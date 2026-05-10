@@ -92,27 +92,31 @@ try {
   if (fs.existsSync(path.join(pluginDir, 'assets'))) {
     console.log('Adding assets/ directory...');
     const assetsPath = path.join(pluginDir, 'assets');
-    const addAssetsFolder = (dirPath, zipPathPrefix) => {
-      const files = fs.readdirSync(dirPath);
-      for (const file of files) {
-        const filePath = path.join(dirPath, file);
-        const stat = fs.statSync(filePath);
-        if (stat.isDirectory()) {
-          addAssetsFolder(filePath, zipPathPrefix + file + '/');
-        } else {
-          // Only include built files, icons, not source files
-          const isBuiltFile =
-                    file === 'index.js' ||
-                    file === 'index.css' ||
-                    file === 'index.asset.php' ||
-                    dirPath.includes('icons');
-          if (isBuiltFile) {
-            zip.addLocalFile(filePath, zipPathPrefix);
-          }
-        }
+    const addLocalAsset = (relativePath) => {
+      const filePath = path.join(pluginDir, relativePath);
+      if (!fs.existsSync(filePath)) {
+        return;
       }
+
+      const zipEntryName = path.posix.join(
+          packageName,
+          path.dirname(relativePath).split(path.sep).join('/'),
+          path.basename(relativePath),
+      );
+
+      zip.addFile(zipEntryName, fs.readFileSync(filePath));
     };
-    addAssetsFolder(assetsPath, `${packageName}/assets/`);
+
+    addLocalAsset('assets/js/index.js');
+    addLocalAsset('assets/js/index.asset.php');
+    addLocalAsset('assets/css/index.css');
+
+    if (fs.existsSync(path.join(assetsPath, 'icons'))) {
+      zip.addLocalFolder(
+          path.join(assetsPath, 'icons'),
+          `${packageName}/assets/icons`,
+      );
+    }
   }
 
   // Add vendor directory
