@@ -1,11 +1,10 @@
 <?php
-/**
- * AI Image Renamer.
- *
- * @description     Uses AI to rename images during upload for SEO-friendly filenames.
+/*
+ * @name:           AI Image Renamer
+ * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer/
+ * @see             https://docs.kolja-nolte.com/ai-image-renamer
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,8 +14,8 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package         AIR
- * @license         GPL-2.0-or-later
+ * @package AIR
+ * @license GPL-2.0-or-later
  */
 
 /**
@@ -39,9 +38,14 @@
 
 declare( strict_types=1 );
 
-// Prevent direct access.
+// Prevent direct access
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
+
+// Load Composer autoloader
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 
 use AIR\Plugin;
@@ -51,18 +55,6 @@ const AIR_VERSION = '1.0.0';
 define( 'AIR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AIR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'AIR_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-
-if ( file_exists( AIR_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
-	require_once AIR_PLUGIN_DIR . 'vendor/autoload.php';
-} else {
-	add_action( 'admin_notices', function () {
-		echo '<div class="notice notice-error"><p>';
-		esc_html_e( 'AI Image Renamer: Composer dependencies not installed. Please run "composer install" in the plugin directory.', 'ai-image-renamer' );
-		echo '</p></div>';
-	} );
-
-	return;
-}
 
 /**
  * Loads the plugin's text domain for translation.
@@ -80,12 +72,11 @@ add_action( 'init', function (): void {
 /**
  * Initializes and executes the Plugin object.
  *
- * This function creates a new instance of the Plugin class,
+ * This function retrieves the singleton instance of the Plugin class,
  * and subsequently calls its init() method to initialize it.
  *
  * @return void
  */
 add_action( 'plugins_loaded', function () {
-	$plugin = new Plugin();
-	$plugin->init();
+	Plugin::get_instance()->init();
 } );
