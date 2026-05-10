@@ -3,6 +3,7 @@
 .vscode/
 cache/
 *.md
+.github
 !README.md
 !CHANGELOG.md
 !CONTRIBUTING.md
