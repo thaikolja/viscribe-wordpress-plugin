@@ -1,11 +1,10 @@
 <?php
-/**
- * AI Image Renamer.
- *
- * @description     Uses AI to rename images during upload for SEO-friendly filenames.
+/*
+ * @name:           AI Image Renamer
+ * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer/
+ * @see             https://docs.kolja-nolte.com/ai-image-renamer
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,8 +14,8 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package         AIR
- * @license         GPL-2.0-or-later
+ * @package AIR
+ * @license GPL-2.0-or-later
  */
 
 /**
@@ -37,28 +36,25 @@
  * @package AIR
  */
 
-declare(strict_types=1);
+declare( strict_types=1 );
 
 // Prevent direct access
-if (!defined('ABSPATH')) {
-  exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Load Composer autoloader
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 
 use AIR\Plugin;
 
 const AIR_VERSION = '1.0.0';
 
-define('AIR_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('AIR_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('AIR_PLUGIN_BASENAME', plugin_basename(__FILE__));
-
-
-function name()
-{
-  $name = 'kolja';
-
-  return $name;
-}
+define( 'AIR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'AIR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'AIR_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Loads the plugin's text domain for translation.
@@ -69,19 +65,18 @@ function name()
  *
  * @return void
  */
-add_action('init', function (): void {
-  load_plugin_textdomain('ai-image', false, dirname(AIR_PLUGIN_BASENAME) . '/languages');
-});
+add_action( 'init', function (): void {
+	load_plugin_textdomain( 'ai-image-renamer', false, dirname( AIR_PLUGIN_BASENAME ) . '/languages' );
+} );
 
 /**
  * Initializes and executes the Plugin object.
  *
- * This function creates a new instance of the Plugin class,
+ * This function retrieves the singleton instance of the Plugin class,
  * and subsequently calls its init() method to initialize it.
  *
  * @return void
  */
-add_action('plugins_loaded', function () {
-  $plugin = new Plugin();
-  $plugin->init();
-});
+add_action( 'plugins_loaded', function () {
+	Plugin::get_instance()->init();
+} );
