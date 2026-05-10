@@ -8,7 +8,7 @@
     "build":      "NODE_ENV=production vite build && node scripts/generate-asset-file.mjs",
     "preview":    "vite preview",
     "zip":        "node scripts/plugin-zip.mjs",
-    "bundle":     "npm run build && composer install --no-dev -o --prefer-dist && npm run zip && composer install",
+    "bundle":     "npm run build && composer install --no-dev -o --prefer-dist && npm run zip && composer install && node scripts/ensure-zip-assets.mjs",
     "production": "npm run bundle",
     "lint:js":    "wp-scripts lint-js --fix",
     "lint:css":   "wp-scripts lint-style --fix"
@@ -24,9 +24,9 @@
   "license":         "GPL-2.0-or-later",
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.6",
-    "@babel/preset-env":    "^7.29.0",
-    "@wordpress/scripts":   "^31.1.0",
-    "adm-zip":              "^0.5.10",
-    "vite":                 "^6.0.0"
+    "@babel/preset-env":    "^7.29.5",
+    "@wordpress/scripts":   "^32.1.0",
+    "adm-zip":              "^0.5.17",
+    "vite":                 "^8.0.11"
   }
 }
