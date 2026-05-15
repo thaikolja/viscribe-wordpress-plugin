@@ -1,4 +1,4 @@
-=== AI Image Renamer ===
+=== Viscribe ===
 Contributors:         thaikolja
 Tags:                 images, media, seo, accessibility, ai
 Requires at least:    6.0
@@ -13,7 +13,7 @@ Automatically rename newly uploaded images with AI-generated, descriptive filena
 
 == Description ==
 
-AI Image Renamer helps you replace filenames like `IMG_1234.jpg` with more descriptive names based on the actual image content.
+Viscribe helps you replace filenames like `IMG_1234.jpg` with more descriptive names based on the actual image content.
 
 The plugin integrates with Groq's Vision API during upload and can:
 
@@ -23,7 +23,7 @@ The plugin integrates with Groq's Vision API during upload and can:
 * let you choose supported file types and the Groq vision model,
 * support API key handling in the settings UI while also allowing a `wp-config.php`-based setup.
 
-The settings screen is available under **Media → AI Image Renamer**.
+The settings screen is available under **Media → Viscribe**.
 
 = Example =
 
@@ -39,7 +39,7 @@ The settings screen is available under **Media → AI Image Renamer**.
 
 = Security notes =
 
-* The plugin supports storing the Groq API key directly in `wp-config.php` via `AIR_API_KEY`.
+* The plugin supports storing the Groq API key directly in `wp-config.php` via `VISCRIBE_API_KEY`.
 * Saved API keys are encrypted at rest.
 * The plugin warns administrators when the encryption key is still stored in the database instead of `wp-config.php`.
 * All AJAX requests are protected by capability checks and nonces.
@@ -52,8 +52,8 @@ The plugin includes actions and filters for advanced integrations, including upl
 
 = From WordPress.org =
 
-1. Install and activate **AI Image Renamer**.
-2. Go to **Media → AI Image Renamer**.
+1. Install and activate **Viscribe**.
+2. Go to **Media → Viscribe**.
 3. Enter your Groq API key.
 4. Click **Test Connection**.
 5. Save your settings.
@@ -62,7 +62,7 @@ The plugin includes actions and filters for advanced integrations, including upl
 
 1. Upload the plugin folder to `/wp-content/plugins/`.
 2. Activate the plugin in WordPress.
-3. Open **Media → AI Image Renamer**.
+3. Open **Media → Viscribe**.
 4. Add your Groq API key and save the settings.
 
 == Frequently Asked Questions ==
@@ -77,11 +77,11 @@ The upload continues with the original filename.
 
 = Can I store the API key outside the database? =
 
-Yes. Define `AIR_API_KEY` in `wp-config.php` and the plugin will use that value instead of a saved key.
+Yes. Define `VISCRIBE_API_KEY` in `wp-config.php` and the plugin will use that value instead of a saved key.
 
 = Can I also keep the encryption key out of the database? =
 
-Yes. Define `AIR_ENCRYPTION_KEY` in `wp-config.php`.
+Yes. Define `VISCRIBE_ENCRYPTION_KEY` in `wp-config.php`.
 
 = Which file types can be processed? =
 
@@ -121,7 +121,7 @@ This plugin connects to a third-party service.
 
 = Groq =
 
-AI Image Renamer uses the Groq API to analyze uploaded images and generate descriptive filenames.
+Viscribe uses the Groq API to analyze uploaded images and generate descriptive filenames.
 
 **What is sent:**
 
@@ -144,6 +144,6 @@ AI Image Renamer uses the Groq API to analyze uploaded images and generate descr
 
 == Support ==
 
-* Documentation:      https://docs.kolja-nolte.com/ai-image-renamer
-* Support forum:      https://wordpress.org/support/plugin/ai-image-renamer/
-* Source repository:  https://gitlab.com/thaikolja/ai-image-renamer
+* Documentation:      https://docs.kolja-nolte.com/viscribe
+* Support forum:      https://wordpress.org/support/plugin/viscribe/
+* Source repository:  https://gitlab.com/thaikolja/viscribe

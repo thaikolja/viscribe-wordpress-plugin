@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'thaikolja/ai-image-renamer',
+        'name' => 'thaikolja/viscribe',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd430ac447f767cde314cb52c83014021345279aa',
+        'reference' => 'bdbc8c5651226d17d703abe96b55e54c884705bc',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -109,19 +109,19 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'thaikolja/ai-image-renamer' => array(
+        'thaikolja/viscribe' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd430ac447f767cde314cb52c83014021345279aa',
+            'reference' => 'bdbc8c5651226d17d703abe96b55e54c884705bc',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'twig/twig' => array(
-            'pretty_version' => 'v3.22.2',
-            'version' => '3.22.2.0',
-            'reference' => '946ddeafa3c9f4ce279d1f34051af041db0e16f2',
+            'pretty_version' => 'v3.24.0',
+            'version' => '3.24.0.0',
+            'reference' => 'a6769aefb305efef849dc25c9fd1653358c148f0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../twig/twig',
             'aliases' => array(),

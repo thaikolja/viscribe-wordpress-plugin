@@ -14,27 +14,31 @@ namespace Twig\Node\Expression\Variable;
 use Twig\Compiler;
 use Twig\Node\Expression\AbstractExpression;
 
-final class AssignTemplateVariable extends AbstractExpression {
+final class AssignTemplateVariable extends AbstractExpression
+{
+    public function __construct(TemplateVariable $var, bool $global = true)
+    {
+        parent::__construct(['var' => $var], ['global' => $global], $var->getTemplateLine());
+    }
 
-	public function __construct( TemplateVariable $var, bool $global = true ) {
-		parent::__construct( array( 'var' => $var ), array( 'global' => $global ), $var->getTemplateLine() );
-	}
+    public function compile(Compiler $compiler): void
+    {
+        /** @var TemplateVariable $var */
+        $var = $this->nodes['var'];
 
-	public function compile( Compiler $compiler ): void {
-		/** @var TemplateVariable $var */
-		$var = $this->nodes['var'];
+        $compiler
+            ->addDebugInfo($this)
+            ->write('$macros[')
+            ->string($var->getName($compiler))
+            ->raw('] = ')
+        ;
 
-		$compiler
-			->addDebugInfo( $this )
-			->write( '$macros[' )
-			->string( $var->getName( $compiler ) )
-			->raw( '] = ' );
-
-		if ( $this->getAttribute( 'global' ) ) {
-			$compiler
-				->raw( '$this->macros[' )
-				->string( $var->getName( $compiler ) )
-				->raw( '] = ' );
-		}
-	}
+        if ($this->getAttribute('global')) {
+            $compiler
+                ->raw('$this->macros[')
+                ->string($var->getName($compiler))
+                ->raw('] = ')
+            ;
+        }
+    }
 }

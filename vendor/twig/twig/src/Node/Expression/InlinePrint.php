@@ -17,20 +17,23 @@ use Twig\Node\Node;
 /**
  * @internal
  */
-final class InlinePrint extends AbstractExpression {
+final class InlinePrint extends AbstractExpression
+{
+    /**
+     * @param AbstractExpression $node
+     */
+    public function __construct(Node $node, int $lineno)
+    {
+        trigger_deprecation('twig/twig', '3.16', \sprintf('The "%s" class is deprecated with no replacement.', static::class));
 
-	/**
-	 * @param AbstractExpression $node
-	 */
-	public function __construct( Node $node, int $lineno ) {
-		trigger_deprecation( 'twig/twig', '3.16', \sprintf( 'The "%s" class is deprecated with no replacement.', self::class ) );
+        parent::__construct(['node' => $node], [], $lineno);
+    }
 
-		parent::__construct( array( 'node' => $node ), array(), $lineno );
-	}
-
-	public function compile( Compiler $compiler ): void {
-		$compiler
-			->raw( 'yield ' )
-			->subcompile( $this->getNode( 'node' ) );
-	}
+    public function compile(Compiler $compiler): void
+    {
+        $compiler
+            ->raw('yield ')
+            ->subcompile($this->getNode('node'))
+        ;
+    }
 }

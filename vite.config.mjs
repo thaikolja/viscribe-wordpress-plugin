@@ -1,9 +1,9 @@
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,7 +13,7 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package AIR
+ * @package Viscribe
  * @license GPL-2.0-or-later
  */
 

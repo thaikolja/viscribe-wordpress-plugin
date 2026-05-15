@@ -1,5 +1,5 @@
 {
-  "name":            "ai-image-renamer",
+  "name":            "viscribe",
   "version":         "1.0.0",
   "description":     "Uses AI to rename images during upload for SEO-friendly filenames.",
   "main":            "index.js",

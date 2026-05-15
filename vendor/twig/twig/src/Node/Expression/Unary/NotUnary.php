@@ -14,9 +14,10 @@ namespace Twig\Node\Expression\Unary;
 
 use Twig\Compiler;
 
-class NotUnary extends AbstractUnary {
-
-	public function operator( Compiler $compiler ): Compiler {
-		return $compiler->raw( '!' );
-	}
+class NotUnary extends AbstractUnary
+{
+    public function operator(Compiler $compiler): Compiler
+    {
+        return $compiler->raw('!');
+    }
 }

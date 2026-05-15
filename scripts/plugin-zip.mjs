@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package AIR
+ * @package Viscribe
  * @license GPL-2.0-or-later
  */
 
@@ -65,7 +65,7 @@ const pluginDir = path.join(__dirname, '..');
  * This variable holds the name of the software package that can be
  * utilized for tasks related to renaming images with AI capabilities.
  */
-const packageName = 'ai-image-renamer';
+const packageName = 'viscribe';
 /**
  * Represents the name of the zip file, constructed dynamically by appending a `.zip` extension to the package name.
  *
@@ -168,7 +168,7 @@ try {
     if (
         entry.entryName.match(/\.md$/i) ||
         entry.entryName.match(/\.DS_Store$/i) ||
-        entry.entryName.match(/\/ai-image-renamer\.zip$/i) ||
+        entry.entryName.match(/\/viscribe\.zip$/i) ||
         entry.entryName.match(/\/phpcs\.xml\.dist$/i) ||
         entry.entryName.match(/\/(\.distignore|\.babelrc|\.eslintignore|\.eslintrc\.json)$/i) ||
         //entry.entryName.match(/\/vendor\/bin(\/|$)/i) ||

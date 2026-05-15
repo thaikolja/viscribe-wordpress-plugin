@@ -1,8 +1,8 @@
 {# Max Keywords Field Template #}
-<label for="air_max_keywords" class="screen-reader-text">
-    {{ __('Maximum Keywords', 'ai-image-renamer') }}
+<label for="viscribe_max_keywords" class="screen-reader-text">
+    {% trans %}Maximum Keywords{% endtrans %}
 </label>
-<select name="{{ option_name }}[max_keywords]" id="air_max_keywords">
+<select name="{{ option_name }}[max_keywords]" id="viscribe_max_keywords">
     {% for i in 1..10 %}
         <option value="{{ i }}" {{ max_keywords == i ? 'selected' : '' }}>
             {{ i }}
@@ -10,5 +10,5 @@
     {% endfor %}
 </select>
 <p class="description">
-    {{ __('Maximum number of keywords to generate for filenames.', 'ai-image-renamer') }}
+    {% trans %}Maximum number of keywords to generate for filenames.{% endtrans %}
 </p>

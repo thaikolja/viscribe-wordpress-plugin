@@ -12,95 +12,134 @@
 namespace Twig\Node\Expression;
 
 use Twig\Compiler;
+use Twig\Error\SyntaxError;
 use Twig\Node\Expression\Unary\SpreadUnary;
 use Twig\Node\Expression\Unary\StringCastUnary;
 use Twig\Node\Expression\Variable\ContextVariable;
 
-class ArrayExpression extends AbstractExpression implements SupportDefinedTestInterface, ReturnArrayInterface {
+class ArrayExpression extends AbstractExpression implements SupportDefinedTestInterface, ReturnArrayInterface
+{
+    use SupportDefinedTestTrait;
 
-	use SupportDefinedTestTrait;
+    private $index;
 
-	private $index;
+    public function __construct(array $elements, int $lineno)
+    {
+        parent::__construct($elements, [], $lineno);
 
-	public function __construct( array $elements, int $lineno ) {
-		parent::__construct( $elements, array(), $lineno );
+        $this->index = -1;
+        foreach ($this->getKeyValuePairs() as $pair) {
+            if ($pair['key'] instanceof ConstantExpression && ctype_digit((string) $pair['key']->getAttribute('value')) && $pair['key']->getAttribute('value') > $this->index) {
+                $this->index = $pair['key']->getAttribute('value');
+            }
+        }
+    }
 
-		$this->index = -1;
-		foreach ( $this->getKeyValuePairs() as $pair ) {
-			if ( $pair['key'] instanceof ConstantExpression && ctype_digit( (string) $pair['key']->getAttribute( 'value' ) ) && $pair['key']->getAttribute( 'value' ) > $this->index ) {
-				$this->index = $pair['key']->getAttribute( 'value' );
-			}
-		}
-	}
+    public function getKeyValuePairs(): array
+    {
+        $pairs = [];
+        foreach (array_chunk($this->nodes, 2) as $pair) {
+            $pairs[] = [
+                'key' => $pair[0],
+                'value' => $pair[1],
+            ];
+        }
 
-	public function getKeyValuePairs(): array {
-		$pairs = array();
-		foreach ( array_chunk( $this->nodes, 2 ) as $pair ) {
-			$pairs[] = array(
-				'key'   => $pair[0],
-				'value' => $pair[1],
-			);
-		}
+        return $pairs;
+    }
 
-		return $pairs;
-	}
+    public function hasElement(AbstractExpression $key): bool
+    {
+        foreach ($this->getKeyValuePairs() as $pair) {
+            // we compare the string representation of the keys
+            // to avoid comparing the line numbers which are not relevant here.
+            if ((string) $key === (string) $pair['key']) {
+                return true;
+            }
+        }
 
-	public function hasElement( AbstractExpression $key ): bool {
-		foreach ( $this->getKeyValuePairs() as $pair ) {
-			// we compare the string representation of the keys
-			// to avoid comparing the line numbers which are not relevant here.
-			if ( (string) $key === (string) $pair['key'] ) {
-				return true;
-			}
-		}
+        return false;
+    }
 
-		return false;
-	}
+    /**
+     * Checks if the array is a sequence (keys are sequential integers starting from 0).
+     *
+     * @internal
+     */
+    public function isSequence(): bool
+    {
+        foreach ($this->getKeyValuePairs() as $i => $pair) {
+            $key = $pair['key'];
+            if ($key instanceof TempNameExpression) {
+                $keyValue = $key->getAttribute('name');
+            } elseif ($key instanceof ConstantExpression) {
+                $keyValue = $key->getAttribute('value');
+            } else {
+                return false;
+            }
 
-	public function addElement( AbstractExpression $value, ?AbstractExpression $key = null ): void {
-		if ( null === $key ) {
-			$key = new ConstantExpression( ++$this->index, $value->getTemplateLine() );
-		}
+            if ($keyValue !== $i) {
+                return false;
+            }
+        }
 
-		array_push( $this->nodes, $key, $value );
-	}
+        return true;
+    }
 
-	public function compile( Compiler $compiler ): void {
-		if ( $this->definedTest ) {
-			$compiler->repr( true );
+    public function addElement(AbstractExpression $value, ?AbstractExpression $key = null): void
+    {
+        if (null === $key) {
+            $key = new ConstantExpression(++$this->index, $value->getTemplateLine());
+        }
 
-			return;
-		}
+        array_push($this->nodes, $key, $value);
+    }
 
-		$compiler->raw( '[' );
-		$isSequence = true;
-		foreach ( $this->getKeyValuePairs() as $i => $pair ) {
-			if ( 0 !== $i ) {
-				$compiler->raw( ', ' );
-			}
+    public function compile(Compiler $compiler): void
+    {
+        if ($this->definedTest) {
+            $compiler->repr(true);
 
-			$key = null;
-			if ( $pair['key'] instanceof ContextVariable ) {
-				$pair['key'] = new StringCastUnary( $pair['key'], $pair['key']->getTemplateLine() );
-			} elseif ( $pair['key'] instanceof TempNameExpression ) {
-				$key         = $pair['key']->getAttribute( 'name' );
-				$pair['key'] = new ConstantExpression( $key, $pair['key']->getTemplateLine() );
-			} elseif ( $pair['key'] instanceof ConstantExpression ) {
-				$key = $pair['key']->getAttribute( 'value' );
-			}
+            return;
+        }
 
-			if ( $key !== $i ) {
-				$isSequence = false;
-			}
+        // Check for empty expressions which are only allowed in destructuring
+        foreach ($this->getKeyValuePairs() as $pair) {
+            if ($pair['value'] instanceof EmptyExpression) {
+                throw new SyntaxError('Empty array elements are only allowed in destructuring assignments.', $pair['value']->getTemplateLine(), $this->getSourceContext());
+            }
+        }
 
-			if ( ! $isSequence && ! $pair['value'] instanceof SpreadUnary ) {
-				$compiler
-					->subcompile( $pair['key'] )
-					->raw( ' => ' );
-			}
+        $compiler->raw('[');
+        $isSequence = true;
+        foreach ($this->getKeyValuePairs() as $i => $pair) {
+            if (0 !== $i) {
+                $compiler->raw(', ');
+            }
 
-			$compiler->subcompile( $pair['value'] );
-		}
-		$compiler->raw( ']' );
-	}
+            $key = null;
+            if ($pair['key'] instanceof ContextVariable) {
+                $pair['key'] = new StringCastUnary($pair['key'], $pair['key']->getTemplateLine());
+            } elseif ($pair['key'] instanceof TempNameExpression) {
+                $key = $pair['key']->getAttribute('name');
+                $pair['key'] = new ConstantExpression($key, $pair['key']->getTemplateLine());
+            } elseif ($pair['key'] instanceof ConstantExpression) {
+                $key = $pair['key']->getAttribute('value');
+            }
+
+            if ($key !== $i) {
+                $isSequence = false;
+            }
+
+            if (!$isSequence && !$pair['value'] instanceof SpreadUnary) {
+                $compiler
+                    ->subcompile($pair['key'])
+                    ->raw(' => ')
+                ;
+            }
+
+            $compiler->subcompile($pair['value']);
+        }
+        $compiler->raw(']');
+    }
 }

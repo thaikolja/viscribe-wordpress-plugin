@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="AI Image Renamer">
-	<description>WordPress Coding Standards for AI Image Renamer plugin.</description>
+<ruleset name="Viscribe">
+	<description>WordPress Coding Standards for Viscribe plugin.</description>
 
 	<!-- What to scan -->
 	<file>.</file>

@@ -1,19 +1,19 @@
 {# Models Panel Template #}
-<div class="air-card">
-    <div class="air-card-header">
+<div class="viscribe-card">
+    <div class="viscribe-card-header">
         <h2>
             <span class="dashicons dashicons-grid-view"></span>
-            {{ __('AI Models', 'ai-image-renamer') }}
-            <a href="{{ doc_url('usage/settings#ai-model') }}" target="_blank" rel="noopener noreferrer" class="air-doc-badge">
+            {% trans %}AI Models{% endtrans %}
+            <a href="{{ doc_url('usage/settings#ai-model') }}" target="_blank" rel="noopener noreferrer" class="viscribe-doc-badge">
                 <span class="dashicons dashicons-book"></span>
-                <span>{{ __('Documentation', 'ai-image-renamer') }}</span> </a>
+                <span>{% trans %}Documentation{% endtrans %}</span> </a>
         </h2>
-        <p class="air-card-description">{{ __('Choose which Groq vision model should analyze new uploads.', 'ai-image-renamer') }}</p>
+        <p class="viscribe-card-description">{% trans %}Choose which Groq vision model should analyze new uploads.{% endtrans %}</p>
     </div>
-    <div class="air-card-body">
-        <div class="air-setting-row air-setting-row--stacked">
-            <div class="air-setting-control">
-                <div class="air-model-cards">
+    <div class="viscribe-card-body">
+        <div class="viscribe-setting-row viscribe-setting-row--stacked">
+            <div class="viscribe-setting-control">
+                <div class="viscribe-model-cards">
                     {% include 'admin/fields/model.twig' with {
                         models: models,
                         current: current,
@@ -22,8 +22,8 @@
                     } %}
                 </div>
                 <p class="deprecation-notice">
-                    {{ __('Llama 4 Maverick was deprecated by Groq on March 9, 2026.', 'ai-image-renamer') }}
-                    <a href="https://console.groq.com/docs/deprecations#march-9-2026-metallamallama4maverick17b128einstruct" target="_blank" rel="noopener noreferrer">{{ __('Read the deprecation notice', 'ai-image-renamer') }}</a>
+                    {% trans %}Llama 4 Maverick was deprecated by Groq on March 9, 2026.{% endtrans %}
+                    <a href="https://console.groq.com/docs/deprecations#march-9-2026-metallamallama4maverick17b128einstruct" target="_blank" rel="noopener noreferrer">{% trans %}Read the deprecation notice{% endtrans %}</a>
                 </p>
             </div>
         </div>

@@ -16,9 +16,9 @@ namespace Twig\Node\Expression;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface SupportDefinedTestInterface {
+interface SupportDefinedTestInterface
+{
+    public function enableDefinedTest(): void;
 
-	public function enableDefinedTest(): void;
-
-	public function isDefinedTestEnabled(): bool;
+    public function isDefinedTestEnabled(): bool;
 }

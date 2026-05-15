@@ -1,61 +1,61 @@
 {# Tab Navigation Component #}
 <nav
-        class="air-tabs"
+        class="viscribe-tabs"
         role="tablist">
     <button
             type="button"
-            class="air-tab active"
+            class="viscribe-tab active"
             data-tab="general"
             role="tab"
             aria-selected="true"
-            aria-controls="air-panel-general">
+            aria-controls="viscribe-panel-general">
         <span class="dashicons dashicons-admin-settings"></span>
-        <span class="air-tab-label">{{ __('General', 'ai-image-renamer') }}</span>
+        <span class="viscribe-tab-label">{% trans %}General{% endtrans %}</span>
     </button>
     <button
             type="button"
-            class="air-tab"
+            class="viscribe-tab"
             data-tab="api"
             role="tab"
             aria-selected="false"
-            aria-controls="air-panel-api">
+            aria-controls="viscribe-panel-api">
         <span class="dashicons dashicons-admin-network"></span>
-        <span class="air-tab-label">{{ __('API Key', 'ai-image-renamer') }}</span>
+        <span class="viscribe-tab-label">{% trans %}API Key{% endtrans %}</span>
     </button>
     <button
             type="button"
-            class="air-tab"
+            class="viscribe-tab"
             data-tab="models"
             role="tab"
             aria-selected="false"
-            aria-controls="air-panel-models">
+            aria-controls="viscribe-panel-models">
         <span class="dashicons dashicons-grid-view"></span>
-        <span class="air-tab-label">{{ __('Models', 'ai-image-renamer') }}</span>
+        <span class="viscribe-tab-label">{% trans %}Models{% endtrans %}</span>
     </button>
     <button
             type="button"
-            class="air-tab"
+            class="viscribe-tab"
             data-tab="filetypes"
             role="tab"
             aria-selected="false"
-            aria-controls="air-panel-filetypes">
+            aria-controls="viscribe-panel-filetypes">
         <span class="dashicons dashicons-format-image"></span>
-        <span class="air-tab-label">{{ __('File Types', 'ai-image-renamer') }}</span>
+        <span class="viscribe-tab-label">{% trans %}File Types{% endtrans %}</span>
     </button>
     <button
             type="button"
-            class="air-tab"
+            class="viscribe-tab"
             data-tab="advanced"
             role="tab"
             aria-selected="false"
-            aria-controls="air-panel-advanced">
+            aria-controls="viscribe-panel-advanced">
         <span class="dashicons dashicons-admin-tools"></span>
-        <span class="air-tab-label">{{ __('Advanced', 'ai-image-renamer') }}</span>
+        <span class="viscribe-tab-label">{% trans %}Advanced{% endtrans %}</span>
     </button>
     <a
             href="{{ doc_url('usage/quick-start') }}"
             target="_blank"
             rel="noopener noreferrer"
-            class="air-tab"> <span class="dashicons dashicons-welcome-learn-more"></span>
-        <span class="air-tab-label">{{ __('Documentation', 'ai-image-renamer') }}</span> </a>
+            class="viscribe-tab"> <span class="dashicons dashicons-welcome-learn-more"></span>
+        <span class="viscribe-tab-label">{% trans %}Documentation{% endtrans %}</span> </a>
 </nav>

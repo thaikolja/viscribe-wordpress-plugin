@@ -1,40 +1,40 @@
 {# General Settings Template #}
 {% include 'admin/components/intro.twig' %}
-<div class="air-card">
-    <div class="air-card-header">
+<div class="viscribe-card">
+    <div class="viscribe-card-header">
         <h2>
             <span class="dashicons dashicons-admin-settings"></span>
-            {{ __('General Settings', 'ai-image-renamer') }}
-            <a href="{{ doc_url('usage/settings') }}" target="_blank" rel="noopener noreferrer" class="air-doc-badge">
+            {% trans %}General Settings{% endtrans %}
+            <a href="{{ doc_url('usage/settings') }}" target="_blank" rel="noopener noreferrer" class="viscribe-doc-badge">
                 <span class="dashicons dashicons-book"></span>
-                <span>{{ __('Documentation', 'ai-image-renamer') }}</span> </a>
+                <span>{% trans %}Documentation{% endtrans %}</span> </a>
         </h2>
-        <p class="air-card-description">{{ __('Choose what should happen when new images are uploaded.', 'ai-image-renamer') }}</p>
+        <p class="viscribe-card-description">{% trans %}Choose what should happen when new images are uploaded.{% endtrans %}</p>
     </div>
-    <div class="air-card-body">
-        <div class="air-setting-row">
-            <div class="air-setting-label">
-                <label for="air_enabled">{{ __('Enable Auto-Rename', 'ai-image-renamer') }}</label>
-                <p class="air-setting-description">{{ __('Automatically rename supported image uploads while WordPress processes them.', 'ai-image-renamer') }}</p>
+    <div class="viscribe-card-body">
+        <div class="viscribe-setting-row">
+            <div class="viscribe-setting-label">
+                <label for="viscribe_enabled">{% trans %}Enable Auto-Rename{% endtrans %}</label>
+                <p class="viscribe-setting-description">{% trans %}Automatically rename supported image uploads while WordPress processes them.{% endtrans %}</p>
             </div>
-            <div class="air-setting-control">
-                <label class="air-toggle">
+            <div class="viscribe-setting-control">
+                <label class="viscribe-toggle">
                     <input type="hidden" name="{{ option_name }}[enabled]" value="0">
-                    <input type="checkbox" id="air_enabled" name="{{ option_name }}[enabled]" value="1" {{ enabled ? 'checked' : '' }}>
-                    <span class="air-toggle-slider"></span>
+                    <input type="checkbox" id="viscribe_enabled" name="{{ option_name }}[enabled]" value="1" {{ enabled ? 'checked' : '' }}>
+                    <span class="viscribe-toggle-slider"></span>
                 </label>
             </div>
         </div>
-        <div class="air-setting-row">
-            <div class="air-setting-label">
-                <label for="air_set_alt_text">{{ __('Populate Alt Text', 'ai-image-renamer') }}</label>
-                <p class="air-setting-description">{{ __('Save a cleaned version of the generated description as the attachment alt text.', 'ai-image-renamer') }}</p>
+        <div class="viscribe-setting-row">
+            <div class="viscribe-setting-label">
+                <label for="viscribe_set_alt_text">{% trans %}Populate Alt Text{% endtrans %}</label>
+                <p class="viscribe-setting-description">{% trans %}Save a cleaned version of the generated description as the attachment alt text.{% endtrans %}</p>
             </div>
-            <div class="air-setting-control">
-                <label class="air-toggle">
+            <div class="viscribe-setting-control">
+                <label class="viscribe-toggle">
                     <input type="hidden" name="{{ option_name }}[set_alt_text]" value="0">
-                    <input type="checkbox" id="air_set_alt_text" name="{{ option_name }}[set_alt_text]" value="1" {{ set_alt_text ? 'checked' : '' }}>
-                    <span class="air-toggle-slider"></span>
+                    <input type="checkbox" id="viscribe_set_alt_text" name="{{ option_name }}[set_alt_text]" value="1" {{ set_alt_text ? 'checked' : '' }}>
+                    <span class="viscribe-toggle-slider"></span>
                 </label>
             </div>
         </div>

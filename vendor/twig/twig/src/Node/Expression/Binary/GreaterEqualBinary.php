@@ -14,24 +14,27 @@ namespace Twig\Node\Expression\Binary;
 use Twig\Compiler;
 use Twig\Node\Expression\ReturnBoolInterface;
 
-class GreaterEqualBinary extends AbstractBinary implements ReturnBoolInterface {
+class GreaterEqualBinary extends AbstractBinary implements ReturnBoolInterface
+{
+    public function compile(Compiler $compiler): void
+    {
+        if (\PHP_VERSION_ID >= 80000) {
+            parent::compile($compiler);
 
-	public function compile( Compiler $compiler ): void {
-		if ( \PHP_VERSION_ID >= 80000 ) {
-			parent::compile( $compiler );
+            return;
+        }
 
-			return;
-		}
+        $compiler
+            ->raw('(0 <= CoreExtension::compare(')
+            ->subcompile($this->getNode('left'))
+            ->raw(', ')
+            ->subcompile($this->getNode('right'))
+            ->raw('))')
+        ;
+    }
 
-		$compiler
-			->raw( '(0 <= CoreExtension::compare(' )
-			->subcompile( $this->getNode( 'left' ) )
-			->raw( ', ' )
-			->subcompile( $this->getNode( 'right' ) )
-			->raw( '))' );
-	}
-
-	public function operator( Compiler $compiler ): Compiler {
-		return $compiler->raw( '>=' );
-	}
+    public function operator(Compiler $compiler): Compiler
+    {
+        return $compiler->raw('>=');
+    }
 }

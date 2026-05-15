@@ -1,29 +1,28 @@
 {# Donation Banner Component #}
-<div class="air-donation-banner" id="air-donation-banner">
-    <a href="https://www.paypal.me/thaikolja/10" target="_blank" class="air-donation-banner-link" rel="noopener noreferrer">
-        <div class="air-donation-banner-content">
-            <div class="air-donation-banner-icon">
+<div class="viscribe-donation-banner" id="viscribe-donation-banner">
+    <a href="https://www.paypal.me/thaikolja/10" target="_blank" class="viscribe-donation-banner-link" rel="noopener noreferrer">
+        <div class="viscribe-donation-banner-content">
+            <div class="viscribe-donation-banner-icon">
                 <span class="dashicons dashicons-heart"></span>
             </div>
-            <div class="air-donation-banner-text">
+            <div class="viscribe-donation-banner-text">
                 <h3>
-                    {{ __("Is this plugin useful to you? Let's make it even better!", 'ai-image-renamer') }}
+                    {% trans %}Is this plugin useful to you? Let's make it even better!{% endtrans %}
                 </h3>
                 <p>
-                    {{ __('Maintining and keeping a plugin up-to-date requires a lot of work. Your donation helps me
+                    {% trans %}Maintining and keeping a plugin up-to-date requires a lot of work. Your donation helps me
                     as a single plugin developer to keep adding new features and improvements to the plugin. Every
-                    contribution, big or small, is greatly appreciated and goes a long way!',
-                        'ai-image-renamer') }}</p>
+                    contribution, big or small, is greatly appreciated and goes a long way!{% endtrans %}</p>
             </div>
-            <div class="air-donation-banner-cta">
-                <button type="button" class="air-donation-button">
+            <div class="viscribe-donation-banner-cta">
+                <button type="button" class="viscribe-donation-button">
                     <span class="dashicons dashicons-heart"></span>
-                    {{ __('Donate via PayPal', 'ai-image-renamer') }}
+                    {% trans %}Donate via PayPal{% endtrans %}
                 </button>
             </div>
         </div>
     </a>
-    <button type="button" class="air-donation-banner-close" id="air-donation-banner-close" aria-label="{{ __('Close', 'ai-image-renamer') }}">
+    <button type="button" class="viscribe-donation-banner-close" id="viscribe-donation-banner-close" aria-label="{% trans %}Close{% endtrans %}">
         <span class="dashicons dashicons-no-alt"></span>
     </button>
 </div>

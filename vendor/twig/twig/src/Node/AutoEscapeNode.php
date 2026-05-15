@@ -26,13 +26,15 @@ use Twig\Compiler;
  * @author Fabien Potencier <fabien@symfony.com>
  */
 #[YieldReady]
-class AutoEscapeNode extends Node {
+class AutoEscapeNode extends Node
+{
+    public function __construct($value, Node $body, int $lineno)
+    {
+        parent::__construct(['body' => $body], ['value' => $value], $lineno);
+    }
 
-	public function __construct( $value, Node $body, int $lineno ) {
-		parent::__construct( array( 'body' => $body ), array( 'value' => $value ), $lineno );
-	}
-
-	public function compile( Compiler $compiler ): void {
-		$compiler->subcompile( $this->getNode( 'body' ) );
-	}
+    public function compile(Compiler $compiler): void
+    {
+        $compiler->subcompile($this->getNode('body'));
+    }
 }

@@ -3,8 +3,8 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: AI Image Renamer 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-image-renamer\n"
+"Project-Id-Version: Viscribe 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/viscribe\n"
 "POT-Creation-Date: 2026-03-25 00:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -13,38 +13,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
-"v1.0.0: AI Image Renamer\n"
-"report-msgid-bugs-to: https://docs.kolja-nolte.com/ai-image-renamer\n"
+"v1.0.0: Viscribe\n"
+"report-msgid-bugs-to: https://docs.kolja-nolte.com/viscribe\n"
 "last-translator: Kolja Nolte <kolja.nolte@gmail.com>\n"
-"X-Domain: ai-image-renamer\n"
+"X-Domain: viscribe\n"
 
 #. Plugin Name of the plugin
-#: ai-image-renamer.php
-msgid "AI Image Renamer"
+#: viscribe.php
+msgid "Viscribe"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: ai-image-renamer.php
-msgid "https://docs.kolja-nolte.com/ai-image-renamer"
+#: viscribe.php
+msgid "https://docs.kolja-nolte.com/viscribe"
 msgstr ""
 
 #. Description of the plugin
-#: ai-image-renamer.php
+#: viscribe.php
 msgid "Automatically renames uploaded images using Groq's Vision API for SEO-friendly filenames."
 msgstr ""
 
 #. Author of the plugin
-#: ai-image-renamer.php
+#: viscribe.php
 msgid "Kolja Nolte"
 msgstr ""
 
 #. Author URI of the plugin
-#: ai-image-renamer.php
+#: viscribe.php
 msgid "https://www.kolja-nolte.com"
 msgstr ""
 
-#: ai-image-renamer.php:61
-msgid "AI Image Renamer: Composer dependencies not installed. Please run \"composer install\" in the plugin directory."
+#: viscribe.php:61
+msgid "Viscribe: Composer dependencies not installed. Please run \"composer install\" in the plugin directory."
 msgstr ""
 
 #: includes/Admin/Settings_Page.php:155
@@ -314,10 +314,10 @@ msgid "API key deleted."
 msgstr ""
 
 #: includes/Services/Encryption_Service.php:210
-msgid "Security Warning: AI Image Renamer"
+msgid "Security Warning: Viscribe"
 msgstr ""
 
-#. translators: %s: AIR_ENCRYPTION_KEY
+#. translators: %s: VISCRIBE_ENCRYPTION_KEY
 #: includes/Services/Encryption_Service.php:213
 #, php-format
 msgid "Your encryption key is stored in the WordPress database. For better security, define %s in your wp-config.php file."

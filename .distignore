@@ -23,4 +23,4 @@ vite.config.mjs
 # Exclude cache and system files
 cache/
 .DS_Store
-ai-image-renamer.zip
+viscribe.zip

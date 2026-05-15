@@ -1,25 +1,25 @@
 {# Admin Settings Page Template - Modern Tab Layout #}
 <div
-        class="wrap air-settings-wrap">
+        class="wrap viscribe-settings-wrap">
     {# Header #}
     {% include 'admin/components/header.twig' %}
 
 
     <div
-            class="air-settings-container">
+            class="viscribe-settings-container">
         {# Tab Navigation (Sidebar) #}
-        <aside class="air-settings-nav">
+        <aside class="viscribe-settings-nav">
             {% include 'admin/components/tabs.twig' %}
         </aside>
 
         {# Main Content Area #}
-        <main class="air-settings-content">
+        <main class="viscribe-settings-content">
             <!--suppress HtmlUnknownTarget -->
-            <form method="post" action="options.php" id="air-settings-form">
+            <form method="post" action="options.php" id="viscribe-settings-form">
                 {{ settings_fields(option_group)|raw }}
 
                 {# General Settings Panel #}
-                <div id="air-panel-general" class="air-panel active" role="tabpanel" aria-labelledby="air-tab-general">
+                <div id="viscribe-panel-general" class="viscribe-panel active" role="tabpanel" aria-labelledby="viscribe-tab-general">
                     {% include 'admin/fields/general.twig' with {
                         option_name: option_name,
                         enabled: enabled,
@@ -31,26 +31,26 @@
                 </div>
 
                 {# API Configuration Panel #}
-                <div id="air-panel-api" class="air-panel" role="tabpanel" aria-labelledby="air-tab-api" hidden>
-                    <div class="air-card">
-                        <div class="air-card-header">
+                <div id="viscribe-panel-api" class="viscribe-panel" role="tabpanel" aria-labelledby="viscribe-tab-api" hidden>
+                    <div class="viscribe-card">
+                        <div class="viscribe-card-header">
                             <h2>
                                 <span class="dashicons dashicons-admin-network"></span>
-                                {{ __('API Configuration', 'ai-image-renamer') }}
-                                <a href="{{ doc_url('usage/settings#api-configuration') }}" target="_blank" rel="noopener noreferrer" class="air-doc-badge">
+                                {% trans %}API Configuration{% endtrans %}
+                                <a href="{{ doc_url('usage/settings#api-configuration') }}" target="_blank" rel="noopener noreferrer" class="viscribe-doc-badge">
                                     <span class="dashicons dashicons-book"></span>
-                                    <span>{{ __('Documentation', 'ai-image-renamer') }}</span> </a>
+                                    <span>{% trans %}Documentation{% endtrans %}</span> </a>
                             </h2>
-                            <p class="air-card-description">{{ __('Connect to the Groq Vision API to enable AI-powered image renaming.', 'ai-image-renamer') }}</p>
+                            <p class="viscribe-card-description">{% trans %}Connect to the Groq Vision API to enable AI-powered image renaming.{% endtrans %}</p>
                         </div>
-                        <div class="air-card-body">
+                        <div class="viscribe-card-body">
                             {% include 'admin/fields/api-key.twig' with {option_name: option_name, display_key: display_key, placeholder: placeholder, saved: saved, using_api_key_constant: using_api_key_constant} %}
                         </div>
                     </div>
                 </div>
 
                 {# Models Panel #}
-                <div id="air-panel-models" class="air-panel" role="tabpanel" aria-labelledby="air-tab-models" hidden>
+                <div id="viscribe-panel-models" class="viscribe-panel" role="tabpanel" aria-labelledby="viscribe-tab-models" hidden>
                     {% include 'admin/fields/models.twig' with {
                         models: models,
                         current: current,
@@ -60,7 +60,7 @@
                 </div>
 
                 {# File Types Panel #}
-                <div id="air-panel-filetypes" class="air-panel" role="tabpanel" aria-labelledby="air-tab-filetypes" hidden>
+                <div id="viscribe-panel-filetypes" class="viscribe-panel" role="tabpanel" aria-labelledby="viscribe-tab-filetypes" hidden>
                     {% include 'admin/fields/file-types.twig' with {
                         option_name: option_name,
                         file_types: file_types,
@@ -69,7 +69,7 @@
                 </div>
 
                 {# Advanced Settings Panel #}
-                <div id="air-panel-advanced" class="air-panel" role="tabpanel" aria-labelledby="air-tab-advanced" hidden>
+                <div id="viscribe-panel-advanced" class="viscribe-panel" role="tabpanel" aria-labelledby="viscribe-tab-advanced" hidden>
                     {% include 'admin/fields/advanced.twig' with {
                         option_name: option_name,
                         max_keywords: max_keywords,
@@ -78,10 +78,10 @@
                 </div>
 
                 {# Submit Button #}
-                <div class="air-submit-row">
-                    <button type="submit" name="submit" id="submit" class="button button-primary air-button-with-icon">
+                <div class="viscribe-submit-row">
+                    <button type="submit" name="submit" id="submit" class="button button-primary viscribe-button-with-icon">
                         <span class="dashicons dashicons-saved"></span>
-                        {{ __('Save Settings', 'ai-image-renamer') }}
+                        {% trans %}Save Settings{% endtrans %}
                     </button>
                 </div>
                 {% include 'admin/components/footer.twig' %}
@@ -89,7 +89,7 @@
         </main>
 
         {# Sidebar #}
-        <aside class="air-settings-sidebar">
+        <aside class="viscribe-settings-sidebar">
             {% include 'admin/sidebar.twig' %}
         </aside>
     </div>

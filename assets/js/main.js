@@ -1,5 +1,5 @@
 /**
- * AI Image Renamer - Admin Entry Point
+ * Viscribe - Admin Entry Point
  */
 
 // Import styles

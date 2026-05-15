@@ -31,56 +31,60 @@ use Twig\Token;
  *
  * @internal
  */
-final class IfTokenParser extends AbstractTokenParser {
+final class IfTokenParser extends AbstractTokenParser
+{
+    public function parse(Token $token): Node
+    {
+        $lineno = $token->getLine();
+        $expr = $this->parser->parseExpression();
+        $stream = $this->parser->getStream();
+        $stream->expect(Token::BLOCK_END_TYPE);
+        $body = $this->parser->subparse([$this, 'decideIfFork']);
+        $tests = [$expr, $body];
+        $else = null;
 
-	public function parse( Token $token ): Node {
-		$lineno = $token->getLine();
-		$expr   = $this->parser->parseExpression();
-		$stream = $this->parser->getStream();
-		$stream->expect( Token::BLOCK_END_TYPE );
-		$body  = $this->parser->subparse( array( $this, 'decideIfFork' ) );
-		$tests = array( $expr, $body );
-		$else  = null;
+        $end = false;
+        while (!$end) {
+            switch ($stream->next()->getValue()) {
+                case 'else':
+                    $stream->expect(Token::BLOCK_END_TYPE);
+                    $else = $this->parser->subparse([$this, 'decideIfEnd']);
+                    break;
 
-		$end = false;
-		while ( ! $end ) {
-			switch ( $stream->next()->getValue() ) {
-				case 'else':
-					$stream->expect( Token::BLOCK_END_TYPE );
-					$else = $this->parser->subparse( array( $this, 'decideIfEnd' ) );
-					break;
+                case 'elseif':
+                    $expr = $this->parser->parseExpression();
+                    $stream->expect(Token::BLOCK_END_TYPE);
+                    $body = $this->parser->subparse([$this, 'decideIfFork']);
+                    $tests[] = $expr;
+                    $tests[] = $body;
+                    break;
 
-				case 'elseif':
-					$expr = $this->parser->parseExpression();
-					$stream->expect( Token::BLOCK_END_TYPE );
-					$body    = $this->parser->subparse( array( $this, 'decideIfFork' ) );
-					$tests[] = $expr;
-					$tests[] = $body;
-					break;
+                case 'endif':
+                    $end = true;
+                    break;
 
-				case 'endif':
-					$end = true;
-					break;
+                default:
+                    throw new SyntaxError(\sprintf('Unexpected end of template. Twig was looking for the following tags "else", "elseif", or "endif" to close the "if" block started at line %d).', $lineno), $stream->getCurrent()->getLine(), $stream->getSourceContext());
+            }
+        }
 
-				default:
-					throw new SyntaxError( \sprintf( 'Unexpected end of template. Twig was looking for the following tags "else", "elseif", or "endif" to close the "if" block started at line %d).', $lineno ), $stream->getCurrent()->getLine(), $stream->getSourceContext() );
-			}
-		}
+        $stream->expect(Token::BLOCK_END_TYPE);
 
-		$stream->expect( Token::BLOCK_END_TYPE );
+        return new IfNode(new Nodes($tests), $else, $lineno);
+    }
 
-		return new IfNode( new Nodes( $tests ), $else, $lineno );
-	}
+    public function decideIfFork(Token $token): bool
+    {
+        return $token->test(['elseif', 'else', 'endif']);
+    }
 
-	public function decideIfFork( Token $token ): bool {
-		return $token->test( array( 'elseif', 'else', 'endif' ) );
-	}
+    public function decideIfEnd(Token $token): bool
+    {
+        return $token->test(['endif']);
+    }
 
-	public function decideIfEnd( Token $token ): bool {
-		return $token->test( array( 'endif' ) );
-	}
-
-	public function getTag(): string {
-		return 'if';
-	}
+    public function getTag(): string
+    {
+        return 'if';
+    }
 }

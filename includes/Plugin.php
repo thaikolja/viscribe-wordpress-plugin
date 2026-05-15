@@ -1,10 +1,10 @@
 <?php
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,25 +14,25 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package AIR
+ * @package Viscribe
  * @license GPL-2.0-or-later
  */
 
 /**
  * Main Plugin Bootstrap Class.
  *
- * @package AIR
+ * @package Viscribe
  */
 
 declare( strict_types=1 );
 
-namespace AIR;
+namespace Viscribe;
 
-use AIR\Admin\Settings_Page;
-use AIR\Hooks\Image_Uploader;
-use AIR\Services\Groq_Service;
-use AIR\Services\Template_Engine;
-use AIR\Services\Encryption_Service;
+use Viscribe\Admin\Settings_Page;
+use Viscribe\Hooks\Image_Uploader;
+use Viscribe\Services\Groq_Service;
+use Viscribe\Services\Template_Engine;
+use Viscribe\Services\Encryption_Service;
 
 /**
  * Class Plugin
@@ -118,7 +118,7 @@ class Plugin {
 		 *
 		 * @since 1.0.0
 		 */
-		\do_action( 'air_services_loaded', $this );
+		\do_action( 'viscribe_services_loaded', $this );
 
 		// Initialize admin settings page.
 		if ( \is_admin() ) {
@@ -138,7 +138,7 @@ class Plugin {
 		 *
 		 * @since 1.0.0
 		 */
-		\do_action( 'air_loaded', $this );
+		\do_action( 'viscribe_loaded', $this );
 	}
 
 	/**
@@ -192,6 +192,6 @@ class Plugin {
 	 * @return bool
 	 */
 	final public function is_pro_active(): bool {
-		return \class_exists( 'AIR_Pro\\Pro' ) && \apply_filters( 'air_pro_is_licensed', false );
+		return \class_exists( 'Viscribe_Pro\\Pro' ) && \apply_filters( 'viscribe_pro_is_licensed', false );
 	}
 }

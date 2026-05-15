@@ -1,40 +1,40 @@
 {# Current Model Limits Card #}
-<div class="air-card air-model-limits-card">
-    <div class="air-card-header">
+<div class="viscribe-card viscribe-model-limits-card">
+    <div class="viscribe-card-header">
         <h2>
             <span class="dashicons dashicons-performance"></span>
             {{ model_limit_info.title }}
-            <a href="{{ model_limit_info.model_card_url }}" target="_blank" rel="noopener noreferrer" class="air-doc-badge">
+            <a href="{{ model_limit_info.model_card_url }}" target="_blank" rel="noopener noreferrer" class="viscribe-doc-badge">
                 <span class="dashicons dashicons-book"></span>
-                <span>{{ __('Model Card', 'ai-image-renamer') }}</span>
+                <span>{% trans %}Model Card{% endtrans %}</span>
             </a>
         </h2>
-        <p class="air-card-description">{{ model_limit_info.description }}</p>
+        <p class="viscribe-card-description">{{ model_limit_info.description }}</p>
     </div>
 
-    <div class="air-card-body">
-        <p class="air-model-limit-meta">
+    <div class="viscribe-card-body">
+        <p class="viscribe-model-limit-meta">
             <strong>{{ model_limit_info.model_label }}</strong>
-            <code class="air-model-limit-code">{{ model_limit_info.model_id }}</code>
+            <code class="viscribe-model-limit-code">{{ model_limit_info.model_id }}</code>
         </p>
 
-        <div class="air-model-limit-list">
+        <div class="viscribe-model-limit-list">
             {% for item in model_limit_info.items %}
-                <article class="air-model-limit-item">
-                    <div class="air-model-limit-item-header">
+                <article class="viscribe-model-limit-item">
+                    <div class="viscribe-model-limit-item-header">
                         <h3>{{ item.label }}</h3>
-                        <span class="air-model-limit-value">{{ item.value }}</span>
+                        <span class="viscribe-model-limit-value">{{ item.value }}</span>
                     </div>
-                    <p class="air-model-limit-meaning">{{ item.meaning }}</p>
+                    <p class="viscribe-model-limit-meaning">{{ item.meaning }}</p>
                 </article>
             {% endfor %}
         </div>
 
-        <div class="air-model-limit-notes">
+        <div class="viscribe-model-limit-notes">
             {% for note in model_limit_info.notes %}
-                <div class="air-model-limit-note air-model-limit-note--{{ note.variant }}">
+                <div class="viscribe-model-limit-note viscribe-model-limit-note--{{ note.variant }}">
                     <span class="dashicons dashicons-info-outline"></span>
-                    <div class="air-model-limit-note-body">
+                    <div class="viscribe-model-limit-note-body">
                         <strong>{{ note.title }}</strong>
                         <p>{{ note.text }}</p>
                     </div>

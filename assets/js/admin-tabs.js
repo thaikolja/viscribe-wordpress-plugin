@@ -1,34 +1,21 @@
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/wp-ai-image-renamer/
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * Released under the GNU General Public License v2 or later.
- * See: https://www.gnu.org/licenses/gpl-2.0.html
- *
- * @package AIR
- * @license GPL-2.0-or-later
- */
+ * @see             https://docs.kolja-nolte.com/viscribe/
 
-/**
- * AI Image Renamer - Tab Navigation
+ * Viscribe - Tab Navigation
  *
  * Handles tab switching for the modern settings page.
  *
- * @package AIR
+ * @package Viscribe
  */
 
 (function ($) {
   "use strict";
 
-  const AIRTabs = {
+  const ViscribeTabs = {
     /**
      * Initialize tab functionality.
      */
@@ -41,7 +28,7 @@
      * Bind click events to tabs.
      */
     bindEvents: function () {
-      $(document).on("click", ".air-tab", this.switchTab.bind(this));
+      $(document).on("click", ".viscribe-tab", this.switchTab.bind(this));
     },
 
     /**
@@ -60,12 +47,12 @@
       e.preventDefault();
 
       // Update active tab
-      $(".air-tab").removeClass("active").attr("aria-selected", "false");
+      $(".viscribe-tab").removeClass("active").attr("aria-selected", "false");
       $tab.addClass("active").attr("aria-selected", "true");
 
       // Update active panel
-      $(".air-panel").removeClass("active").attr("hidden", true);
-      $("#air-panel-" + tabId)
+      $(".viscribe-panel").removeClass("active").attr("hidden", true);
+      $("#viscribe-panel-" + tabId)
           .addClass("active")
           .removeAttr("hidden");
 
@@ -95,14 +82,14 @@
     handleHashNavigation: function () {
       const hash = window.location.hash.substring(1);
 
-      if (hash && $(`.air-tab[data-tab="${hash}"]`).length) {
-        $('.air-tab[data-tab="' + hash + '"]').trigger("click");
+      if (hash && $(`.viscribe-tab[data-tab="${hash}"]`).length) {
+        $('.viscribe-tab[data-tab="' + hash + '"]').trigger("click");
       }
     },
   };
 
   // Initialize on DOM ready
   $(document).ready(function () {
-    AIRTabs.init();
+    ViscribeTabs.init();
   });
 })(jQuery);

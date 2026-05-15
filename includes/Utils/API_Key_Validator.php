@@ -1,10 +1,10 @@
 <?php
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,19 +14,19 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package AIR
+ * @package Viscribe
  * @license GPL-2.0-or-later
  */
 
 /**
  * API Key Validator Utility.
  *
- * @package AIR\Utils
+ * @package Viscribe\Utils
  */
 
 declare( strict_types=1 );
 
-namespace AIR\Utils;
+namespace Viscribe\Utils;
 
 /**
  * Class API_Key_Validator
@@ -63,7 +63,7 @@ class API_Key_Validator {
 		if ( empty( $api_key ) ) {
 			return [
 				'valid'   => false,
-				'message' => \__( 'API key cannot be empty.', 'ai-image-renamer' ),
+				'message' => \__( 'API key cannot be empty.', 'viscribe' ),
 			];
 		}
 
@@ -71,7 +71,7 @@ class API_Key_Validator {
 		if ( ! str_starts_with( $api_key, self::GROQ_KEY_PREFIX ) ) {
 			return [
 				'valid'   => false,
-				'message' => \sprintf( /* translators: %s: API key prefix */ \__( 'Invalid API key format. Groq API keys start with %s', 'ai-image-renamer' ), self::GROQ_KEY_PREFIX ),
+				'message' => \sprintf( /* translators: %s: API key prefix */ \__( 'Invalid API key format. Groq API keys start with %s', 'viscribe' ), self::GROQ_KEY_PREFIX ),
 			];
 		}
 
@@ -80,7 +80,7 @@ class API_Key_Validator {
 		if ( $key_length !== self::EXACT_LENGTH ) {
 			return [
 				'valid'   => false,
-				'message' => \sprintf( /* translators: %d: Exact length */ \__( 'The API key does not match the required length. It must be exactly %d characters long.', 'ai-image-renamer' ), self::EXACT_LENGTH ),
+				'message' => \sprintf( /* translators: %d: Exact length */ \__( 'The API key does not match the required length. It must be exactly %d characters long.', 'viscribe' ), self::EXACT_LENGTH ),
 			];
 		}
 
@@ -90,7 +90,7 @@ class API_Key_Validator {
 		if ( ! preg_match( $pattern, $api_key ) ) {
 			return [
 				'valid'   => false,
-				'message' => \__( 'The API key contains invalid characters. <strong>Only alphanumeric characters, hyphens, and underscores</strong> are allowed.', 'ai-image-renamer' ),
+				'message' => \__( 'The API key contains invalid characters. <strong>Only alphanumeric characters, hyphens, and underscores</strong> are allowed.', 'viscribe' ),
 			];
 		}
 
@@ -98,7 +98,7 @@ class API_Key_Validator {
 		if ( self::contains_suspicious_patterns( $api_key ) ) {
 			return [
 				'valid'   => false,
-				'message' => \__( 'The API key contains invalid patterns.', 'ai-image-renamer' ),
+				'message' => \__( 'The API key contains invalid patterns.', 'viscribe' ),
 			];
 		}
 

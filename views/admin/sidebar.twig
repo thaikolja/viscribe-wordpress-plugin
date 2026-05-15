@@ -1,35 +1,35 @@
 {# Sidebar Template - Helpful Resources #}
-<div class="air-sidebar air-pro-upsell postbox">
-    <div class="postbox-header air-pro-header">
+<div class="viscribe-sidebar viscribe-pro-upsell postbox">
+    <div class="postbox-header viscribe-pro-header">
         <h2 class="hndle ui-sortable-handle">
 			<span>
 				<span class="dashicons dashicons-sos"></span>
-				{{ __('Helpful Resources', 'ai-image-renamer') }}
+				{% trans %}Helpful Resources{% endtrans %}
 			</span>
         </h2>
     </div>
     <div class="inside">
-        <p class="air-pro-tagline">{{ __('Everything you need to configure the plugin safely and troubleshoot uploads quickly.', 'ai-image-renamer') }}</p>
-        <ul class="air-pro-features">
+        <p class="viscribe-pro-tagline">{% trans %}Everything you need to configure the plugin safely and troubleshoot uploads quickly.{% endtrans %}</p>
+        <ul class="viscribe-pro-features">
             <li>
                 <span class="dashicons dashicons-book-alt"></span>
-                <strong>{{ __('Documentation', 'ai-image-renamer') }}</strong>
-                <span>{{ __('Step-by-step setup guides, technical notes, and hook references.', 'ai-image-renamer') }}</span>
+                <strong>{% trans %}Documentation{% endtrans %}</strong>
+                <span>{% trans %}Step-by-step setup guides, technical notes, and hook references.{% endtrans %}</span>
             </li>
             <li>
                 <span class="dashicons dashicons-shield-alt"></span>
-                <strong>{{ __('Security', 'ai-image-renamer') }}</strong>
-                <span>{{ __('Use wp-config.php constants when you want the strongest API key handling.', 'ai-image-renamer') }}</span>
+                <strong>{% trans %}Security{% endtrans %}</strong>
+                <span>{% trans %}Use wp-config.php constants when you want the strongest API key handling.{% endtrans %}</span>
             </li>
             <li>
                 <span class="dashicons dashicons-format-chat"></span>
-                <strong>{{ __('Support', 'ai-image-renamer') }}</strong>
-                <span>{{ __('Use the WordPress.org support forum if something does not behave as expected.', 'ai-image-renamer') }}</span>
+                <strong>{% trans %}Support{% endtrans %}</strong>
+                <span>{% trans %}Use the WordPress.org support forum if something does not behave as expected.{% endtrans %}</span>
             </li>
             <li>
                 <span class="dashicons dashicons-editor-code"></span>
-                <strong>{{ __('Developer Friendly', 'ai-image-renamer') }}</strong>
-                <span>{{ __('Filters and actions are available when you need to adapt the upload workflow.', 'ai-image-renamer') }}</span>
+                <strong>{% trans %}Developer Friendly{% endtrans %}</strong>
+                <span>{% trans %}Filters and actions are available when you need to adapt the upload workflow.{% endtrans %}</span>
             </li>
         </ul>
 
