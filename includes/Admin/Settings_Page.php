@@ -349,11 +349,11 @@ class Settings_Page {
 	}
 
 	/**
-	 * Render the API key field.
+	 * Get decrypted API key and derived display values.
 	 *
-	 * @return void
+	 * @return array{encrypted: string, decrypted: string, saved: bool, display_key: string, placeholder: string}
 	 */
-	final public function render_api_key_field(): void {
+	private function get_api_key_info(): array {
 		$options       = \get_option( self::OPTION_NAME, $this->get_defaults() );
 		$encrypted_key = $options['api_key'] ?? '';
 		$decrypted_key = '';
@@ -367,24 +367,51 @@ class Settings_Page {
 
 		$saved = ! empty( $encrypted_key );
 
-		// Mask the API key for display.
-		$display_key = $saved && ! empty( $decrypted_key ) ? API_Key_Validator::mask_for_display( $decrypted_key ) : '';
+		return [
+			'encrypted'   => $encrypted_key,
+			'decrypted'   => $decrypted_key,
+			'saved'       => $saved,
+			'display_key' => $saved && ! empty( $decrypted_key ) ? API_Key_Validator::mask_for_display( $decrypted_key ) : '',
+			'placeholder' => $saved ? __( 'Enter a new key to replace the saved one…', 'viscribe' ) : 'gsk_...',
+		];
+	}
 
-		// Set placeholder based on whether a key is saved.
-		$placeholder            = $saved ? __( 'Enter a new key to replace the saved one…', 'viscribe' ) : 'gsk_...';
+	/**
+	 * Render a simple checkbox field.
+	 *
+	 * @param string $template     Twig template relative to views/.
+	 * @param string $field_key    Key in the options array.
+	 * @param string $template_key Key passed to the template.
+	 *
+	 * @return void
+	 */
+	private function render_checkbox_field( string $template, string $field_key, string $template_key ): void {
+		$options = \get_option( self::OPTION_NAME, $this->get_defaults() );
+		$checked = $this->normalize_checkbox_value( $options[ $field_key ] ?? $this->get_defaults()[ $field_key ] );
+
+		echo $this->template_engine->render( $template, [ // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		                                                  'option_name' => esc_attr( self::OPTION_NAME ),
+		                                                  $template_key => (bool) $checked,
+		] );
+	}
+
+	/**
+	 * Render the API key field.
+	 *
+	 * @return void
+	 */
+	final public function render_api_key_field(): void {
+		$info                   = $this->get_api_key_info();
 		$using_api_key_constant = Groq_Service::has_api_key_constant();
 
-		// All values escaped before passing to template.
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Twig context contains escaped strings and typed boolean flags only.
 		echo $this->template_engine->render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'admin/fields/api-key.twig', [
 			'option_name'            => esc_attr( self::OPTION_NAME ),
-			'display_key'            => esc_attr( $display_key ),
-			'placeholder'            => esc_attr( $placeholder ),
-			'saved'                  => $saved,
+			'display_key'            => esc_attr( $info['display_key'] ),
+			'placeholder'            => esc_attr( $info['placeholder'] ),
+			'saved'                  => $info['saved'],
 			'using_api_key_constant' => $using_api_key_constant,
 		] );
-		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
@@ -609,15 +636,7 @@ class Settings_Page {
 	 * @return void
 	 */
 	final public function render_enabled_field(): void {
-		$options = \get_option( self::OPTION_NAME, $this->get_defaults() );
-		$enabled = $this->normalize_checkbox_value( $options['enabled'] ?? $this->get_defaults()['enabled'] );
-
-		// All values escaped before passing to template.
-		echo $this->template_engine->render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			'admin/fields/enabled.twig', [
-			'option_name' => esc_attr( self::OPTION_NAME ),
-			'enabled'     => (bool) $enabled,
-		] );
+		$this->render_checkbox_field( 'admin/fields/enabled.twig', 'enabled', 'enabled' );
 	}
 
 	/**
@@ -626,15 +645,7 @@ class Settings_Page {
 	 * @return void
 	 */
 	final public function render_alt_text_field(): void {
-		$options = \get_option( self::OPTION_NAME, $this->get_defaults() );
-		$set_alt = $this->normalize_checkbox_value( $options['set_alt_text'] ?? $this->get_defaults()['set_alt_text'] );
-
-		// All values escaped before passing to template.
-		echo $this->template_engine->render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			'admin/fields/alt-text.twig', [
-			'option_name' => esc_attr( self::OPTION_NAME ),
-			'set_alt'     => (bool) $set_alt,
-		] );
+		$this->render_checkbox_field( 'admin/fields/alt-text.twig', 'set_alt_text', 'set_alt' );
 	}
 
 	/**
@@ -706,20 +717,8 @@ class Settings_Page {
 			return;
 		}
 
-		$options       = \get_option( self::OPTION_NAME, $this->get_defaults() );
-		$encrypted_key = $options['api_key'] ?? '';
-		$decrypted_key = '';
-
-		if ( ! empty( $encrypted_key ) ) {
-			$decrypted_key = $this->encryption_service->decrypt( $encrypted_key );
-			if ( false === $decrypted_key ) {
-				$decrypted_key = '';
-			}
-		}
-
-		$saved       = ! empty( $encrypted_key );
-		$display_key = $saved && ! empty( $decrypted_key ) ? API_Key_Validator::mask_for_display( $decrypted_key ) : '';
-		$placeholder = $saved ? __( 'Enter a new key to replace the saved one…', 'viscribe' ) : 'gsk_...';
+		$options      = \get_option( self::OPTION_NAME, $this->get_defaults() );
+		$api_key_info = $this->get_api_key_info();
 
 		// File types.
 		$file_types      = $options['file_types'] ?? [];
@@ -748,9 +747,9 @@ class Settings_Page {
 			'option_name'            => esc_attr( self::OPTION_NAME ),
 			'version'                => esc_html( VISCRIBE_VERSION ),
 			'page_title'             => esc_html( get_admin_page_title() ),
-			'display_key'            => esc_attr( $display_key ),
-			'placeholder'            => esc_attr( $placeholder ),
-			'saved'                  => $saved,
+			'display_key'            => esc_attr( $api_key_info['display_key'] ),
+			'placeholder'            => esc_attr( $api_key_info['placeholder'] ),
+			'saved'                  => $api_key_info['saved'],
 			'enabled'                => $this->normalize_checkbox_value( $options['enabled'] ?? $this->get_defaults()['enabled'] ),
 			'set_alt_text'           => $this->normalize_checkbox_value( $options['set_alt_text'] ?? $this->get_defaults()['set_alt_text'] ),
 			'file_types'             => array_map( 'esc_attr', $file_types ),

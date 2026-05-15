@@ -31,6 +31,7 @@ namespace Viscribe\Services\Twig;
 
 use Twig\Compiler;
 use Twig\Node\Node;
+use Twig\Node\TextNode;
 
 /**
  * Compiles {% trans %}...{% endtrans %} into \__( '...', 'viscribe' ).
@@ -58,9 +59,10 @@ class TransNode extends Node {
 		}
 
 		$compiler
-			->raw( "<?php echo \\\__( '" )
+			->addDebugInfo( $this )
+			->write( 'echo \__( \'' )
 			->raw( str_replace( "'", "\\'", $text ) )
-			->raw( "', 'viscribe' ); ?>\n" );
+			->raw( "', 'viscribe' );\n" );
 	}
 
 	/**
@@ -71,6 +73,10 @@ class TransNode extends Node {
 	 * @return string The extracted text.
 	 */
 	private function extract_text( Node $node ): string {
+		if ( $node instanceof TextNode ) {
+			return trim( $node->getAttribute( 'data' ) );
+		}
+
 		$text = '';
 
 		for ( $i = 0; $i < $node->count(); $i ++ ) {
