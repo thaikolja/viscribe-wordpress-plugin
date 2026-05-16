@@ -5,7 +5,7 @@
  * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/viscribe
+ * @see             https://docs.kolja-nolte.com/viscribe-wordpress-plugin
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -391,10 +391,12 @@ class Settings_Page {
 		$options = \get_option( self::OPTION_NAME, $this->get_defaults() );
 		$checked = $this->normalize_checkbox_value( $options[ $field_key ] ?? $this->get_defaults()[ $field_key ] );
 
-		echo $this->template_engine->render( $template, [ // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		                                                  'option_name' => esc_attr( self::OPTION_NAME ),
-		                                                  $template_key => (bool) $checked,
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $this->template_engine->render( $template, [
+			'option_name' => esc_attr( self::OPTION_NAME ),
+			$template_key => (bool) $checked,
 		] );
+		// phpcs:enable
 	}
 
 	/**
@@ -406,7 +408,8 @@ class Settings_Page {
 		$info                   = $this->get_api_key_info();
 		$using_api_key_constant = Groq_Service::has_api_key_constant();
 
-		echo $this->template_engine->render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $this->template_engine->render(
 			'admin/fields/api-key.twig', [
 			'option_name'            => esc_attr( self::OPTION_NAME ),
 			'display_key'            => esc_attr( $info['display_key'] ),
@@ -414,6 +417,7 @@ class Settings_Page {
 			'saved'                  => $info['saved'],
 			'using_api_key_constant' => $using_api_key_constant,
 		] );
+		// phpcs:enable
 	}
 
 	/**
@@ -684,11 +688,12 @@ class Settings_Page {
 		$options      = \get_option( self::OPTION_NAME, $this->get_defaults() );
 		$max_keywords = $options['max_keywords'] ?? 5;
 
-		// All values escaped before passing to template.
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $this->template_engine->render( 'admin/fields/max-keywords.twig', [
 			'option_name'  => esc_attr( self::OPTION_NAME ),
 			'max_keywords' => absint( $max_keywords ),
 		] );
+		// phpcs:enable
 	}
 
 	/**
