@@ -446,19 +446,6 @@ class Settings_Page {
 	 */
 	private function get_available_models( string $current ): array {
 		$models = [
-			'meta-llama/llama-4-maverick-17b-128e-instruct' => [
-				'label'      => 'Llama 4 Maverick',
-				'provider'   => 'meta',
-				'desc'       => 'Best for detailed image analysis. Generates more accurate filenames and alt text for complex images.',
-				'highlights' => [ 'params' ],
-				'specs'      => [
-					'params'  => '17B (128 Experts)',
-					'context' => '128k',
-					'speed'   => '600 tokens/s',
-					'size'    => '20 MB',
-				],
-				'deprecated' => true,
-			],
 			'meta-llama/llama-4-scout-17b-16e-instruct'     => [
 				'label'      => 'Llama 4 Scout',
 				'provider'   => 'meta',
@@ -471,6 +458,19 @@ class Settings_Page {
 					'size'    => '20 MB',
 				],
 				'deprecated' => false,
+			],
+			'meta-llama/llama-4-maverick-17b-128e-instruct' => [
+				'label'      => 'Llama 4 Maverick',
+				'provider'   => 'meta',
+				'desc'       => 'Best for detailed image analysis. Generates more accurate filenames and alt text for complex images.',
+				'highlights' => [ 'params' ],
+				'specs'      => [
+					'params'  => '17B (128 Experts)',
+					'context' => '128k',
+					'speed'   => '600 tokens/s',
+					'size'    => '20 MB',
+				],
+				'deprecated' => true,
 			],
 		];
 
