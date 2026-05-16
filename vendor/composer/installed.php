@@ -3,7 +3,7 @@
         'name' => 'thaikolja/viscribe',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'bdbc8c5651226d17d703abe96b55e54c884705bc',
+        'reference' => 'b2dd7769f835b7879ff5f5375e6d31a51242a0ee',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -112,7 +112,7 @@
         'thaikolja/viscribe' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'bdbc8c5651226d17d703abe96b55e54c884705bc',
+            'reference' => 'b2dd7769f835b7879ff5f5375e6d31a51242a0ee',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
