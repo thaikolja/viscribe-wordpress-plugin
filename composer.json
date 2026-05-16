@@ -1,5 +1,5 @@
 {
-  "name":        "thaikolja/viscribe",
+  "name":        "thaikolja/viscribe-wordpress-plugin",
   "description": "A WordPress plugin that automatically renames uploaded images using Groq's Vision API for SEO-friendly filenames.",
   "type":        "wordpress-plugin",
   "license":     "GPL-2.0-or-later",
@@ -18,11 +18,11 @@
     "vision-api",
     "image-renaming"
   ],
-  "homepage":    "https://gitlab.com/thaikolja/viscribe",
+  "homepage":    "https://gitlab.com/thaikolja/viscribe-wordpress-plugin",
   "support":     {
     "docs":   "https://docs.kolja-nolte.com/viscribe",
     "forum":  "https://wordpress.org/support/plugin/viscribe/",
-    "source": "https://gitlab.com/thaikolja/viscribe"
+    "source": "https://gitlab.com/thaikolja/viscribe-wordpress-plugin"
   },
   "require":     {
     "php":                   ">=8.2",
@@ -52,7 +52,7 @@
   "config":      {
     "optimize-autoloader": true,
     "sort-packages":       true,
-    "allow-plugins":       {
+    "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }

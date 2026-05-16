@@ -47,9 +47,9 @@
       const $badge     = $("#viscribe_test_result");
       const $icon      = $badge.find(".dashicons");
       const $text      = $badge.find(".viscribe-status-badge-text");
-      const allStates  = ".viscribe-status-badge--idle viscribe-status-badge--testing viscribe-status-badge--success viscribe-status-badge--error";
+      const allStates  = "viscribe-status-badge--idle viscribe-status-badge--testing viscribe-status-badge--success viscribe-status-badge--error";
 
-      $badge.removeClass(allStates).addClass(".viscribe-status-badge--" + state);
+      $badge.removeClass(allStates).addClass("viscribe-status-badge--" + state);
       $text.text(text);
 
       // Swap icon: spinner while testing, lightbulb otherwise
@@ -141,8 +141,8 @@
     $testBtn.on("click", (e) => {
       e.preventDefault();
 
-      // Disable button and start spinner on its icon
-      $testBtn.prop("disabled", true).addClass(".viscribe-btn--loading");
+      // Disable button and start spinner on the status badge
+      $testBtn.prop("disabled", true);
       setResultState("testing", admin.strings.testing || "Testing…");
 
       // Build AJAX data. When using constant, don't send API key from input.
@@ -174,14 +174,14 @@
               } else {
                 setResultState("error", `${admin.strings.error} ${msg}`.trim());
               }
-              $testBtn.prop("disabled", false).removeClass(".viscribe-btn--loading");
+              $testBtn.prop("disabled", false);
             }, delay);
           })
           .fail((_xhr, _status, errorThrown) => {
             const delay = Math.max(0, MIN_SPIN_MS - (Date.now() - startTime));
             setTimeout(() => {
               setResultState("error", `${admin.strings.error} ${errorThrown || ""}`.trim());
-              $testBtn.prop("disabled", false).removeClass(".viscribe-btn--loading");
+              $testBtn.prop("disabled", false);
             }, delay);
           });
     });

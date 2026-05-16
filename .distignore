@@ -8,7 +8,8 @@ docs/
 assets/js/main.js
 assets/js/admin.js
 assets/js/admin-tabs.js
-assets/css/main.css
+assets/js/styles.js
+assets/css/styles.css
 
 # Exclude source maps
 assets/**/*.map
@@ -30,4 +31,4 @@ vite.config.mjs
 # Exclude cache and system files
 cache/
 .DS_Store
-*.zip
+viscribe.zip

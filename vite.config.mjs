@@ -1,22 +1,3 @@
-/*
- * @name:           Viscribe
- * @description     Uses AI to rename images during upload for SEO-friendly filenames.
- * @author          Kolja Nolte <kolja.nolte@gmail.com>
- * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/viscribe
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * Released under the GNU General Public License v2 or later.
- * See: https://www.gnu.org/licenses/gpl-2.0.html
- *
- * @package Viscribe
- * @license GPL-2.0-or-later
- */
-
 import {defineConfig}  from 'vite';
 import path            from 'path';
 import {fileURLToPath} from 'url';
@@ -24,41 +5,23 @@ import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const isProduction = process.env.NODE_ENV === 'production';
+const suffix = isProduction ? '.min' : '';
 
 export default defineConfig({
-  plugins: [],
   build:   {
     outDir:        'assets',
     emptyOutDir:   false,
+    sourcemap:     true,
+    minify:        isProduction,
     rollupOptions: {
       input:  {
         main: path.resolve(__dirname, 'assets/js/main.js'),
       },
       output: {
-        entryFileNames: 'js/index.js',
-        chunkFileNames: 'js/[name].js',
-        assetFileNames: (assetInfo) => {
-          const assetNames = [
-            assetInfo?.name,
-            assetInfo?.originalFileName,
-            ...(assetInfo?.names ?? []),
-            ...(assetInfo?.originalFileNames ?? []),
-          ].filter((name) => typeof name === 'string' && name.length > 0);
-
-          // Rename the single generated stylesheet to index.css to match packaging expectations.
-          if (assetNames.some((name) => name.endsWith('.css'))) {
-            return 'css/index.css';
-          }
-
-          return '[name][extname]';
-        },
+        entryFileNames: `js/scripts${suffix}.js`,
+        chunkFileNames: `js/[name]${suffix}.js`,
       },
     },
-    sourcemap:     false,
-    minify:        isProduction,
-    cssMinify:     isProduction,
-    jsSourceMap:   true,
-    cssCodeSplit:  true,
   },
   server:  {
     port:  3000,

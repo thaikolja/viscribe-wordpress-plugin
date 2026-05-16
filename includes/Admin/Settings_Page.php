@@ -139,7 +139,6 @@ class Settings_Page {
 		\register_setting( self::OPTION_GROUP, self::OPTION_NAME, [
 			'type'              => 'array',
 			'sanitize_callback' => [ $this, 'sanitize_settings' ],
-			'default'           => $this->get_defaults(),
 		] );
 
 		// Main settings section.
@@ -808,11 +807,18 @@ class Settings_Page {
 			return;
 		}
 
-		$asset_file = include VISCRIBE_PLUGIN_DIR . 'assets/js/index.asset.php';
+		$suffix = defined( 'WP_DEBUG' ) && WP_DEBUG ? '' : '.min';
 
-		\wp_enqueue_style( 'viscribe-admin', VISCRIBE_PLUGIN_URL . 'assets/css/index.css', [], $asset_file['version'] );
+		if ( '' === $suffix ) {
+			$version = \filemtime( VISCRIBE_PLUGIN_DIR . 'assets/js/scripts.js' );
+		} else {
+			$asset_file = include VISCRIBE_PLUGIN_DIR . 'assets/js/index.asset.php';
+			$version    = $asset_file['version'];
+		}
 
-		\wp_enqueue_script( 'viscribe-admin', VISCRIBE_PLUGIN_URL . 'assets/js/index.js', array_merge( $asset_file['dependencies'], [ 'jquery' ] ), $asset_file['version'], true );
+		\wp_enqueue_style( 'viscribe-admin', VISCRIBE_PLUGIN_URL . "assets/css/styles{$suffix}.css", [], $version );
+
+		\wp_enqueue_script( 'viscribe-admin', VISCRIBE_PLUGIN_URL . "assets/js/scripts{$suffix}.js", [ 'jquery' ], $version, true );
 
 		\wp_localize_script( 'viscribe-admin', 'viscribeAdmin', [
 			'ajaxUrl'             => \admin_url( 'admin-ajax.php' ),
