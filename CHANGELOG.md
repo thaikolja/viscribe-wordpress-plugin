@@ -1,23 +1,21 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+All notable changes to this project will be documented in this file.
+ 
+## v1
 
-## [1.0.0] - 2026-05-10
+### v1.0.0
 
-### Added
+Initial release.
 
-- Initial release of Viscribe.
-- Integration with Groq Vision API for automated image renaming.
-- Support for JPEG, PNG, and WebP image formats.
-- Options to customize AI prompt and maximum keywords.
-- Support for automatically setting image Alt Text based on AI description.
-- Encryption service for secure API key storage.
-- Twig-based template engine for admin views.
-- PSR-4 autoloading via Composer.
-
-### Fixed
-
-- Fixed fatal error where classes were not loading due to missing Composer autoloader.
-- Fixed dashboard menu item not appearing in "Media" menu by correcting hook timing (moved from `admin_init` to
-  `plugins_loaded`).
-- Improved plugin initialization using the Singleton pattern.
+- Automatic image renaming on upload using Groq Vision API
+- Configurable AI model selection (Llama 4 Scout)
+- Optional alt text population for accessibility
+- Encrypted API key storage (database or `wp-config.php` constant)
+- Configurable file types (JPEG, PNG, WebP, GIF)
+- Batch image processing of up to 5 images at a time
+- Configurable keyword limits for filename generation
+- Modern tabbed settings page with Twig templates
+- Translation-ready (`.pot` file, custom `{% trans %}` Twig tag)
+- System diagnostics panel
+- Extension hooks for Pro add-on plugin
