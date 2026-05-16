@@ -1961,3 +1961,230 @@ span:not(.dashicons) {
     transform: rotate(360deg);
   }
 }
+
+/* ── Provider Cards ── */
+
+.viscribe-provider-card {
+  border: 2px solid var(--viscribe-gray-200);
+  border-radius: var(--viscribe-border-radius);
+  background: var(--viscribe-white);
+  cursor: pointer;
+  transition: var(--viscribe-transition);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: var(--viscribe-gap-md);
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.viscribe-provider-card:hover {
+  border-color: var(--viscribe-gray-400);
+}
+
+.viscribe-provider-card--selected {
+  border-color: var(--viscribe-primary);
+  background: linear-gradient(135deg, var(--viscribe-primary-light) 0%, var(--viscribe-white) 100%);
+  box-shadow: var(--viscribe-shadow-sm);
+}
+
+.viscribe-provider-card--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+
+.viscribe-provider-card--disabled:hover {
+  border-color: var(--viscribe-gray-200);
+}
+
+.viscribe-provider-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.viscribe-provider-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--viscribe-gap-sm);
+}
+
+.viscribe-provider-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.viscribe-provider-brand .dashicons {
+  width: 26px;
+  height: 26px;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.viscribe-provider-brand-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.viscribe-provider-brand-text strong {
+  color: var(--viscribe-gray-900);
+  font-size: 16px;
+}
+
+.viscribe-provider-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.viscribe-provider-selection-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.viscribe-provider-selection-indicator .dashicons-yes {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.viscribe-provider-radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--viscribe-gray-300);
+  background: var(--viscribe-white);
+  display: inline-block;
+  flex-shrink: 0;
+  transition: var(--viscribe-transition);
+}
+
+.viscribe-provider-card--selected .viscribe-provider-radio-circle {
+  display: none;
+}
+
+.viscribe-provider-card-desc {
+  color: var(--viscribe-gray-600);
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Provider Model Table ── */
+
+.viscribe-provider-models {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 4px;
+  border: 1px solid var(--viscribe-gray-100);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.viscribe-provider-models thead {
+  background: var(--viscribe-gray-50);
+}
+
+.viscribe-provider-models th {
+  text-align: left;
+  padding: 8px 12px;
+  color: var(--viscribe-gray-500);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-bottom: 1px solid var(--viscribe-gray-200);
+}
+
+.viscribe-provider-models td {
+  padding: 8px 12px;
+  color: var(--viscribe-gray-700);
+  border-bottom: 1px solid var(--viscribe-gray-100);
+  vertical-align: middle;
+}
+
+.viscribe-provider-models tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.viscribe-provider-models tbody tr:hover {
+  background: var(--viscribe-gray-50);
+}
+
+.viscribe-provider-model-name strong {
+  color: var(--viscribe-gray-900);
+  font-size: 13px;
+}
+
+.viscribe-provider-models td code {
+  font-size: 12px;
+  background: var(--viscribe-gray-100);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--viscribe-gray-700);
+}
+
+.viscribe-provider-status {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.viscribe-provider-status--available {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.viscribe-provider-status--deprecated {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.viscribe-provider-status--planned {
+  background: var(--viscribe-gray-100);
+  color: var(--viscribe-gray-500);
+}
+
+/* ── Provider Cards: Responsive ── */
+
+@media (width <= 782px) {
+  .viscribe-provider-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .viscribe-provider-selection-indicator {
+    align-self: flex-end;
+    margin-top: -32px;
+  }
+
+  .viscribe-provider-models {
+    font-size: 12px;
+  }
+
+  .viscribe-provider-models th,
+  .viscribe-provider-models td {
+    padding: 6px 8px;
+  }
+}
