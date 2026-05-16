@@ -31,46 +31,47 @@ use Twig\Token;
  *
  * @internal
  */
-final class BlockTokenParser extends AbstractTokenParser {
+final class BlockTokenParser extends AbstractTokenParser
+{
+    public function parse(Token $token): Node
+    {
+        $lineno = $token->getLine();
+        $stream = $this->parser->getStream();
+        $name = $stream->expect(Token::NAME_TYPE)->getValue();
+        $this->parser->setBlock($name, $block = new BlockNode($name, new EmptyNode(), $lineno));
+        $this->parser->pushLocalScope();
+        $this->parser->pushBlockStack($name);
 
-	public function parse( Token $token ): Node {
-		$lineno = $token->getLine();
-		$stream = $this->parser->getStream();
-		$name   = $stream->expect( Token::NAME_TYPE )->getValue();
-		$this->parser->setBlock( $name, $block = new BlockNode( $name, new EmptyNode(), $lineno ) );
-		$this->parser->pushLocalScope();
-		$this->parser->pushBlockStack( $name );
+        if ($stream->nextIf(Token::BLOCK_END_TYPE)) {
+            $body = $this->parser->subparse([$this, 'decideBlockEnd'], true);
+            if ($token = $stream->nextIf(Token::NAME_TYPE)) {
+                $value = $token->getValue();
 
-		if ( $stream->nextIf( Token::BLOCK_END_TYPE ) ) {
-			$body = $this->parser->subparse( array( $this, 'decideBlockEnd' ), true );
-			if ( $token = $stream->nextIf( Token::NAME_TYPE ) ) {
-				$value = $token->getValue();
+                if ($value != $name) {
+                    throw new SyntaxError(\sprintf('Expected endblock for block "%s" (but "%s" given).', $name, $value), $stream->getCurrent()->getLine(), $stream->getSourceContext());
+                }
+            }
+        } else {
+            $body = new Nodes([
+                new PrintNode($this->parser->parseExpression(), $lineno),
+            ]);
+        }
+        $stream->expect(Token::BLOCK_END_TYPE);
 
-				if ( $value != $name ) {
-					throw new SyntaxError( \sprintf( 'Expected endblock for block "%s" (but "%s" given).', $name, $value ), $stream->getCurrent()->getLine(), $stream->getSourceContext() );
-				}
-			}
-		} else {
-			$body = new Nodes(
-				array(
-					new PrintNode( $this->parser->parseExpression(), $lineno ),
-				)
-			);
-		}
-		$stream->expect( Token::BLOCK_END_TYPE );
+        $block->setNode('body', $body);
+        $this->parser->popBlockStack();
+        $this->parser->popLocalScope();
 
-		$block->setNode( 'body', $body );
-		$this->parser->popBlockStack();
-		$this->parser->popLocalScope();
+        return new BlockReferenceNode($name, $lineno);
+    }
 
-		return new BlockReferenceNode( $name, $lineno );
-	}
+    public function decideBlockEnd(Token $token): bool
+    {
+        return $token->test('endblock');
+    }
 
-	public function decideBlockEnd( Token $token ): bool {
-		return $token->test( 'endblock' );
-	}
-
-	public function getTag(): string {
-		return 'block';
-	}
+    public function getTag(): string
+    {
+        return 'block';
+    }
 }

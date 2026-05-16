@@ -1,42 +1,29 @@
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/wp-ai-image-renamer/
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * Released under the GNU General Public License v2 or later.
- * See: https://www.gnu.org/licenses/gpl-2.0.html
- *
- * @package AIR
- * @license GPL-2.0-or-later
- */
+ * @see             https://docs.kolja-nolte.com/viscribe/
 
-/**
- * AI Image Renamer - Admin JavaScript
+ * Viscribe - Admin JavaScript
  *
  * Handles the Test Connection and Delete API Key functionalities.
  */
 
-/* global airAdmin */
+/* global viscribeAdmin */
 
 (function ($) {
   "use strict";
 
   $(function () {
-    const admin = window.airAdmin;
+    const admin = window.viscribeAdmin;
     if (!admin || !admin.ajaxUrl) {
       // Fail fast to avoid runtime errors if localized script data is missing
       return;
     }
 
     const $doc = $(document);
-    const $apiKeyInput = $("#air_api_key");
+    const $apiKeyInput = $("#viscribe_api_key");
 
     // Track if the user has entered a new key (not masked)
     let hasEnteredNewKey = false;
@@ -46,7 +33,7 @@
       $btn.prop("disabled", disabled).attr("aria-disabled", disabled ? "true" : "false");
 
       if (typeof label === "string") {
-        const $labelTarget = $btn.find(".air-button-label, span[aria-hidden='true']").last();
+        const $labelTarget = $btn.find(".viscribe-button-label, span[aria-hidden='true']").last();
 
         if ($labelTarget.length) {
           $labelTarget.text(label);
@@ -57,12 +44,12 @@
     };
 
     const setResultState = (state, text) => {
-      const $badge     = $("#air_test_result");
+      const $badge     = $("#viscribe_test_result");
       const $icon      = $badge.find(".dashicons");
-      const $text      = $badge.find(".air-status-badge-text");
-      const allStates  = "air-status-badge--idle air-status-badge--testing air-status-badge--success air-status-badge--error";
+      const $text      = $badge.find(".viscribe-status-badge-text");
+      const allStates  = "viscribe-status-badge--idle viscribe-status-badge--testing viscribe-status-badge--success viscribe-status-badge--error";
 
-      $badge.removeClass(allStates).addClass("air-status-badge--" + state);
+      $badge.removeClass(allStates).addClass("viscribe-status-badge--" + state);
       $text.text(text);
 
       // Swap icon: spinner while testing, lightbulb otherwise
@@ -87,15 +74,15 @@
 
     // Hide inline error when user types
     const clearErrorInTab = () => {
-      $("#air-api-key-error-msg").hide().text("");
+      $("#viscribe-api-key-error-msg").hide().text("");
     };
 
     const showErrorInTab = (message) => {
-      $("#air-api-key-error-msg").text(message).show();
+      $("#viscribe-api-key-error-msg").text(message).show();
     };
 
     const updateApiKeyDescription = (message) => {
-      $("#air_api_key_desc").text(message);
+      $("#viscribe_api_key_desc").text(message);
     };
 
     // When user starts typing in the input field, clear the masked value
@@ -120,7 +107,7 @@
     });
 
     // --- Pre-save Validation ---
-    const $form = $("#air-settings-form");
+    const $form = $("#viscribe-settings-form");
     const usingConstant = !!admin.usingApiKeyConstant;
 
 
@@ -149,18 +136,18 @@
     });
 
     // --- Test Connection Handler ---
-    const $testBtn = $("#air_test_connection");
+    const $testBtn = $("#viscribe_test_connection");
 
     $testBtn.on("click", (e) => {
       e.preventDefault();
 
-      // Disable button and start spinner on its icon
-      $testBtn.prop("disabled", true).addClass("air-btn--loading");
+      // Disable button and start spinner on the status badge
+      $testBtn.prop("disabled", true);
       setResultState("testing", admin.strings.testing || "Testing…");
 
       // Build AJAX data. When using constant, don't send API key from input.
       const data = {
-        action: "air_test_connection",
+        action: "viscribe_test_connection",
         nonce:  admin.nonces.test_connection,
       };
 
@@ -187,20 +174,20 @@
               } else {
                 setResultState("error", `${admin.strings.error} ${msg}`.trim());
               }
-              $testBtn.prop("disabled", false).removeClass("air-btn--loading");
+              $testBtn.prop("disabled", false);
             }, delay);
           })
           .fail((_xhr, _status, errorThrown) => {
             const delay = Math.max(0, MIN_SPIN_MS - (Date.now() - startTime));
             setTimeout(() => {
               setResultState("error", `${admin.strings.error} ${errorThrown || ""}`.trim());
-              $testBtn.prop("disabled", false).removeClass("air-btn--loading");
+              $testBtn.prop("disabled", false);
             }, delay);
           });
     });
 
     // --- Delete API Key Handler ---
-    $doc.on("click", "#air_delete_api_key", function (e) {
+    $doc.on("click", "#viscribe_delete_api_key", function (e) {
       e.preventDefault();
 
       if (
@@ -223,7 +210,7 @@
         url:    admin.ajaxUrl,
         method: "POST",
         data:   {
-          action: "air_delete_api_key",
+          action: "viscribe_delete_api_key",
           nonce:  admin.nonces.delete_api_key,
         },
       })
@@ -245,9 +232,9 @@
     });
 
     // --- Encryption Notice Dismiss Handler ---
-    $doc.on("click", ".air-encryption-notice .notice-dismiss", function () {
-      const $notice = $(this).closest(".air-encryption-notice");
-      const nonce = String($notice.data("air-dismiss-nonce") ?? "");
+    $doc.on("click", ".viscribe-encryption-notice .notice-dismiss", function () {
+      const $notice = $(this).closest(".viscribe-encryption-notice");
+      const nonce = String($notice.data(".viscribe-dismiss-nonce") ?? "");
 
       if (!nonce) {
         return;
@@ -257,7 +244,7 @@
         url: admin.ajaxUrl,
         method: "POST",
         data: {
-          action: "air_dismiss_encryption_notice",
+          action: "viscribe_dismiss_encryption_notice",
           nonce,
         },
       });
@@ -265,14 +252,14 @@
 
     // --- Model Selector Handler ---
     const updateModelCards = () => {
-      const $cards = $(".air-model-card");
+      const $cards = $(".viscribe-model-card");
       $cards.removeClass("selected");
-      $cards.find("input:checked").closest(".air-model-card").addClass("selected");
+      $cards.find("input:checked").closest(".viscribe-model-card").addClass("selected");
     };
 
     updateModelCards();
 
-    $doc.on("change", ".air-model-card input", updateModelCards);
+    $doc.on("change", ".viscribe-model-card input", updateModelCards);
 
   });
 })(jQuery);

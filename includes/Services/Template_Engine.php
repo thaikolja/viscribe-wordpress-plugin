@@ -1,11 +1,11 @@
 <?php
 
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,19 +15,19 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package AIR
+ * @package Viscribe
  * @license GPL-2.0-or-later
  */
 
 /**
  * Twig Template Engine Service.
  *
- * @package AIR\Services
+ * @package Viscribe\Services
  */
 
 declare( strict_types=1 );
 
-namespace AIR\Services;
+namespace Viscribe\Services;
 
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -35,6 +35,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
+use Viscribe\Services\Twig\TransTokenParser;
 
 /**
  * Class Template_Engine
@@ -55,22 +56,22 @@ class Template_Engine {
 	 * Initializes the Twig environment with the views directory.
 	 */
 	public function __construct() {
-		$views_path = AIR_PLUGIN_DIR . 'views';
-		$cache_path = AIR_PLUGIN_DIR . 'cache/twig';
+		$views_path = VISCRIBE_PLUGIN_DIR . 'views';
+		$cache_path = VISCRIBE_PLUGIN_DIR . 'cache/twig';
 
 		// Validate views directory path.
 		$real_views_path = \realpath( $views_path );
-		$real_plugin_dir = \realpath( AIR_PLUGIN_DIR );
+		$real_plugin_dir = \realpath( VISCRIBE_PLUGIN_DIR );
 
 		if ( false === $real_views_path || false === $real_plugin_dir ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				\error_log( 'AI Image Renamer: Failed to resolve paths for Twig template engine.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				\error_log( 'Viscribe: Failed to resolve paths for Twig template engine.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 			// Fall back to no caching if path resolution fails.
 			$cache_path = false;
 		} else if ( ! str_starts_with( $real_views_path, $real_plugin_dir ) ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				\error_log( 'AI Image Renamer: Views directory is outside plugin directory.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				\error_log( 'Viscribe: Views directory is outside plugin directory.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 			// Fall back to no caching for security.
 			$cache_path = false;
@@ -82,7 +83,7 @@ class Template_Engine {
 
 			if ( ! $created ) {
 				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-					\error_log( 'AI Image Renamer: Failed to create Twig cache directory.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+					\error_log( 'Viscribe: Failed to create Twig cache directory.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 				}
 
 				// Fall back to no caching if directory creation fails.
@@ -93,7 +94,7 @@ class Template_Engine {
 		// Validate cache directory is writable.
 		if ( $cache_path && ! \wp_is_writable( $cache_path ) ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				\error_log( 'AI Image Renamer: Twig cache directory is not writable.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				\error_log( 'Viscribe: Twig cache directory is not writable.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 
 			// Fall back to no caching if directory is not writable.
@@ -109,7 +110,7 @@ class Template_Engine {
 		 *
 		 * @since 1.0.0
 		 */
-		$template_paths = \apply_filters( 'air_template_paths', [ $views_path ] );
+		$template_paths = \apply_filters( 'viscribe_template_paths', [ $views_path ] );
 
 		// Validate and filter paths - only include existing directories.
 		$valid_paths = [];
@@ -136,6 +137,9 @@ class Template_Engine {
 		// Add WordPress-specific globals and functions.
 		$this->register_globals();
 		$this->register_functions();
+
+		// Register the {% trans %} token parser for compile-time translation.
+		$this->twig->addTokenParser( new TransTokenParser() );
 	}
 
 	/**
@@ -144,8 +148,8 @@ class Template_Engine {
 	 * @return void
 	 */
 	private function register_globals(): void {
-		$this->twig->addGlobal( 'plugin_url', AIR_PLUGIN_URL );
-		$this->twig->addGlobal( 'plugin_version', AIR_VERSION );
+		$this->twig->addGlobal( 'plugin_url', VISCRIBE_PLUGIN_URL );
+		$this->twig->addGlobal( 'plugin_version', VISCRIBE_VERSION );
 	}
 
 	/**
@@ -154,11 +158,6 @@ class Template_Engine {
 	 * @return void
 	 */
 	private function register_functions(): void {
-		// WordPress translation functions.
-		$this->twig->addFunction( new TwigFunction( '__', function ( string $text ): string {
-			return \__( $text, 'ai-image-renamer' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-		} ) );
-
 		$this->twig->addFunction( new TwigFunction( 'esc_html', function ( string $text ): string {
 			return \esc_html( $text );
 		} ) );
@@ -201,7 +200,7 @@ class Template_Engine {
 		} ) );
 
 		$this->twig->addFunction( new TwigFunction( 'doc_url', function ( string $path = '' ): string {
-			$base = (string) \apply_filters( 'air_docs_base_url', 'https://docs.kolja-nolte.com/ai-image-renamer/' );
+			$base = (string) \apply_filters( 'viscribe_docs_base_url', 'https://docs.kolja-nolte.com/viscribe/' );
 
 			return $base . ltrim( $path, '/' );
 		} ) );
@@ -220,7 +219,7 @@ class Template_Engine {
 			return $this->twig->render( $template, $context );
 		} catch ( LoaderError|RuntimeError|SyntaxError $e ) {
 			if ( WP_DEBUG ) {
-				return '<div class="notice notice-error"><p>' . \esc_html__( 'Template Error:', 'ai-image-renamer' ) . ' ' . \esc_html( $e->getMessage() ) . '</p></div>';
+				return '<div class="notice notice-error"><p>' . \esc_html__( 'Template Error:', 'viscribe' ) . ' ' . \esc_html( $e->getMessage() ) . '</p></div>';
 			}
 
 			return '';

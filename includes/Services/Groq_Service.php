@@ -1,10 +1,10 @@
 <?php
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,19 +14,19 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package AIR
+ * @package Viscribe
  * @license GPL-2.0-or-later
  */
 
 /**
  * Groq API Service.
  *
- * @package AIR\Services
+ * @package Viscribe\Services
  */
 
 declare( strict_types=1 );
 
-namespace AIR\Services;
+namespace Viscribe\Services;
 
 /**
  * Class Groq_Service
@@ -67,26 +67,26 @@ class Groq_Service {
 	/**
 	 * Check if the API key is defined as a constant in wp-config.php.
 	 *
-	 * @return bool True if AIR_API_KEY constant is defined and non-empty.
+	 * @return bool True if VISCRIBE_API_KEY constant is defined and non-empty.
 	 */
 	public static function has_api_key_constant(): bool {
-		return \defined( 'AIR_API_KEY' ) && ! empty( AIR_API_KEY );
+		return \defined( 'VISCRIBE_API_KEY' ) && ! empty( VISCRIBE_API_KEY );
 	}
 
 	/**
 	 * Get the decrypted API key.
 	 *
-	 * Prioritizes the AIR_API_KEY constant over the database-stored key.
+	 * Prioritizes the VISCRIBE_API_KEY constant over the database-stored key.
 	 *
 	 * @return string|false The API key or false if not available.
 	 */
 	private function get_api_key(): string|false {
 		// Check for constant-defined API key first (recommended method).
 		if ( self::has_api_key_constant() ) {
-			return AIR_API_KEY;
+			return VISCRIBE_API_KEY;
 		}
 
-		$options = \get_option( 'air_options', [] );
+		$options = \get_option( 'viscribe_options', [] );
 
 		if ( empty( $options['api_key'] ) ) {
 			return false;
@@ -101,7 +101,7 @@ class Groq_Service {
 	 * @return string The prompt text.
 	 */
 	private function get_prompt(): string {
-		$options = \get_option( 'air_options', [] );
+		$options = \get_option( 'viscribe_options', [] );
 
 		$set_alt = isset( $options['set_alt_text'] ) && '1' === (string) $options['set_alt_text'];
 
@@ -120,7 +120,7 @@ class Groq_Service {
 		 *
 		 * @since 1.0.0
 		 */
-		return \apply_filters( 'air_prompt', $prompt, $max_keywords, $set_alt );
+		return \apply_filters( 'viscribe_prompt', $prompt, $max_keywords, $set_alt );
 	}
 
 	/**
@@ -129,7 +129,7 @@ class Groq_Service {
 	 * @return bool True if enabled.
 	 */
 	final public function is_enabled(): bool {
-		$options = \get_option( 'air_options', [] );
+		$options = \get_option( 'viscribe_options', [] );
 
 		// Check enabled flag - handle both boolean and string "1" from database.
 		$enabled = isset( $options['enabled'] ) && ( true === $options['enabled'] || '1' === $options['enabled'] || 1 === $options['enabled'] );
@@ -148,7 +148,7 @@ class Groq_Service {
 	 * @return bool True if allowed.
 	 */
 	final public function is_allowed_type( string $mime_type ): bool {
-		$options    = \get_option( 'air_options', [] );
+		$options    = \get_option( 'viscribe_options', [] );
 		$file_types = $options['file_types'] ?? [ 'image/jpeg', 'image/png', 'image/webp', 'image/gif' ];
 
 		/**
@@ -160,7 +160,7 @@ class Groq_Service {
 		 *
 		 * @since 1.0.0
 		 */
-		$file_types = \apply_filters( 'air_allowed_file_types', $file_types, $mime_type );
+		$file_types = \apply_filters( 'viscribe_allowed_file_types', $file_types, $mime_type );
 
 		return in_array( $mime_type, $file_types, true );
 	}
@@ -178,7 +178,7 @@ class Groq_Service {
 		}
 
 		if ( empty( $api_key ) ) {
-			return \__( 'No API key configured.', 'ai-image-renamer' );
+			return \__( 'No API key configured.', 'viscribe' );
 		}
 
 		// Make a simple models request to verify the key.
@@ -208,7 +208,7 @@ class Groq_Service {
 				return \esc_html( $decoded['error']['message'] );
 			}
 
-			return \sprintf( /* translators: %d: HTTP status code */ \__( 'API returned HTTP %d', 'ai-image-renamer' ), $code );
+			return \sprintf( /* translators: %d: HTTP status code */ \__( 'API returned HTTP %d', 'viscribe' ), $code );
 		}
 
 		return true;
@@ -220,7 +220,7 @@ class Groq_Service {
 	 * @return string
 	 */
 	private function get_model(): string {
-		$options = \get_option( 'air_options', [] );
+		$options = \get_option( 'viscribe_options', [] );
 
 		return $options['model'] ?? self::DEFAULT_MODEL;
 	}
@@ -261,7 +261,7 @@ class Groq_Service {
 		 *
 		 * @since 1.0.0
 		 */
-		$max_file_size = \apply_filters( 'air_max_file_size', $max_file_size, $image_path );
+		$max_file_size = \apply_filters( 'viscribe_max_file_size', $max_file_size, $image_path );
 
 		$file_size = \filesize( $image_path );
 
@@ -323,7 +323,7 @@ class Groq_Service {
 		 *
 		 * @since 1.0.0
 		 */
-		$payload = \apply_filters( 'air_api_payload', $payload, $image_path );
+		$payload = \apply_filters( 'viscribe_api_payload', $payload, $image_path );
 
 		$encoded_payload = \wp_json_encode( $payload );
 
@@ -350,7 +350,7 @@ class Groq_Service {
 		 *
 		 * @since 1.0.0
 		 */
-		$request_args = \apply_filters( 'air_api_request_args', $request_args, $payload, $image_path );
+		$request_args = \apply_filters( 'viscribe_api_request_args', $request_args, $payload, $image_path );
 
 		// Make the API request.
 		$response = \wp_remote_post( self::API_ENDPOINT, $request_args );
@@ -378,7 +378,7 @@ class Groq_Service {
 		 *
 		 * @since 1.0.0
 		 */
-		\do_action( 'air_api_response', $decoded, $code, $image_path );
+		\do_action( 'viscribe_api_response', $decoded, $code, $image_path );
 
 		if ( ! isset( $decoded['choices'][0]['message']['content'] ) ) {
 			return false;

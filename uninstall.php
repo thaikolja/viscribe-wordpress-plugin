@@ -1,12 +1,12 @@
 <?php
 
 /**
- * AI Image Renamer.
+ * Viscribe.
  *
  * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/wp-ai-image-renamer/
+ * @see             https://docs.kolja-nolte.com/viscribe/
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package         AIR
+ * @package         Viscribe
  * @license         GPL-2.0-or-later
  */
 
@@ -26,7 +26,7 @@
  * Removes all plugin data when the plugin is deleted via WordPress admin.
  * This file is called automatically by WordPress when the plugin is uninstalled.
  *
- * @package AIR
+ * @package Viscribe
  */
 
 // Security check: exit if not called by WordPress.
@@ -37,7 +37,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 /**
  * Clean up all plugin options from the database.
  */
-function air_uninstall_cleanup(): void {
+function viscribe_uninstall_cleanup(): void {
 	// Initialize WP_Filesystem.
 	global $wp_filesystem;
 
@@ -48,11 +48,11 @@ function air_uninstall_cleanup(): void {
 	WP_Filesystem();
 
 	// Delete plugin options.
-	delete_option( 'air_options' );
-	delete_option( 'air_encryption_key' );
+	delete_option( 'viscribe_options' );
+	delete_option( 'viscribe_encryption_key' );
 
 	// Delete user meta for dismissed notices (for all users).
-	delete_metadata( 'user', 0, 'air_encryption_notice_dismissed', '', true );
+	delete_metadata( 'user', 0, 'viscribe_encryption_notice_dismissed', '', true );
 
 	// Transients (air_pending_alt_text_*, air_rate_limit_*) are short-lived
 	// (≤5 min TTL) and auto-expire. No explicit cleanup needed.
@@ -61,7 +61,7 @@ function air_uninstall_cleanup(): void {
 	$cache_dir = plugin_dir_path( __FILE__ ) . 'cache/twig';
 
 	if ( is_dir( $cache_dir ) ) {
-		air_remove_directory_recursive( $cache_dir );
+		viscribe_remove_directory_recursive( $cache_dir );
 	}
 
 	// Remove parent cache directory if empty.
@@ -82,7 +82,7 @@ function air_uninstall_cleanup(): void {
  *
  * @return bool True on success, false on failure.
  */
-function air_remove_directory_recursive( string $dir ): bool {
+function viscribe_remove_directory_recursive( string $dir ): bool {
 	global $wp_filesystem;
 
 	if ( ! $wp_filesystem || ! is_dir( $dir ) ) {
@@ -98,7 +98,7 @@ function air_remove_directory_recursive( string $dir ): bool {
 		$path = trailingslashit( $dir ) . $filename;
 
 		if ( 'd' === $fileinfo['type'] ) {
-			air_remove_directory_recursive( $path );
+			viscribe_remove_directory_recursive( $path );
 		} else {
 			wp_delete_file( $path );
 		}
@@ -108,4 +108,4 @@ function air_remove_directory_recursive( string $dir ): bool {
 }
 
 // Run the cleanup.
-air_uninstall_cleanup();
+viscribe_uninstall_cleanup();

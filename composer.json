@@ -1,5 +1,5 @@
 {
-  "name":        "thaikolja/ai-image-renamer",
+  "name":        "thaikolja/viscribe-wordpress-plugin",
   "description": "A WordPress plugin that automatically renames uploaded images using Groq's Vision API for SEO-friendly filenames.",
   "type":        "wordpress-plugin",
   "license":     "GPL-2.0-or-later",
@@ -18,15 +18,15 @@
     "vision-api",
     "image-renaming"
   ],
-  "homepage":    "https://gitlab.com/thaikolja/ai-image-renamer",
+  "homepage":    "https://gitlab.com/thaikolja/viscribe-wordpress-plugin",
   "support":     {
-    "docs":   "https://docs.kolja-nolte.com/ai-image-renamer",
-    "forum":  "https://wordpress.org/support/plugin/ai-image-renamer/",
-    "source": "https://gitlab.com/thaikolja/ai-image-renamer"
+    "docs":   "https://docs.kolja-nolte.com/viscribe",
+    "forum":  "https://wordpress.org/support/plugin/viscribe/",
+    "source": "https://gitlab.com/thaikolja/viscribe-wordpress-plugin"
   },
   "require":     {
     "php":                   ">=8.2",
-    "twig/twig":             "~v3.22.2",
+    "twig/twig":             "~v3.24.0",
     "defuse/php-encryption": "^v2.4"
   },
   "require-dev": {
@@ -37,11 +37,11 @@
   },
   "autoload":    {
     "psr-4": {
-      "AIR\\": "includes/"
+      "Viscribe\\": "includes/"
     }
   },
   "scripts":     {
-    "lint":    "php -l ai-image-renamer.php && find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
+    "lint":    "php -l viscribe.php && find includes -name '*.php' -print0 | xargs -0 -n1 php -l",
     "phpstan": "phpstan analyse includes --no-progress",
     "phpcs":   "phpcs . --standard=vendor/wp-coding-standards/wpcs/WordPress",
     "phpcbf":  "phpcbf . --standard=vendor/wp-coding-standards/wpcs/WordPress"
@@ -52,7 +52,7 @@
   "config":      {
     "optimize-autoloader": true,
     "sort-packages":       true,
-    "allow-plugins":       {
+    "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }

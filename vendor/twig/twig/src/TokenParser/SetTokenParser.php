@@ -29,55 +29,59 @@ use Twig\Token;
  *
  * @internal
  */
-final class SetTokenParser extends AbstractTokenParser {
+final class SetTokenParser extends AbstractTokenParser
+{
+    public function parse(Token $token): Node
+    {
+        $lineno = $token->getLine();
+        $stream = $this->parser->getStream();
+        $names = $this->parseAssignmentExpression();
 
-	public function parse( Token $token ): Node {
-		$lineno = $token->getLine();
-		$stream = $this->parser->getStream();
-		$names  = $this->parseAssignmentExpression();
+        $capture = false;
+        if ($stream->nextIf(Token::OPERATOR_TYPE, '=')) {
+            $values = $this->parseMultitargetExpression();
 
-		$capture = false;
-		if ( $stream->nextIf( Token::OPERATOR_TYPE, '=' ) ) {
-			$values = $this->parseMultitargetExpression();
+            $stream->expect(Token::BLOCK_END_TYPE);
 
-			$stream->expect( Token::BLOCK_END_TYPE );
+            if (\count($names) !== \count($values)) {
+                throw new SyntaxError('When using set, you must have the same number of variables and assignments.', $stream->getCurrent()->getLine(), $stream->getSourceContext());
+            }
+        } else {
+            $capture = true;
 
-			if ( \count( $names ) !== \count( $values ) ) {
-				throw new SyntaxError( 'When using set, you must have the same number of variables and assignments.', $stream->getCurrent()->getLine(), $stream->getSourceContext() );
-			}
-		} else {
-			$capture = true;
+            if (\count($names) > 1) {
+                throw new SyntaxError('When using set with a block, you cannot have a multi-target.', $stream->getCurrent()->getLine(), $stream->getSourceContext());
+            }
 
-			if ( \count( $names ) > 1 ) {
-				throw new SyntaxError( 'When using set with a block, you cannot have a multi-target.', $stream->getCurrent()->getLine(), $stream->getSourceContext() );
-			}
+            $stream->expect(Token::BLOCK_END_TYPE);
 
-			$stream->expect( Token::BLOCK_END_TYPE );
+            $values = $this->parser->subparse([$this, 'decideBlockEnd'], true);
+            $stream->expect(Token::BLOCK_END_TYPE);
+        }
 
-			$values = $this->parser->subparse( array( $this, 'decideBlockEnd' ), true );
-			$stream->expect( Token::BLOCK_END_TYPE );
-		}
+        return new SetNode($capture, $names, $values, $lineno);
+    }
 
-		return new SetNode( $capture, $names, $values, $lineno );
-	}
+    public function decideBlockEnd(Token $token): bool
+    {
+        return $token->test('endset');
+    }
 
-	public function decideBlockEnd( Token $token ): bool {
-		return $token->test( 'endset' );
-	}
+    public function getTag(): string
+    {
+        return 'set';
+    }
 
-	public function getTag(): string {
-		return 'set';
-	}
+    private function parseMultitargetExpression(): Nodes
+    {
+        $targets = [];
+        while (true) {
+            $targets[] = $this->parser->parseExpression();
+            if (!$this->parser->getStream()->nextIf(Token::PUNCTUATION_TYPE, ',')) {
+                break;
+            }
+        }
 
-	private function parseMultitargetExpression(): Nodes {
-		$targets = array();
-		while ( true ) {
-			$targets[] = $this->parser->parseExpression();
-			if ( ! $this->parser->getStream()->nextIf( Token::PUNCTUATION_TYPE, ',' ) ) {
-				break;
-			}
-		}
-
-		return new Nodes( $targets );
-	}
+        return new Nodes($targets);
+    }
 }

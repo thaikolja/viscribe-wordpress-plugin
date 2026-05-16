@@ -14,18 +14,21 @@ namespace Twig\Node\Expression\Binary;
 use Twig\Compiler;
 use Twig\Node\Expression\ReturnBoolInterface;
 
-class HasSomeBinary extends AbstractBinary implements ReturnBoolInterface {
+class HasSomeBinary extends AbstractBinary implements ReturnBoolInterface
+{
+    public function compile(Compiler $compiler): void
+    {
+        $compiler
+            ->raw('CoreExtension::arraySome($this->env, ')
+            ->subcompile($this->getNode('left'))
+            ->raw(', ')
+            ->subcompile($this->getNode('right'))
+            ->raw(')')
+        ;
+    }
 
-	public function compile( Compiler $compiler ): void {
-		$compiler
-			->raw( 'CoreExtension::arraySome($this->env, ' )
-			->subcompile( $this->getNode( 'left' ) )
-			->raw( ', ' )
-			->subcompile( $this->getNode( 'right' ) )
-			->raw( ')' );
-	}
-
-	public function operator( Compiler $compiler ): Compiler {
-		return $compiler->raw( '' );
-	}
+    public function operator(Compiler $compiler): Compiler
+    {
+        return $compiler->raw('');
+    }
 }

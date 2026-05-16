@@ -1,61 +1,24 @@
 {# Tab Navigation Component #}
-<nav
-        class="air-tabs"
-        role="tablist">
-    <button
-            type="button"
-            class="air-tab active"
-            data-tab="general"
-            role="tab"
-            aria-selected="true"
-            aria-controls="air-panel-general">
-        <span class="dashicons dashicons-admin-settings"></span>
-        <span class="air-tab-label">{{ __('General', 'ai-image-renamer') }}</span>
-    </button>
-    <button
-            type="button"
-            class="air-tab"
-            data-tab="api"
-            role="tab"
-            aria-selected="false"
-            aria-controls="air-panel-api">
-        <span class="dashicons dashicons-admin-network"></span>
-        <span class="air-tab-label">{{ __('API Key', 'ai-image-renamer') }}</span>
-    </button>
-    <button
-            type="button"
-            class="air-tab"
-            data-tab="models"
-            role="tab"
-            aria-selected="false"
-            aria-controls="air-panel-models">
-        <span class="dashicons dashicons-grid-view"></span>
-        <span class="air-tab-label">{{ __('Models', 'ai-image-renamer') }}</span>
-    </button>
-    <button
-            type="button"
-            class="air-tab"
-            data-tab="filetypes"
-            role="tab"
-            aria-selected="false"
-            aria-controls="air-panel-filetypes">
-        <span class="dashicons dashicons-format-image"></span>
-        <span class="air-tab-label">{{ __('File Types', 'ai-image-renamer') }}</span>
-    </button>
-    <button
-            type="button"
-            class="air-tab"
-            data-tab="advanced"
-            role="tab"
-            aria-selected="false"
-            aria-controls="air-panel-advanced">
-        <span class="dashicons dashicons-admin-tools"></span>
-        <span class="air-tab-label">{{ __('Advanced', 'ai-image-renamer') }}</span>
-    </button>
-    <a
-            href="{{ doc_url('usage/quick-start') }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="air-tab"> <span class="dashicons dashicons-welcome-learn-more"></span>
-        <span class="air-tab-label">{{ __('Documentation', 'ai-image-renamer') }}</span> </a>
+<nav class="viscribe-tabs" role="tablist">
+	{% for tab_id, tab in tabs %}
+		<button
+			type="button"
+			class="viscribe-tab{{ tab.active ? ' active' : '' }}"
+			id="viscribe-tab-{{ tab_id }}"
+			data-tab="{{ tab_id }}"
+			role="tab"
+			aria-selected="{{ tab.active ? 'true' : 'false' }}"
+			aria-controls="viscribe-panel-{{ tab_id }}">
+			<span class="dashicons {{ tab.icon }}"></span>
+			<span class="viscribe-tab-label">{{ tab.label }}</span>
+		</button>
+	{% endfor %}
+	<a
+		href="{{ doc_url('usage/quick-start') }}"
+		target="_blank"
+		rel="noopener noreferrer"
+		class="viscribe-tab">
+		<span class="dashicons dashicons-welcome-learn-more"></span>
+		<span class="viscribe-tab-label">{% trans %}Documentation{% endtrans %}</span>
+	</a>
 </nav>

@@ -11,17 +11,25 @@
 
 namespace Twig\ExpressionParser;
 
-abstract class AbstractExpressionParser implements ExpressionParserInterface {
+abstract class AbstractExpressionParser implements ExpressionParserInterface
+{
+    public function __toString(): string
+    {
+        return \sprintf('%s(%s)', ExpressionParserType::getType($this)->value, $this->getName());
+    }
 
-	public function __toString(): string {
-		return \sprintf( '%s(%s)', ExpressionParserType::getType( $this )->value, $this->getName() );
-	}
+    public function getPrecedenceChange(): ?PrecedenceChange
+    {
+        return null;
+    }
 
-	public function getPrecedenceChange(): ?PrecedenceChange {
-		return null;
-	}
+    public function getAliases(): array
+    {
+        return [];
+    }
 
-	public function getAliases(): array {
-		return array();
-	}
+    public function getOperatorTokens(): array
+    {
+        return [$this->getName(), ...$this->getAliases()];
+    }
 }

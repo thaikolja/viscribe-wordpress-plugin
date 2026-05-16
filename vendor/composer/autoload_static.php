@@ -19,6 +19,10 @@ class ComposerStaticInit7f53cf6b0680c2626a5112c24da3ed29
     );
 
     public static $prefixLengthsPsr4 = array (
+        'V' =>
+        array (
+            'Viscribe\\' => 9,
+        ),
         'T' =>
         array (
             'Twig\\' => 5,
@@ -40,13 +44,13 @@ class ComposerStaticInit7f53cf6b0680c2626a5112c24da3ed29
         array (
             'Defuse\\Crypto\\' => 14,
         ),
-        'A' =>
-        array (
-            'AIR\\' => 4,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Viscribe\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/includes',
+        ),
         'Twig\\' =>
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -71,23 +75,9 @@ class ComposerStaticInit7f53cf6b0680c2626a5112c24da3ed29
         array (
             0 => __DIR__ . '/..' . '/defuse/php-encryption/src',
         ),
-        'AIR\\' =>
-        array (
-            0 => __DIR__ . '/../..' . '/includes',
-        ),
     );
 
     public static $classMap = array (
-        'AIR\\Admin\\Settings_Page' => __DIR__ . '/../..' . '/includes/Admin/Settings_Page.php',
-        'AIR\\Hooks\\Image_Uploader' => __DIR__ . '/../..' . '/includes/Hooks/Image_Uploader.php',
-        'AIR\\Plugin' => __DIR__ . '/../..' . '/includes/Plugin.php',
-        'AIR\\Services\\Encryption_Service' => __DIR__ . '/../..' . '/includes/Services/Encryption_Service.php',
-        'AIR\\Services\\Groq_Service' => __DIR__ . '/../..' . '/includes/Services/Groq_Service.php',
-        'AIR\\Services\\Template_Engine' => __DIR__ . '/../..' . '/includes/Services/Template_Engine.php',
-        'AIR\\Utils\\API_Key_Validator' => __DIR__ . '/../..' . '/includes/Utils/API_Key_Validator.php',
-        'AIR\\Utils\\File_Sanitizer' => __DIR__ . '/../..' . '/includes/Utils/File_Sanitizer.php',
-        'AIR\\Utils\\Rate_Limiter' => __DIR__ . '/../..' . '/includes/Utils/Rate_Limiter.php',
-        'AIR\\Utils\\SVG_Sanitizer' => __DIR__ . '/../..' . '/includes/Utils/SVG_Sanitizer.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Defuse\\Crypto\\Core' => __DIR__ . '/..' . '/defuse/php-encryption/src/Core.php',
         'Defuse\\Crypto\\Crypto' => __DIR__ . '/..' . '/defuse/php-encryption/src/Crypto.php',
@@ -308,6 +298,7 @@ class ComposerStaticInit7f53cf6b0680c2626a5112c24da3ed29
         'Twig\\ExpressionParser\\InfixExpressionParserInterface' => __DIR__ . '/..' . '/twig/twig/src/ExpressionParser/InfixExpressionParserInterface.php',
         'Twig\\ExpressionParser\\Infix\\ArgumentsTrait' => __DIR__ . '/..' . '/twig/twig/src/ExpressionParser/Infix/ArgumentsTrait.php',
         'Twig\\ExpressionParser\\Infix\\ArrowExpressionParser' => __DIR__ . '/..' . '/twig/twig/src/ExpressionParser/Infix/ArrowExpressionParser.php',
+        'Twig\\ExpressionParser\\Infix\\AssignmentExpressionParser' => __DIR__ . '/..' . '/twig/twig/src/ExpressionParser/Infix/AssignmentExpressionParser.php',
         'Twig\\ExpressionParser\\Infix\\BinaryOperatorExpressionParser' => __DIR__ . '/..' . '/twig/twig/src/ExpressionParser/Infix/BinaryOperatorExpressionParser.php',
         'Twig\\ExpressionParser\\Infix\\ConditionalTernaryExpressionParser' => __DIR__ . '/..' . '/twig/twig/src/ExpressionParser/Infix/ConditionalTernaryExpressionParser.php',
         'Twig\\ExpressionParser\\Infix\\DotExpressionParser' => __DIR__ . '/..' . '/twig/twig/src/ExpressionParser/Infix/DotExpressionParser.php',
@@ -393,10 +384,15 @@ class ComposerStaticInit7f53cf6b0680c2626a5112c24da3ed29
         'Twig\\Node\\Expression\\Binary\\MulBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/MulBinary.php',
         'Twig\\Node\\Expression\\Binary\\NotEqualBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/NotEqualBinary.php',
         'Twig\\Node\\Expression\\Binary\\NotInBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/NotInBinary.php',
+        'Twig\\Node\\Expression\\Binary\\NotSameAsBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/NotSameAsBinary.php',
         'Twig\\Node\\Expression\\Binary\\NullCoalesceBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/NullCoalesceBinary.php',
+        'Twig\\Node\\Expression\\Binary\\ObjectDestructuringSetBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/ObjectDestructuringSetBinary.php',
         'Twig\\Node\\Expression\\Binary\\OrBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/OrBinary.php',
         'Twig\\Node\\Expression\\Binary\\PowerBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/PowerBinary.php',
         'Twig\\Node\\Expression\\Binary\\RangeBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/RangeBinary.php',
+        'Twig\\Node\\Expression\\Binary\\SameAsBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/SameAsBinary.php',
+        'Twig\\Node\\Expression\\Binary\\SequenceDestructuringSetBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/SequenceDestructuringSetBinary.php',
+        'Twig\\Node\\Expression\\Binary\\SetBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/SetBinary.php',
         'Twig\\Node\\Expression\\Binary\\SpaceshipBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/SpaceshipBinary.php',
         'Twig\\Node\\Expression\\Binary\\StartsWithBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/StartsWithBinary.php',
         'Twig\\Node\\Expression\\Binary\\SubBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/SubBinary.php',
@@ -405,6 +401,7 @@ class ComposerStaticInit7f53cf6b0680c2626a5112c24da3ed29
         'Twig\\Node\\Expression\\CallExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/CallExpression.php',
         'Twig\\Node\\Expression\\ConditionalExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/ConditionalExpression.php',
         'Twig\\Node\\Expression\\ConstantExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/ConstantExpression.php',
+        'Twig\\Node\\Expression\\EmptyExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/EmptyExpression.php',
         'Twig\\Node\\Expression\\FilterExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/FilterExpression.php',
         'Twig\\Node\\Expression\\Filter\\DefaultFilter' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Filter/DefaultFilter.php',
         'Twig\\Node\\Expression\\Filter\\RawFilter' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Filter/RawFilter.php',
@@ -532,6 +529,18 @@ class ComposerStaticInit7f53cf6b0680c2626a5112c24da3ed29
         'Twig\\Util\\DeprecationCollector' => __DIR__ . '/..' . '/twig/twig/src/Util/DeprecationCollector.php',
         'Twig\\Util\\ReflectionCallable' => __DIR__ . '/..' . '/twig/twig/src/Util/ReflectionCallable.php',
         'Twig\\Util\\TemplateDirIterator' => __DIR__ . '/..' . '/twig/twig/src/Util/TemplateDirIterator.php',
+        'Viscribe\\Admin\\Settings_Page' => __DIR__ . '/../..' . '/includes/Admin/Settings_Page.php',
+        'Viscribe\\Hooks\\Image_Uploader' => __DIR__ . '/../..' . '/includes/Hooks/Image_Uploader.php',
+        'Viscribe\\Plugin' => __DIR__ . '/../..' . '/includes/Plugin.php',
+        'Viscribe\\Services\\Encryption_Service' => __DIR__ . '/../..' . '/includes/Services/Encryption_Service.php',
+        'Viscribe\\Services\\Groq_Service' => __DIR__ . '/../..' . '/includes/Services/Groq_Service.php',
+        'Viscribe\\Services\\Template_Engine' => __DIR__ . '/../..' . '/includes/Services/Template_Engine.php',
+        'Viscribe\\Services\\Twig\\TransNode' => __DIR__ . '/../..' . '/includes/Services/Twig/TransNode.php',
+        'Viscribe\\Services\\Twig\\TransTokenParser' => __DIR__ . '/../..' . '/includes/Services/Twig/TransTokenParser.php',
+        'Viscribe\\Utils\\API_Key_Validator' => __DIR__ . '/../..' . '/includes/Utils/API_Key_Validator.php',
+        'Viscribe\\Utils\\File_Sanitizer' => __DIR__ . '/../..' . '/includes/Utils/File_Sanitizer.php',
+        'Viscribe\\Utils\\Rate_Limiter' => __DIR__ . '/../..' . '/includes/Utils/Rate_Limiter.php',
+        'Viscribe\\Utils\\SVG_Sanitizer' => __DIR__ . '/../..' . '/includes/Utils/SVG_Sanitizer.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -21,17 +21,20 @@ use Twig\Node\Expression\AbstractExpression;
  * @author Fabien Potencier <fabien@symfony.com>
  */
 #[YieldReady]
-class DoNode extends Node {
+class DoNode extends Node
+{
+    public function __construct(AbstractExpression $expr, int $lineno)
+    {
+        parent::__construct(['expr' => $expr], [], $lineno);
+    }
 
-	public function __construct( AbstractExpression $expr, int $lineno ) {
-		parent::__construct( array( 'expr' => $expr ), array(), $lineno );
-	}
-
-	public function compile( Compiler $compiler ): void {
-		$compiler
-			->addDebugInfo( $this )
-			->write( '' )
-			->subcompile( $this->getNode( 'expr' ) )
-			->raw( ";\n" );
-	}
+    public function compile(Compiler $compiler): void
+    {
+        $compiler
+            ->addDebugInfo($this)
+            ->write('')
+            ->subcompile($this->getNode('expr'))
+            ->raw(";\n")
+        ;
+    }
 }

@@ -1,10 +1,10 @@
 <?php
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,22 +14,22 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package AIR
+ * @package Viscribe
  * @license GPL-2.0-or-later
  */
 
 /**
  * Image Uploader Hook.
  *
- * @package AIR\Hooks
+ * @package Viscribe\Hooks
  */
 
 declare( strict_types=1 );
 
-namespace AIR\Hooks;
+namespace Viscribe\Hooks;
 
-use AIR\Services\Groq_Service;
-use AIR\Utils\File_Sanitizer;
+use Viscribe\Services\Groq_Service;
+use Viscribe\Utils\File_Sanitizer;
 
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -54,7 +54,7 @@ class Image_Uploader {
 	 *
 	 * @var string
 	 */
-	private const ALT_TEXT_TRANSIENT_PREFIX = 'air_pending_alt_text_';
+	private const ALT_TEXT_TRANSIENT_PREFIX = 'viscribe_pending_alt_text_';
 
 	/**
 	 * Transient expiration time in seconds (5 minutes).
@@ -124,7 +124,7 @@ class Image_Uploader {
 		 *
 		 * @since 1.0.0
 		 */
-		if ( ! \apply_filters( 'air_should_process_upload', true, $file, $mime_type ) ) {
+		if ( ! \apply_filters( 'viscribe_should_process_upload', true, $file, $mime_type ) ) {
 			return $file;
 		}
 
@@ -141,7 +141,7 @@ class Image_Uploader {
 		 *
 		 * @since 1.0.0
 		 */
-		$description = \apply_filters( 'air_generated_description', $description, $tmp_path, $file );
+		$description = \apply_filters( 'viscribe_generated_description', $description, $tmp_path, $file );
 
 		// If generation failed, fall back to the original filename.
 		if ( ! $description ) {
@@ -175,7 +175,7 @@ class Image_Uploader {
 		 *
 		 * @since 1.0.0
 		 */
-		$new_filename = \apply_filters( 'air_new_filename', $new_filename, $sanitized_name, $extension, $file, $description );
+		$new_filename = \apply_filters( 'viscribe_new_filename', $new_filename, $sanitized_name, $extension, $file, $description );
 
 		$new_filename = \sanitize_file_name( (string) $new_filename );
 
@@ -203,10 +203,10 @@ class Image_Uploader {
 		 *
 		 * @since 1.0.0
 		 */
-		\do_action( 'air_image_renamed', $new_filename, $original_name, $description, $file );
+		\do_action( 'viscribe_image_renamed', $new_filename, $original_name, $description, $file );
 
 		// Check if Alt Text feature is enabled.
-		$options = \get_option( 'air_options', [] );
+		$options = \get_option( 'viscribe_options', [] );
 		$set_alt = isset( $options['set_alt_text'] ) && '1' === (string) $options['set_alt_text'];
 
 		if ( $set_alt && ! empty( $description ) ) {
@@ -222,7 +222,7 @@ class Image_Uploader {
 			 *
 			 * @since 1.0.0
 			 */
-			$alt_text = \apply_filters( 'air_alt_text', $clean_text, $description, $file );
+			$alt_text = \apply_filters( 'viscribe_alt_text', $clean_text, $description, $file );
 			$alt_text = \sanitize_text_field( \wp_strip_all_tags( (string) $alt_text ) );
 
 			if ( '' === $alt_text ) {
@@ -280,7 +280,7 @@ class Image_Uploader {
 
 		$extension = $mime_to_ext[ $mime_type ] ?? 'jpg';
 
-		$extension = \apply_filters( 'air_mime_to_ext', $extension, $mime_type );
+		$extension = \apply_filters( 'viscribe_mime_to_ext', $extension, $mime_type );
 
 		return is_string( $extension ) && '' !== $extension ? strtolower( $extension ) : 'jpg';
 	}

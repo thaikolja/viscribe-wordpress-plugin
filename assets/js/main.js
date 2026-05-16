@@ -1,9 +1,6 @@
 /**
- * AI Image Renamer - Admin Entry Point
+ * Viscribe - Admin Entry Point
  */
-
-// Import styles
-import '../css/index.css';
 
 // Import components
 import './admin.js';

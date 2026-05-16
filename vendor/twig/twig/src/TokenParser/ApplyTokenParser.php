@@ -28,39 +28,39 @@ use Twig\Token;
  *
  * @internal
  */
-final class ApplyTokenParser extends AbstractTokenParser {
+final class ApplyTokenParser extends AbstractTokenParser
+{
+    public function parse(Token $token): Node
+    {
+        $lineno = $token->getLine();
+        $ref = new LocalVariable(null, $lineno);
+        $filter = $ref;
+        $op = $this->parser->getEnvironment()->getExpressionParsers()->getByClass(FilterExpressionParser::class);
+        while (true) {
+            $filter = $op->parse($this->parser, $filter, $this->parser->getCurrentToken());
+            if (!$this->parser->getStream()->test(Token::OPERATOR_TYPE, '|')) {
+                break;
+            }
+            $this->parser->getStream()->next();
+        }
 
-	public function parse( Token $token ): Node {
-		$lineno = $token->getLine();
-		$ref    = new LocalVariable( null, $lineno );
-		$filter = $ref;
-		$op     = $this->parser->getEnvironment()->getExpressionParsers()->getByClass( FilterExpressionParser::class );
-		while ( true ) {
-			$filter = $op->parse( $this->parser, $filter, $this->parser->getCurrentToken() );
-			if ( ! $this->parser->getStream()->test( Token::OPERATOR_TYPE, '|' ) ) {
-				break;
-			}
-			$this->parser->getStream()->next();
-		}
+        $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
+        $body = $this->parser->subparse([$this, 'decideApplyEnd'], true);
+        $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
 
-		$this->parser->getStream()->expect( Token::BLOCK_END_TYPE );
-		$body = $this->parser->subparse( array( $this, 'decideApplyEnd' ), true );
-		$this->parser->getStream()->expect( Token::BLOCK_END_TYPE );
+        return new Nodes([
+            new SetNode(true, $ref, $body, $lineno),
+            new PrintNode($filter, $lineno),
+        ], $lineno);
+    }
 
-		return new Nodes(
-			array(
-				new SetNode( true, $ref, $body, $lineno ),
-				new PrintNode( $filter, $lineno ),
-			),
-			$lineno
-		);
-	}
+    public function decideApplyEnd(Token $token): bool
+    {
+        return $token->test('endapply');
+    }
 
-	public function decideApplyEnd( Token $token ): bool {
-		return $token->test( 'endapply' );
-	}
-
-	public function getTag(): string {
-		return 'apply';
-	}
+    public function getTag(): string
+    {
+        return 'apply';
+    }
 }

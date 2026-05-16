@@ -4,8 +4,8 @@
       name="{{ option_name }}[enabled]"
       value="0"/><input
             type="checkbox"
-            id="air_enabled"
+            id="viscribe_enabled"
             name="{{ option_name }}[enabled]"
             value="1" {{ enabled ? 'checked' : '' }}/>
-    {{ __('Automatically rename images on upload', 'ai-image-renamer') }}
+    {% trans %}Automatically rename images on upload{% endtrans %}
 </label>

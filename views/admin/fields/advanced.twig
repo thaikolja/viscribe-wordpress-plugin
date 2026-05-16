@@ -1,42 +1,42 @@
 {# Advanced Settings Template #}
-<div class="air-card">
-    <div class="air-card-header">
+<div class="viscribe-card">
+    <div class="viscribe-card-header">
         <h2>
             <span class="dashicons dashicons-admin-tools"></span>
-            {{ __('Advanced Settings', 'ai-image-renamer') }}
-            <a href="{{ doc_url('usage/settings#advanced-settings') }}" target="_blank" rel="noopener noreferrer" class="air-doc-badge"> <span class="dashicons dashicons-book"></span> <span>{{ __('Documentation', 'ai-image-renamer') }}</span> </a>
+            {% trans %}Advanced Settings{% endtrans %}
+            <a href="{{ doc_url('usage/settings#advanced-settings') }}" target="_blank" rel="noopener noreferrer" class="viscribe-doc-badge"> <span class="dashicons dashicons-book"></span> <span>{% trans %}Documentation{% endtrans %}</span> </a>
         </h2>
-        <p class="air-card-description">
-            {{ __('Fine-tune AI behavior and output.', 'ai-image-renamer') }}
+        <p class="viscribe-card-description">
+            {% trans %}Fine-tune AI behavior and output.{% endtrans %}
         </p>
     </div>
-    <div class="air-card-body">
+    <div class="viscribe-card-body">
         {# Max Keywords Setting #}
-        <div class="air-setting-row">
-            <div class="air-setting-label">
-                <label for="air_max_keywords">{{ __('Max Keywords', 'ai-image-renamer') }}</label>
-                <p class="air-setting-description">
-                    {{ __('Maximum number of keywords to include in the filename (1-10). Recommended: 5', 'ai-image-renamer') }}
+        <div class="viscribe-setting-row">
+            <div class="viscribe-setting-label">
+                <label for="viscribe_max_keywords">{% trans %}Max Keywords{% endtrans %}</label>
+                <p class="viscribe-setting-description">
+                    {% trans %}Maximum number of keywords to include in the filename (1-10). Recommended: 5{% endtrans %}
                 </p>
             </div>
-            <div class="air-setting-control">
-                <input type="number" id="air_max_keywords" name="{{ option_name }}[max_keywords]" value="{{ max_keywords }}" min="1" max="10" class="small-text air-number-input">
+            <div class="viscribe-setting-control">
+                <input type="number" id="viscribe_max_keywords" name="{{ option_name }}[max_keywords]" value="{{ max_keywords }}" min="1" max="10" class="small-text viscribe-number-input">
             </div>
         </div>
     </div>
 </div>
 
 {# Diagnostics Card #}
-<div class="air-card air-diagnostics-card">
-    <div class="air-card-header">
+<div class="viscribe-card viscribe-diagnostics-card">
+    <div class="viscribe-card-header">
         <h2>
             <span class="dashicons dashicons-info"></span>
-            {{ __('System Diagnostics', 'ai-image-renamer') }}
+            {% trans %}System Diagnostics{% endtrans %}
         </h2>
-        <p class="air-card-description">{{ __('Server information and system requirements.', 'ai-image-renamer') }}</p>
+        <p class="viscribe-card-description">{% trans %}Server information and system requirements.{% endtrans %}</p>
     </div>
-    <div class="air-card-body">
-        <table class="widefat air-diagnostics-table">
+    <div class="viscribe-card-body">
+        <table class="widefat viscribe-diagnostics-table">
             <tbody>
             {% for key, data in diagnostics %}
                 <tr>

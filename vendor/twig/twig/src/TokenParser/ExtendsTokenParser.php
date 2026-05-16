@@ -24,25 +24,27 @@ use Twig\Token;
  *
  * @internal
  */
-final class ExtendsTokenParser extends AbstractTokenParser {
+final class ExtendsTokenParser extends AbstractTokenParser
+{
+    public function parse(Token $token): Node
+    {
+        $stream = $this->parser->getStream();
 
-	public function parse( Token $token ): Node {
-		$stream = $this->parser->getStream();
+        if ($this->parser->peekBlockStack()) {
+            throw new SyntaxError('Cannot use "extend" in a block.', $token->getLine(), $stream->getSourceContext());
+        } elseif (!$this->parser->isMainScope()) {
+            throw new SyntaxError('Cannot use "extend" in a macro.', $token->getLine(), $stream->getSourceContext());
+        }
 
-		if ( $this->parser->peekBlockStack() ) {
-			throw new SyntaxError( 'Cannot use "extend" in a block.', $token->getLine(), $stream->getSourceContext() );
-		} elseif ( ! $this->parser->isMainScope() ) {
-			throw new SyntaxError( 'Cannot use "extend" in a macro.', $token->getLine(), $stream->getSourceContext() );
-		}
+        $this->parser->setParent($this->parser->parseExpression());
 
-		$this->parser->setParent( $this->parser->parseExpression() );
+        $stream->expect(Token::BLOCK_END_TYPE);
 
-		$stream->expect( Token::BLOCK_END_TYPE );
+        return new EmptyNode($token->getLine());
+    }
 
-		return new EmptyNode( $token->getLine() );
-	}
-
-	public function getTag(): string {
-		return 'extends';
-	}
+    public function getTag(): string
+    {
+        return 'extends';
+    }
 }

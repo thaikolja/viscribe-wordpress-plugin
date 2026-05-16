@@ -1,10 +1,10 @@
 <?php
 /*
- * @name:           AI Image Renamer
- * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
+ * @name:           Viscribe
+ * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,19 +14,19 @@
  * Released under the GNU General Public License v2 or later.
  * See: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package AIR
+ * @package Viscribe
  * @license GPL-2.0-or-later
  */
 
 /**
  * SVG Sanitizer Utility.
  *
- * @package AIR\Utils
+ * @package Viscribe\Utils
  */
 
 declare( strict_types=1 );
 
-namespace AIR\Utils;
+namespace Viscribe\Utils;
 
 /**
  * Class SVG_Sanitizer
@@ -96,7 +96,7 @@ class SVG_Sanitizer {
 		// Check for potentially dangerous content before parsing.
 		if ( self::contains_dangerous_content( $svg_content ) ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				\error_log( 'AI Image Renamer: SVG contains dangerous content and was rejected.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				\error_log( 'Viscribe: SVG contains dangerous content and was rejected.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 
 			return false;
@@ -114,7 +114,7 @@ class SVG_Sanitizer {
 
 		if ( ! $loaded ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				\error_log( 'AI Image Renamer: Failed to parse SVG content.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				\error_log( 'Viscribe: Failed to parse SVG content.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 
 			return false;
@@ -196,7 +196,7 @@ class SVG_Sanitizer {
 
 		if ( 0 === $svg_elements->length ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				\error_log( 'AI Image Renamer: SVG has no root svg element.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				\error_log( 'Viscribe: SVG has no root svg element.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 
 			return false;
@@ -211,7 +211,7 @@ class SVG_Sanitizer {
 		$namespace = $root->namespaceURI;
 		if ( 'http://www.w3.org/2000/svg' !== $namespace ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				\error_log( 'AI Image Renamer: SVG has invalid namespace: ' . ( $namespace ?: 'none' ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				\error_log( 'Viscribe: SVG has invalid namespace: ' . ( $namespace ?: 'none' ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 
 			return false;
@@ -276,7 +276,7 @@ class SVG_Sanitizer {
 	public static function load_and_sanitize_file( string $file_path ): string|false {
 		// Validate file path is within plugin directory.
 		$real_path  = \realpath( $file_path );
-		$plugin_dir = \realpath( AIR_PLUGIN_DIR );
+		$plugin_dir = \realpath( VISCRIBE_PLUGIN_DIR );
 
 		if ( false === $real_path || false === $plugin_dir ) {
 			return false;
@@ -284,7 +284,7 @@ class SVG_Sanitizer {
 
 		if ( ! str_starts_with( $real_path, $plugin_dir ) ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				\error_log( 'AI Image Renamer: Attempted to load SVG from outside plugin directory.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				\error_log( 'Viscribe: Attempted to load SVG from outside plugin directory.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 
 			return false;

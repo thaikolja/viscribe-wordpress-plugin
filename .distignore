@@ -3,10 +3,20 @@ src/
 node_modules/
 scripts/
 docs/
+
+# Exclude source asset files (only built files should ship)
+assets/js/main.js
+assets/js/admin.js
+assets/js/admin-tabs.js
+assets/js/styles.js
+assets/css/styles.css
+
+# Exclude source maps
+assets/**/*.map
+
 # Exclude configuration files
 package.json
 bun.lock
-composer.json
 phpcs.xml.dist
 vite.config.mjs
 .gitignore
@@ -14,13 +24,11 @@ vite.config.mjs
 .babelrc
 .eslintignore
 .eslintrc.json
+
 # Exclude all markdown files (WordPress uses readme.txt)
 *.md
-# Exclude AI assistant files
-.clavix/
-.gemini/
-.qwen/
+
 # Exclude cache and system files
 cache/
 .DS_Store
-ai-image-renamer.zip
+viscribe.zip

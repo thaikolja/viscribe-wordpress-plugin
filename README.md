@@ -1,131 +1,179 @@
-# AI Image Renamer
+# Viscribe – WordPress Plugin
 
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-0073aa)](https://wordpress.org/) [![PHP](https://img.shields.io/badge/PHP-8.2%2B-777bb4)](https://www.php.net/) [![License: GPL v2+](https://img.shields.io/badge/License-GPLv2%2B-3da639)](https://www.gnu.org/licenses/gpl-2.0.html)
 
-`AI Image Renamer` is a WordPress plugin that renames newly uploaded images with AI-generated, descriptive filenames and can optionally store matching alt text.
+**Viscribe** is a WordPress plugin that leverages Groq's free Vision API to analyze newly uploaded images, extracting descriptive keywords and automatically renaming the files. It can also optionally generate alt text for accessibility.
 
-## What the plugin does
+**Example:**
 
-When a supported image is uploaded, the plugin can:
+`DSC_3246.jpg` → `man-with-beard-in-car.jpg`
 
-1. send the image to Groq's Vision API,
-2. generate a short descriptive text,
-3. convert that output into a safe filename,
-4. keep the original upload flow intact if the API request fails,
-5. optionally save cleaned alt text for the attachment.
+**Read the plugin's [comprehensive documentation](https://docs.kolja-nolte.com/viscribe/usage/quick-start) for more thorough guides, examples, and references.**
 
-The settings page lives in **Media → AI Image Renamer**.
+---
 
-## Current feature set
+## For WordPress Users
 
-- Automatic renaming for new uploads only
-- Optional attachment alt text population
-- Groq API key support via database or `wp-config.php`
-- Encrypted API key storage using `defuse/php-encryption`
-- Configurable file types
-- Configurable keyword limit
-- Model selection for supported Groq vision models
-- Diagnostics and model limit overview in the admin UI
-- WordPress.org-ready production ZIP via `npm run production`
+See [`readme.txt`](./readme.txt) or the [WordPress.org plugin page](https://wordpress.org/plugins/viscribe) for installation instructions. To see how far you can go with *Viscribe*, check out the [official documentation](https://docs.kolja-nolte.com/viscribe/usage/quick-start).
 
-## Supported image types
+---
 
-The plugin can work with these image types:
+## For Developers
 
-- JPEG / JPG
-- PNG
-- WebP
-- GIF
+### Requirements
 
-## Requirements
+- WordPress 6.0+
+- PHP 8.2+
+- Node.js 20+ and `npm`/`bun`
+- Composer 2.x
+- A free [Groq API key](https://console.groq.com/keys)
 
-- WordPress **6.0+**
-- PHP **8.2+**
-- A Groq API key: <https://console.groq.com/keys>
-
-## Installation for development
+### Setup
 
 ```bash
+# Change to plugin directory
 cd /path/to/wordpress/wp-content/plugins
-git clone https://gitlab.com/thaikolja/wp-ai-image-renamer.git ai-image-renamer
-cd ai-image-renamer
-composer install
-npm install
+
+# Clone
+git clone https://gitlab.com/thaikolja/viscribe-wordpress-plugin.git viscribe
+
+# Change into directory
+cd viscribe
+
+# Installer Composer and Node dependencies
+composer install && npm i
 ```
 
-## Development commands
+### Architecture
+
+```
+viscribe/
+├── viscribe.php              # Plugin bootstrap
+├── includes/
+│   ├── Plugin.php            # Service container & init
+│   ├── Admin/
+│   │   └── Settings_Page.php # Admin settings UI
+│   ├── Hooks/
+│   │   └── Image_Uploader.php# wp_handle_upload_prefilter hook
+│   ├── Services/
+│   │   ├── Groq_Service.php  # Groq API integration
+│   │   ├── Encryption_Service.php # defuse/php-encryption wrapper
+│   │   ├── Template_Engine.php    # Twig renderer
+│   │   └── Twig/             # {% trans %} custom token parser
+│   └── Utils/
+│       ├── File_Sanitizer.php
+│       ├── API_Key_Validator.php
+│       ├── Rate_Limiter.php
+│       └── SVG_Sanitizer.php
+├── views/                    # Twig templates
+├── assets/
+│   ├── css/                  # Source (styles.css) + built (styles.min.css)
+│   ├── js/                   # Source (main.js, admin.js) + built (scripts.min.js)
+│   └── icons/                # SVG icons
+├── languages/                # .pot, .po, .mo
+└── scripts/                  # Build tooling
+```
+
+- **PSR-4 autoloading**: `Viscribe\` → `includes/`
+- **Twig 3.24+** for admin templates with custom `{% trans %}` tag compiled to `__()` at compile time
+- **Hook-driven** upload pipeline: `wp_handle_upload_prefilter` → `Image_Uploader` → `Groq_Service` → `File_Sanitizer`
+
+### Extension Hooks
+
+The plugin fires actions and filters for Pro add-on integration:
+
+| Hook | Type | Purpose |
+|------|------|---------|
+| `viscribe_services_loaded` | action | After core services init |
+| `viscribe_loaded` | action | After full plugin init |
+| `viscribe_should_process_upload` | filter | Skip specific uploads |
+| `viscribe_generated_description` | filter | Modify AI description |
+| `viscribe_new_filename` | filter | Modify final filename |
+| `viscribe_alt_text` | filter | Modify alt text |
+| `viscribe_prompt` | filter | Customize AI prompt |
+| `viscribe_api_payload` | filter | Modify API request body |
+| `viscribe_api_request_args` | filter | Modify HTTP request args |
+| `viscribe_template_paths` | filter | Add custom Twig paths |
+| `viscribe_available_models` | filter | Add AI models |
+| `viscribe_available_file_types` | filter | Add MIME types |
+| `viscribe_sanitize_settings` | filter | Extend setting sanitization |
+| `viscribe_settings_defaults` | filter | Extend default values |
+| `viscribe_mime_to_ext` | filter | Custom MIME→ext mapping |
+| `viscribe_max_file_size` | filter | Override API file size limit |
+
+### Development commands
+
+```bash
+# PHP
+composer lint                    # Syntax check
+composer phpcs                   # WordPress Coding Standards
+composer phpcbf                  # Auto-fix CS issues
+composer phpstan                 # Static analysis
+
+# Frontend
+npm run start                    # Vite dev server
+npm run lint:js                  # ESLint
+npm run lint:css                 # Stylelint
+
+# Production
+npm run build                    # Minify assets + create viscribe.zip
+```
+
+### Build process
+
+`npm run build` runs:
+
+1. `NODE_ENV=production vite build` — bundles JS into `assets/js/scripts.min.js` + sourcemap, omits CSS (handled below)
+2. `node scripts/generate-asset-file.mjs` — generates `assets/js/index.asset.php` and minifies `assets/css/styles.css` → `assets/css/styles.min.js`
+3. `composer install --no-dev -o --prefer-dist` — production Composer deps
+4. `node scripts/plugin-zip.mjs` — creates `viscribe.zip` with explicit allowlist (PHP sources, built assets, vendor, views, translations, readme.txt, composer metadata)
+5. `composer install` — restores dev Composer deps
+
+The zip ships **no** source JS/CSS files (`main.js`, `admin.js`, `admin-tabs.js`, `styles.css`), no config files, no markdown, and no `node_modules` / `vendor` dev packages.
+
+### Asset loading
+
+PHP enqueues assets based on `WP_DEBUG`:
+
+| Mode | CSS | JS |
+|------|-----|-----|
+| `WP_DEBUG=true` | `styles.css` (readable source) | `scripts.js` (non-minified bundle) |
+| `WP_DEBUG` off | `styles.min.css` (minified) | `scripts.min.js` (minified bundle) |
+
+### Validation before release
 
 ```bash
 composer lint
 composer phpcs
 composer phpstan
 npm run build
-npm run bundle
+wp plugin check viscribe --skip-plugins=secondary-title
 ```
 
-## Production build
-
-The production archive is created with:
-
-```bash
-npm run production
-```
-
-That process currently:
-
-1. builds frontend assets,
-2. installs Composer dependencies without dev packages,
-3. creates `ai-image-renamer.zip`,
-4. restores development dependencies locally afterwards.
-
-The shipped ZIP includes only runtime-relevant files such as PHP source, assets, views, `readme.txt`, `composer.json`, translations, and runtime Composer dependencies.
-
-## Security notes
-
-### Recommended: store secrets in `wp-config.php`
-
-For the strongest setup, define both constants in `wp-config.php`:
+### Configuration in `wp-config.php`
 
 ```php
-define( 'AIR_API_KEY', 'gsk_your_api_key_here' );
-define( 'AIR_ENCRYPTION_KEY', 'def00000_your_defuse_key_here' );
+define( 'VISCRIBE_API_KEY', 'gsk_your_api_key_here' );
+define( 'VISCRIBE_ENCRYPTION_KEY', 'def00000_your_defuse_key_here' );
 ```
 
-Notes:
+- `VISCRIBE_API_KEY` bypasses database storage.
+- `VISCRIBE_ENCRYPTION_KEY` keeps the encryption key out of the DB.
 
-- `AIR_API_KEY` bypasses database storage for the Groq API key.
-- `AIR_ENCRYPTION_KEY` keeps the encryption key out of the database.
-- If `AIR_API_KEY` is present, it takes priority over any saved key in the settings UI.
+---
 
-## Architecture notes
+## Authors and Collaborators
 
-- Main bootstrap: `ai-image-renamer.php`
-- Service container/bootstrap: `includes/Plugin.php`
-- Admin UI: `includes/Admin/Settings_Page.php`
-- Upload hook: `includes/Hooks/Image_Uploader.php`
-- API integration: `includes/Services/Groq_Service.php`
-- Encryption: `includes/Services/Encryption_Service.php`
-- Twig rendering: `includes/Services/Template_Engine.php`
-
-## Release validation performed locally
-
-Before release, validate at least:
-
-```bash
-npm run production
-wp plugin check ai-image-renamer --skip-plugins=secondary-title
-composer lint
-```
-
-For the real shipped contents, check the extracted ZIP instead of the repository folder whenever review tooling would otherwise flag development-only files.
+* **Kolja Nolte** (kolja.nolte@gmail.com)
 
 ## Links
 
-- Documentation: <https://docs.kolja-nolte.com/ai-image-renamer>
-- WordPress.org: <https://wordpress.org/plugins/ai-image-renamer>
-- Support forum: <https://wordpress.org/support/plugin/ai-image-renamer/>
-- Source repository: <https://gitlab.com/thaikolja/wp-ai-image-renamer>
+- [Official documentation](https://docs.kolja-nolte.com/viscribe)
+- [Viscribe on WordPress.org](https://wordpress.org/plugins/viscribe)
+- [Official support forum](https://wordpress.org/support/plugin/viscribe/)
+- [GitLab repository](https://gitlab.com/thaikolja/viscribe-wordpress-plugin)
+- [GitHub repository](https://gitlab.com/thaikolja/viscribe-wordpress-plugin) (mirror of *GitLab*)
 
 ## License
 
-GPL-2.0-or-later. See `LICENSE`.
+GPL-2.0-or-later. See [`LICENSE`](./LICENSE).

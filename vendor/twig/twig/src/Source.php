@@ -16,29 +16,32 @@ namespace Twig;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-final class Source {
+final class Source
+{
+    /**
+     * @param string $code The template source code
+     * @param string $name The template logical name
+     * @param string $path The filesystem path of the template if any
+     */
+    public function __construct(
+        private string $code,
+        private string $name,
+        private string $path = '',
+    ) {
+    }
 
-	/**
-	 * @param string $code The template source code
-	 * @param string $name The template logical name
-	 * @param string $path The filesystem path of the template if any
-	 */
-	public function __construct(
-		private string $code,
-		private string $name,
-		private string $path = '',
-	) {
-	}
+    public function getCode(): string
+    {
+        return $this->code;
+    }
 
-	public function getCode(): string {
-		return $this->code;
-	}
+    public function getName(): string
+    {
+        return $this->name;
+    }
 
-	public function getName(): string {
-		return $this->name;
-	}
-
-	public function getPath(): string {
-		return $this->path;
-	}
+    public function getPath(): string
+    {
+        return $this->path;
+    }
 }
