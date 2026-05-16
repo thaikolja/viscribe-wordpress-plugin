@@ -722,9 +722,9 @@ class Settings_Page {
 				'icon'  => 'dashicons-admin-network',
 				'label' => \__( 'API Key', 'viscribe' ),
 			],
-			'models'    => [
-				'icon'  => 'dashicons-grid-view',
-				'label' => \__( 'Models', 'viscribe' ),
+			'providers' => [
+				'icon'  => 'dashicons-cloud',
+				'label' => \__( 'Providers', 'viscribe' ),
 			],
 			'filetypes' => [
 				'icon'  => 'dashicons-format-image',
@@ -772,11 +772,11 @@ class Settings_Page {
 				'saved'                  => $args['saved'],
 				'using_api_key_constant' => $args['using_api_key_constant'],
 			] ),
-			'models'    => $engine->render( 'admin/fields/models.twig', [
-				'models'      => $args['models'],
-				'current'     => \esc_attr( $args['current'] ),
-				'option_name' => \esc_attr( self::OPTION_NAME ),
-				'asset_url'   => \esc_url( $args['asset_url'] ),
+			'providers' => $engine->render( 'admin/fields/providers.twig', [
+				'option_name'  => \esc_attr( self::OPTION_NAME ),
+				'models'       => $args['models'],
+				'current'      => \esc_attr( $args['current'] ),
+				'asset_url'    => \esc_url( $args['asset_url'] ),
 			] ),
 			'filetypes' => $engine->render( 'admin/fields/file-types.twig', [
 				'option_name'     => \esc_attr( self::OPTION_NAME ),

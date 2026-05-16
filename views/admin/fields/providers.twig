@@ -1,0 +1,104 @@
+{# Providers Panel — Free version #}
+<div class="viscribe-card">
+	<div class="viscribe-card-header">
+		<h2>
+			<span class="dashicons dashicons-cloud"></span>
+			{% trans %}AI Providers{% endtrans %}
+		</h2>
+		<p class="viscribe-card-description">{% trans %}Select your AI provider and the vision model to use for image analysis.{% endtrans %}</p>
+	</div>
+	<div class="viscribe-card-body">
+
+		{# ── Provider Bar ── #}
+		<div class="viscribe-bar-wrap">
+			<nav class="viscribe-bar" role="radiogroup" aria-label="{% trans %}Select AI provider{% endtrans %}">
+				<label class="viscribe-bar-item viscribe-bar-item--active" data-provider="groq">
+					<svg class="viscribe-bar-ico" viewBox="0 0 33 33" fill="currentColor" aria-hidden="true"><path d="m18.445 4.406-9.468 13.74 7.341.665-1.69 9.578 9.469-13.74-7.342-.664 1.69-9.579Z" fill-rule="evenodd"/></svg>
+					<span class="viscribe-bar-label">{% trans %}Groq{% endtrans %}</span>
+				</label>
+				<label class="viscribe-bar-item viscribe-bar-item--locked" data-provider="openai">
+					<svg class="viscribe-bar-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zM7.424 12.467l3.804-2.194v4.374L7.424 12.47ZM12 14.359V9.984l3.804 2.194L12 14.36Z"/></svg>
+					<span class="viscribe-bar-label">{% trans %}OpenAI{% endtrans %}</span>
+					<span class="viscribe-bar-pro">{% trans %}PRO{% endtrans %}</span>
+				</label>
+				<label class="viscribe-bar-item viscribe-bar-item--locked" data-provider="anthropic">
+					<svg class="viscribe-bar-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
+					<span class="viscribe-bar-label">{% trans %}Anthropic{% endtrans %}</span>
+					<span class="viscribe-bar-pro">{% trans %}PRO{% endtrans %}</span>
+				</label>
+				<label class="viscribe-bar-item viscribe-bar-item--locked" data-provider="gemini">
+					<svg class="viscribe-bar-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>
+					<span class="viscribe-bar-label">{% trans %}Gemini{% endtrans %}</span>
+					<span class="viscribe-bar-pro">{% trans %}PRO{% endtrans %}</span>
+				</label>
+				<label class="viscribe-bar-item viscribe-bar-item--locked" data-provider="custom">
+					<svg class="viscribe-bar-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+					<span class="viscribe-bar-label">{% trans %}Custom{% endtrans %}</span>
+					<span class="viscribe-bar-pro">{% trans %}PRO{% endtrans %}</span>
+				</label>
+			</nav>
+		</div>
+
+		{# ── Model Cards for Groq ── #}
+		<div class="viscribe-model-section">
+			<div class="viscribe-model-cards viscribe-provider-models--active" role="radiogroup" aria-label="{% trans %}Select model{% endtrans %}">
+				{% for slug, m in models %}
+					<label class="viscribe-model-card {{ current == slug ? 'selected' : '' }} {{ m.deprecated ? 'viscribe-model-card--deprecated' : '' }}">
+						<input
+							type="radio"
+							name="{{ option_name }}[model]"
+							value="{{ slug }}"
+							{{ current == slug ? 'checked' : '' }}
+							{{ m.deprecated ? 'disabled' : '' }}
+						/>
+						<span class="viscribe-model-content">
+							<div class="viscribe-model-header">
+								<article class="viscribe-model-title-group">
+									<strong>{{ m.label }}</strong>
+									{% if m.deprecated %}
+										<span class="viscribe-model-badge viscribe-model-badge--deprecated">
+											{% trans %}Unavailable{% endtrans %}
+										</span>
+									{% endif %}
+								</article>
+								{% if current == slug and not m.deprecated %}
+									<span class="dashicons dashicons-yes"></span>
+								{% endif %}
+							</div>
+							<p class="viscribe-model-description">{{ m.desc }}</p>
+							<article class="viscribe-model-specs">
+								<div class="viscribe-spec-item">
+									<span class="dashicons dashicons-networking"></span>
+									<span class="viscribe-spec-label">{% trans %}Params{% endtrans %}</span>
+									<span>{{ m.specs.params }}</span>
+								</div>
+								<div class="viscribe-spec-item viscribe-spec-highlight">
+									<span class="dashicons dashicons-performance"></span>
+									<span class="viscribe-spec-label">{% trans %}Speed{% endtrans %}</span>
+									<span>{{ m.specs.speed }}</span>
+								</div>
+								<div class="viscribe-spec-item">
+									<span class="dashicons dashicons-editor-expand"></span>
+									<span class="viscribe-spec-label">{% trans %}Context{% endtrans %}</span>
+									<span>{{ m.specs.context }}</span>
+								</div>
+							</article>
+						</span>
+					</label>
+				{% endfor %}
+			</div>
+		</div>
+
+		{# ── Pro Upsell Note ── #}
+		<div class="viscribe-model-limit-notes" style="margin-top: var(--viscribe-gap-md);">
+			<div class="viscribe-model-limit-note viscribe-model-limit-note--tip">
+				<span class="dashicons dashicons-info-outline"></span>
+				<div class="viscribe-model-limit-note-body">
+					<strong>{% trans %}More providers available in Pro{% endtrans %}</strong>
+					<p>{% trans %}Viscribe Pro unlocks OpenAI, Anthropic, Google Gemini, and custom OpenAI-compatible providers with full model selection.{% endtrans %}</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

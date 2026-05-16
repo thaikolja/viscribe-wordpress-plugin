@@ -1,4 +1,17 @@
 {# API Key Field Template #}
+<div class="viscribe-card">
+	<div class="viscribe-card-header">
+		<h2>
+			<span class="dashicons dashicons-admin-network"></span>
+			{% trans %}API Configuration{% endtrans %}
+			<a href="{{ doc_url('usage/settings#api-configuration') }}" target="_blank" rel="noopener noreferrer" class="viscribe-doc-badge">
+				<span class="dashicons dashicons-book"></span>
+				<span>{% trans %}Documentation{% endtrans %}</span>
+			</a>
+		</h2>
+		<p class="viscribe-card-description">{% trans %}Connect to the Groq Vision API to enable AI-powered image renaming.{% endtrans %}</p>
+	</div>
+	<div class="viscribe-card-body">
 
 {# ── Notification Banner ── #}
 {% if using_api_key_constant %}
@@ -90,4 +103,6 @@
             </div>
         </div>
     </div>
+</div>
+	</div>
 </div>

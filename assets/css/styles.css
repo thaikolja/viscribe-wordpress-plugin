@@ -592,7 +592,7 @@ td:last-child
 .viscribe-settings-wrap .viscribe-filetypes-grid .viscribe-filetype-card {
   padding: var(--viscribe-gap-md);
   background: var(--viscribe-gray-50);
-  border: 2px solid var(--viscribe-gray-200);
+  border: 1px solid var(--viscribe-gray-200);
   border-radius: var(--viscribe-border-radius);
   cursor: pointer;
   transition: var(--viscribe-transition);
@@ -690,7 +690,7 @@ td:last-child
   min-width: 250px;
   padding: var(--viscribe-gap-md);
   background: var(--viscribe-gray-50);
-  border: 2px solid var(--viscribe-gray-200);
+  border: 1px solid var(--viscribe-gray-200);
   border-radius: var(--viscribe-border-radius);
   cursor: pointer;
   transition: var(--viscribe-transition);
@@ -1962,44 +1962,41 @@ span:not(.dashicons) {
   }
 }
 
-/* ── Provider Cards ── */
+/* ── Branded Provider Bar ── */
 
-.viscribe-provider-card {
-  border: 2px solid var(--viscribe-gray-200);
-  border-radius: var(--viscribe-border-radius);
-  background: var(--viscribe-white);
-  cursor: pointer;
-  transition: var(--viscribe-transition);
+.viscribe-bar-wrap {
+  margin-left: calc(-1 * var(--viscribe-gap-lg));
+  margin-right: calc(-1 * var(--viscribe-gap-lg));
+  margin-top: calc(-1 * var(--viscribe-gap-lg));
+  background: #366aa4;
+}
+
+.viscribe-bar {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: var(--viscribe-gap-md);
+  gap: 0;
+  padding: 0 var(--viscribe-gap-lg);
+}
+
+.viscribe-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 18px;
+  cursor: pointer;
+  user-select: none;
   position: relative;
-  width: 100%;
-  box-sizing: border-box;
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.15s, background 0.15s;
 }
 
-.viscribe-provider-card:hover {
-  border-color: var(--viscribe-gray-400);
+.viscribe-bar-item:hover {
+  color: #fff;
+  background: rgba(54, 106, 164, 0.15);
 }
 
-.viscribe-provider-card--selected {
-  border-color: var(--viscribe-primary);
-  background: linear-gradient(135deg, var(--viscribe-primary-light) 0%, var(--viscribe-white) 100%);
-  box-shadow: var(--viscribe-shadow-sm);
-}
-
-.viscribe-provider-card--disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  filter: grayscale(0.4);
-}
-
-.viscribe-provider-card--disabled:hover {
-  border-color: var(--viscribe-gray-200);
-}
-
-.viscribe-provider-radio {
+.viscribe-bar-item input[type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -2007,184 +2004,247 @@ span:not(.dashicons) {
   pointer-events: none;
 }
 
-.viscribe-provider-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--viscribe-gap-sm);
-}
-
-.viscribe-provider-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.viscribe-provider-brand .dashicons {
-  width: 26px;
-  height: 26px;
-  font-size: 26px;
-  flex-shrink: 0;
-}
-
-.viscribe-provider-brand-text {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.viscribe-provider-brand-text strong {
-  color: var(--viscribe-gray-900);
-  font-size: 16px;
-}
-
-.viscribe-provider-badge {
-  display: inline-flex;
-  align-items: center;
-  font-size: 11px;
+.viscribe-bar-item--active {
+  color: #366aa4 !important;
+  background: #e3edf7 !important;
   font-weight: 600;
+}
+
+.viscribe-bar-item--locked {
+  color: rgba(255,255,255,0.85) !important;
+  cursor: not-allowed;
+}
+
+.viscribe-bar-item--locked:hover {
+  background: transparent;
+}
+
+.viscribe-bar-ico {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.viscribe-bar-label {
   line-height: 1;
-  padding: 3px 7px;
-  border-radius: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
 }
 
-.viscribe-provider-selection-indicator {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
+/* ── Model Sections ── */
+
+.viscribe-model-section {
+  margin-top: var(--viscribe-gap-lg);
 }
 
-.viscribe-provider-selection-indicator .dashicons-yes {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-}
-
-.viscribe-provider-radio-circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid var(--viscribe-gray-300);
-  background: var(--viscribe-white);
-  display: inline-block;
-  flex-shrink: 0;
-  transition: var(--viscribe-transition);
-}
-
-.viscribe-provider-card--selected .viscribe-provider-radio-circle {
+.viscribe-provider-models {
   display: none;
 }
 
-.viscribe-provider-card-desc {
-  color: var(--viscribe-gray-600);
-  font-size: 13.5px;
-  line-height: 1.5;
-  margin: 0;
+.viscribe-provider-models--active {
+  display: block;
 }
 
-/* ── Provider Model Table ── */
+.viscribe-model-section .viscribe-model-cards {
+  max-width: none;
+}
 
-.viscribe-provider-models {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  margin-top: 4px;
-  border: 1px solid var(--viscribe-gray-100);
-  border-radius: 4px;
+/* ── Custom Provider Card ── */
+
+.viscribe-custom-card {
+  border: 1px solid var(--viscribe-gray-200);
+  border-radius: var(--viscribe-border-radius);
+  background: var(--viscribe-white);
+  max-width: 560px;
   overflow: hidden;
 }
 
-.viscribe-provider-models thead {
+.viscribe-custom-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: var(--viscribe-gap-md) var(--viscribe-gap-lg);
   background: var(--viscribe-gray-50);
-}
-
-.viscribe-provider-models th {
-  text-align: left;
-  padding: 8px 12px;
-  color: var(--viscribe-gray-500);
-  font-weight: 600;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
   border-bottom: 1px solid var(--viscribe-gray-200);
 }
 
-.viscribe-provider-models td {
-  padding: 8px 12px;
-  color: var(--viscribe-gray-700);
-  border-bottom: 1px solid var(--viscribe-gray-100);
-  vertical-align: middle;
+.viscribe-custom-head-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--viscribe-border-radius);
+  background: var(--viscribe-white);
+  border: 1px solid var(--viscribe-gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.viscribe-provider-models tbody tr:last-child td {
-  border-bottom: none;
+.viscribe-custom-head-icon .dashicons {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--viscribe-gray-500);
 }
 
-.viscribe-provider-models tbody tr:hover {
-  background: var(--viscribe-gray-50);
-}
-
-.viscribe-provider-model-name strong {
+.viscribe-custom-head strong {
+  display: block;
   color: var(--viscribe-gray-900);
-  font-size: 13px;
+  font-size: 14px;
+  margin-bottom: 2px;
 }
 
-.viscribe-provider-models td code {
+.viscribe-custom-head p {
+  margin: 0;
+  color: var(--viscribe-gray-500);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.viscribe-custom-body {
+  padding: var(--viscribe-gap-md) var(--viscribe-gap-lg) var(--viscribe-gap-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--viscribe-gap-md);
+}
+
+.viscribe-custom-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.viscribe-custom-field-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.viscribe-custom-field-label-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--viscribe-gray-700);
+}
+
+.viscribe-custom-field-input {
+  font-family: monospace;
+  font-size: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--viscribe-gray-300);
+  border-radius: var(--viscribe-border-radius);
+  background: var(--viscribe-gray-50);
+  color: var(--viscribe-gray-900);
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  max-width: 400px;
+}
+
+.viscribe-custom-field-input::placeholder {
+  color: var(--viscribe-gray-400);
+}
+
+.viscribe-custom-field-input:focus {
+  border-color: var(--viscribe-primary);
+  background: var(--viscribe-white);
+  box-shadow: 0 0 0 1px var(--viscribe-primary);
+  outline: none;
+}
+
+.viscribe-custom-field-hint {
+  font-size: 12.5px;
+  color: var(--viscribe-gray-500);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.viscribe-custom-field-hint code {
   font-size: 12px;
   background: var(--viscribe-gray-100);
-  padding: 2px 6px;
+  padding: 1px 5px;
   border-radius: 3px;
   color: var(--viscribe-gray-700);
 }
 
-.viscribe-provider-status {
+/* ── URL Input Group ── */
+
+.viscribe-url-group {
   display: inline-flex;
-  align-items: center;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 10px;
-  white-space: nowrap;
+  border: 1px solid var(--viscribe-gray-300);
+  border-radius: var(--viscribe-border-radius);
+  overflow: hidden;
+  max-width: 500px;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.viscribe-provider-status--available {
-  background: #ecfdf5;
-  color: #065f46;
+.viscribe-url-group:focus-within {
+  border-color: var(--viscribe-primary);
+  box-shadow: 0 0 0 1px var(--viscribe-primary);
 }
 
-.viscribe-provider-status--deprecated {
-  background: #fef3c7;
-  color: #92400e;
+.viscribe-url-input {
+  border: none;
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 12px;
+  font-family: monospace;
+  font-size: 14px;
+  background: var(--viscribe-gray-50);
+  color: var(--viscribe-gray-900);
+  outline: none;
 }
 
-.viscribe-provider-status--planned {
+.viscribe-url-input::placeholder {
+  color: var(--viscribe-gray-400);
+}
+
+.viscribe-url-group:focus-within .viscribe-url-input {
+  background: var(--viscribe-white);
+}
+
+.viscribe-url-suffix {
+  padding: 10px 12px;
   background: var(--viscribe-gray-100);
   color: var(--viscribe-gray-500);
+  font-family: monospace;
+  font-size: 13px;
+  white-space: nowrap;
+  border-left: 1px solid var(--viscribe-gray-200);
+  display: flex;
+  align-items: center;
+  user-select: none;
 }
 
-/* ── Provider Cards: Responsive ── */
+/* ── PRO Badge ── */
+
+.viscribe-bar-pro {
+  display: inline-flex;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.12);
+  padding: 2px 5px;
+  border-radius: 3px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* ── Responsive ── */
 
 @media (width <= 782px) {
-  .viscribe-provider-card-header {
-    flex-direction: column;
-    align-items: flex-start;
+  .viscribe-bar {
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 8px var(--viscribe-gap-sm);
   }
 
-  .viscribe-provider-selection-indicator {
-    align-self: flex-end;
-    margin-top: -32px;
+  .viscribe-bar-item {
+    padding: 8px 12px;
+    font-size: 13px;
+    gap: 6px;
   }
 
-  .viscribe-provider-models {
-    font-size: 12px;
-  }
-
-  .viscribe-provider-models th,
-  .viscribe-provider-models td {
-    padding: 6px 8px;
+  .viscribe-bar-ico {
+    width: 17px;
+    height: 17px;
   }
 }
