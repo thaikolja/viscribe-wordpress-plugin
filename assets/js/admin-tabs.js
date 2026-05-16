@@ -13,7 +13,7 @@
  */
 
 (function ($) {
-  "use strict";
+  'use strict';
 
   const ViscribeTabs = {
     /**
@@ -28,7 +28,7 @@
      * Bind click events to tabs.
      */
     bindEvents: function () {
-      $(document).on("click", ".viscribe-tab", this.switchTab.bind(this));
+      $(document).on('click', '.viscribe-tab', this.switchTab.bind(this));
     },
 
     /**
@@ -38,7 +38,7 @@
      */
     switchTab: function (e) {
       const $tab = $(e.currentTarget);
-      const tabId = $tab.data("tab");
+      const tabId = $tab.data('tab');
 
       if (!tabId) {
         return;
@@ -47,18 +47,18 @@
       e.preventDefault();
 
       // Update active tab
-      $(".viscribe-tab").removeClass("active").attr("aria-selected", "false");
-      $tab.addClass("active").attr("aria-selected", "true");
+      $('.viscribe-tab').removeClass('active').attr('aria-selected', 'false');
+      $tab.addClass('active').attr('aria-selected', 'true');
 
       // Update active panel
-      $(".viscribe-panel").removeClass("active").attr("hidden", true);
-      $("#viscribe-panel-" + tabId)
-          .addClass("active")
-          .removeAttr("hidden");
+      $('.viscribe-panel').removeClass('active').attr('hidden', true);
+      $('#viscribe-panel-' + tabId)
+          .addClass('active')
+          .removeAttr('hidden');
 
       // Update URL hash
       if (history.pushState) {
-        history.pushState(null, null, "#" + tabId);
+        history.pushState(null, null, '#' + tabId);
       } else {
         window.location.hash = tabId;
       }
@@ -68,11 +68,11 @@
       if ($referer.length) {
         let refererVal = $referer.val();
         // Remove existing hash if present
-        const hashIndex = refererVal.indexOf("#");
+        const hashIndex = refererVal.indexOf('#');
         if (hashIndex !== -1) {
           refererVal = refererVal.substring(0, hashIndex);
         }
-        $referer.val(refererVal + "#" + tabId);
+        $referer.val(refererVal + '#' + tabId);
       }
     },
 
@@ -83,7 +83,7 @@
       const hash = window.location.hash.substring(1);
 
       if (hash && $(`.viscribe-tab[data-tab="${hash}"]`).length) {
-        $('.viscribe-tab[data-tab="' + hash + '"]').trigger("click");
+        $('.viscribe-tab[data-tab="' + hash + '"]').trigger('click');
       }
     },
   };

@@ -1,5 +1,5 @@
 {
-  "name":            "ai-image-renamer",
+  "name":            "viscribe",
   "version":         "1.0.0",
   "description":     "Uses AI to rename images during upload for SEO-friendly filenames.",
   "main":            "index.js",
@@ -7,10 +7,10 @@
     "start":      "vite",
     "build":      "NODE_ENV=production vite build && node scripts/generate-asset-file.mjs",
     "preview":    "vite preview",
-    "zip":        "node scripts/plugin-zip.mjs",
-    "bundle":     "npm run build && composer install --no-dev -o --prefer-dist && npm run zip && composer install && node scripts/ensure-zip-assets.mjs",
+    "zip":        "composer install --no-dev -o --prefer-dist && node scripts/plugin-zip.mjs && composer install",
+    "bundle":     "npm run build && npm run zip && node scripts/ensure-zip-assets.mjs",
     "production": "npm run bundle",
-    "lint:js":    "wp-scripts lint-js --fix",
+    "lint:js":    "eslint assets/js/main.js assets/js/admin.js assets/js/admin-tabs.js --no-ignore --fix",
     "lint:css":   "wp-scripts lint-style --fix"
   },
   "keywords":        [

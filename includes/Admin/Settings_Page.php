@@ -933,7 +933,7 @@ class Settings_Page {
 		$suffix = \defined( 'WP_DEBUG' ) && WP_DEBUG ? '' : '.min';
 
 		if ( '' === $suffix ) {
-			$js_file = VISCRIBE_PLUGIN_DIR . 'assets/js/scripts.js';
+			$js_file = VISCRIBE_PLUGIN_DIR . 'assets/js/index.js';
 			$version = \file_exists( $js_file ) ? \filemtime( $js_file ) : VISCRIBE_VERSION;
 		} else {
 			$asset_file   = VISCRIBE_PLUGIN_DIR . 'assets/js/index.asset.php';
@@ -944,9 +944,9 @@ class Settings_Page {
 			}
 		}
 
-		\wp_enqueue_style( 'viscribe-admin', VISCRIBE_PLUGIN_URL . "assets/css/styles{$suffix}.css", [], $version );
+		\wp_enqueue_style( 'viscribe-admin', VISCRIBE_PLUGIN_URL . 'assets/css/styles.min.css', [], $version );
 
-		\wp_enqueue_script( 'viscribe-admin', VISCRIBE_PLUGIN_URL . "assets/js/scripts{$suffix}.js", [ 'jquery' ], $version, true );
+		\wp_enqueue_script( 'viscribe-admin', VISCRIBE_PLUGIN_URL . 'assets/js/index.js', [ 'jquery' ], $version, true );
 
 		\wp_localize_script( 'viscribe-admin', 'viscribeAdmin', [
 			'ajaxUrl'             => \admin_url( 'admin-ajax.php' ),

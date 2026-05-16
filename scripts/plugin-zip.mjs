@@ -5,7 +5,7 @@
  * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,24 +59,16 @@ const __dirname = path.dirname(__filename);
 const pluginDir = path.join(__dirname, '..');
 /**
  * The name of the package.
- * Represents the identifier for the package, which is typically used in
- * package management systems like npm or Yarn.
- *
- * This variable holds the name of the software package that can be
- * utilized for tasks related to renaming images with AI capabilities.
  */
-const packageName = 'ai-image-renamer';
+const packageName = 'viscribe';
 /**
  * Represents the name of the zip file, constructed dynamically by appending a `.zip` extension to the package name.
  *
  * @type {string}
- * Indicates the file name for the zipped package, typically used for packaging or distribution purposes.
  */
 const zipFileName = `${packageName}.zip`;
 /**
  * The file system path to the ZIP archive.
- * Combines the directory of the plugin and the ZIP file name to create an absolute path.
- * This path is typically used to reference the location of the generated or existing ZIP file.
  */
 const zipPath = path.join(pluginDir, zipFileName);
 
@@ -109,7 +101,7 @@ try {
 
     addLocalAsset('assets/js/index.js');
     addLocalAsset('assets/js/index.asset.php');
-    addLocalAsset('assets/css/index.css');
+    addLocalAsset('assets/css/styles.min.css');
 
     if (fs.existsSync(path.join(assetsPath, 'icons'))) {
       zip.addLocalFolder(
@@ -168,7 +160,7 @@ try {
     if (
         entry.entryName.match(/\.md$/i) ||
         entry.entryName.match(/\.DS_Store$/i) ||
-        entry.entryName.match(/\/ai-image-renamer\.zip$/i) ||
+        entry.entryName.match(/\/viscribe\.zip$/i) ||
         entry.entryName.match(/\/phpcs\.xml\.dist$/i) ||
         entry.entryName.match(/\/(\.distignore|\.babelrc|\.eslintignore|\.eslintrc\.json)$/i) ||
         //entry.entryName.match(/\/vendor\/bin(\/|$)/i) ||

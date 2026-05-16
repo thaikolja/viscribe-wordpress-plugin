@@ -3,7 +3,7 @@
  * @wordpress       Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/ai-image-renamer
+ * @see             https://docs.kolja-nolte.com/viscribe
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const pluginDir = path.join(__dirname, '..');
-const packageName = 'ai-image-renamer';
+const packageName = 'viscribe';
 const zipPath = path.join(pluginDir, `${packageName}.zip`);
 const tempZipPath = `${zipPath}.tmp`;
 
@@ -50,5 +50,5 @@ for (const relativePath of assetPaths) {
 
 zip.writeZip(tempZipPath);
 fs.renameSync(tempZipPath, zipPath);
-console.log('✓ Ensured built assets are included in ai-image-renamer.zip');
+console.log('✓ Ensured built assets are included in viscribe.zip');
 
