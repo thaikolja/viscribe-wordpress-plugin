@@ -1,61 +1,23 @@
 {# Tab Navigation Component #}
-<nav
-        class="viscribe-tabs"
-        role="tablist">
-    <button
-            type="button"
-            class="viscribe-tab active"
-            data-tab="general"
-            role="tab"
-            aria-selected="true"
-            aria-controls="viscribe-panel-general">
-        <span class="dashicons dashicons-admin-settings"></span>
-        <span class="viscribe-tab-label">{% trans %}General{% endtrans %}</span>
-    </button>
-    <button
-            type="button"
-            class="viscribe-tab"
-            data-tab="api"
-            role="tab"
-            aria-selected="false"
-            aria-controls="viscribe-panel-api">
-        <span class="dashicons dashicons-admin-network"></span>
-        <span class="viscribe-tab-label">{% trans %}API Key{% endtrans %}</span>
-    </button>
-    <button
-            type="button"
-            class="viscribe-tab"
-            data-tab="models"
-            role="tab"
-            aria-selected="false"
-            aria-controls="viscribe-panel-models">
-        <span class="dashicons dashicons-grid-view"></span>
-        <span class="viscribe-tab-label">{% trans %}Models{% endtrans %}</span>
-    </button>
-    <button
-            type="button"
-            class="viscribe-tab"
-            data-tab="filetypes"
-            role="tab"
-            aria-selected="false"
-            aria-controls="viscribe-panel-filetypes">
-        <span class="dashicons dashicons-format-image"></span>
-        <span class="viscribe-tab-label">{% trans %}File Types{% endtrans %}</span>
-    </button>
-    <button
-            type="button"
-            class="viscribe-tab"
-            data-tab="advanced"
-            role="tab"
-            aria-selected="false"
-            aria-controls="viscribe-panel-advanced">
-        <span class="dashicons dashicons-admin-tools"></span>
-        <span class="viscribe-tab-label">{% trans %}Advanced{% endtrans %}</span>
-    </button>
-    <a
-            href="{{ doc_url('usage/quick-start') }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="viscribe-tab"> <span class="dashicons dashicons-welcome-learn-more"></span>
-        <span class="viscribe-tab-label">{% trans %}Documentation{% endtrans %}</span> </a>
+<nav class="viscribe-tabs" role="tablist">
+	{% for tab_id, tab in tabs %}
+		<button
+			type="button"
+			class="viscribe-tab{{ tab.active ? ' active' : '' }}"
+			data-tab="{{ tab_id }}"
+			role="tab"
+			aria-selected="{{ tab.active ? 'true' : 'false' }}"
+			aria-controls="viscribe-panel-{{ tab_id }}">
+			<span class="dashicons {{ tab.icon }}"></span>
+			<span class="viscribe-tab-label">{{ tab.label }}</span>
+		</button>
+	{% endfor %}
+	<a
+		href="{{ doc_url('usage/quick-start') }}"
+		target="_blank"
+		rel="noopener noreferrer"
+		class="viscribe-tab">
+		<span class="dashicons dashicons-welcome-learn-more"></span>
+		<span class="viscribe-tab-label">{% trans %}Documentation{% endtrans %}</span>
+	</a>
 </nav>

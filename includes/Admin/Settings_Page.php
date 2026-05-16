@@ -707,6 +707,101 @@ class Settings_Page {
 	}
 
 	/**
+	 * Get tab definitions for the settings page.
+	 *
+	 * @return array Associative array of tab_id => ['icon' => ..., 'label' => ..., 'active' => bool].
+	 */
+	private function get_tab_definitions(): array {
+		$tabs = [
+			'general'   => [
+				'icon'   => 'dashicons-admin-settings',
+				'label'  => \__( 'General', 'viscribe' ),
+				'active' => true,
+			],
+			'api'       => [
+				'icon'  => 'dashicons-admin-network',
+				'label' => \__( 'API Key', 'viscribe' ),
+			],
+			'models'    => [
+				'icon'  => 'dashicons-grid-view',
+				'label' => \__( 'Models', 'viscribe' ),
+			],
+			'filetypes' => [
+				'icon'  => 'dashicons-format-image',
+				'label' => \__( 'File Types', 'viscribe' ),
+			],
+			'advanced'  => [
+				'icon'  => 'dashicons-admin-tools',
+				'label' => \__( 'Advanced', 'viscribe' ),
+			],
+		];
+
+		/**
+		 * Filter the settings page tab definitions.
+		 * Pro can add or modify tabs here.
+		 *
+		 * @param array $tabs Associative array of tab_id => ['icon' => ..., 'label' => ..., 'active' => bool].
+		 *
+		 * @since 1.0.0
+		 */
+		return \apply_filters( 'viscribe_settings_tabs', $tabs );
+	}
+
+	/**
+	 * Get pre-rendered panel contents for each tab.
+	 *
+	 * @param array $args Computed variables for the templates.
+	 *
+	 * @return array Associative array of tab_id => pre-rendered HTML string.
+	 */
+	private function get_panel_contents( array $args ): array {
+		$engine = $this->template_engine;
+
+		$panels = [
+			'general'   => $engine->render( 'admin/fields/general.twig', [
+				'option_name'  => \esc_attr( self::OPTION_NAME ),
+				'enabled'      => $args['enabled'],
+				'set_alt_text' => $args['set_alt_text'],
+			] ) . $engine->render( 'admin/fields/model-limits-info.twig', [
+				'model_limit_info' => $args['model_limit_info'],
+			] ),
+			'api'       => $engine->render( 'admin/fields/api-key.twig', [
+				'option_name'            => \esc_attr( self::OPTION_NAME ),
+				'display_key'            => \esc_attr( $args['display_key'] ),
+				'placeholder'            => \esc_attr( $args['placeholder'] ),
+				'saved'                  => $args['saved'],
+				'using_api_key_constant' => $args['using_api_key_constant'],
+			] ),
+			'models'    => $engine->render( 'admin/fields/models.twig', [
+				'models'      => $args['models'],
+				'current'     => \esc_attr( $args['current'] ),
+				'option_name' => \esc_attr( self::OPTION_NAME ),
+				'asset_url'   => \esc_url( $args['asset_url'] ),
+			] ),
+			'filetypes' => $engine->render( 'admin/fields/file-types.twig', [
+				'option_name'     => \esc_attr( self::OPTION_NAME ),
+				'file_types'      => \array_map( 'esc_attr', $args['file_types'] ),
+				'available_types' => \array_map( 'esc_html', $args['available_types'] ),
+			] ),
+			'advanced'  => $engine->render( 'admin/fields/advanced.twig', [
+				'option_name'  => \esc_attr( self::OPTION_NAME ),
+				'max_keywords' => \absint( $args['max_keywords'] ),
+				'diagnostics'  => $args['diagnostics'],
+			] ),
+		];
+
+		/**
+		 * Filter the pre-rendered panel HTML for each tab.
+		 * Pro can add its own panels here.
+		 *
+		 * @param array $panels Associative array of tab_id => pre-rendered HTML string.
+		 *
+		 * @since 1.0.0
+		 */
+		return \apply_filters( 'viscribe_settings_panels', $panels );
+	}
+
+	/**
 	 * Render the settings page.
 	 *
 	 * @return void
@@ -730,67 +825,82 @@ class Settings_Page {
 		$model_limit_info = $this->prepare_model_limit_info_for_template( $this->get_current_model_limit_info( $current ) );
 
 		// Check if cURL exists and is enabled
-		$curl_enabled = function_exists( 'curl_version' );
+		$curl_enabled = \function_exists( 'curl_version' );
 
 		$using_api_key_constant = Groq_Service::has_api_key_constant();
+
+		$enabled      = $this->normalize_checkbox_value( $options['enabled'] ?? $this->get_defaults()['enabled'] );
+		$set_alt_text = $this->normalize_checkbox_value( $options['set_alt_text'] ?? $this->get_defaults()['set_alt_text'] );
+		$max_keywords = \absint( $options['max_keywords'] ?? 5 );
+		$asset_url    = \esc_url( \plugins_url( 'assets', \dirname( __DIR__, 2 ) . '/viscribe.php' ) );
+
+		$diagnostics = [
+			'php'    => [
+				'label' => \esc_html__( 'PHP Version', 'viscribe' ),
+				'value' => \esc_html( PHP_VERSION ),
+				'ok'    => (bool) \version_compare( PHP_VERSION, '8.2', '>=' ),
+				'desc'  => \esc_html__( 'Required: 8.2 or higher', 'viscribe' ),
+			],
+			'wp'     => [
+				'label' => \esc_html__( 'WordPress', 'viscribe' ),
+				'value' => \esc_html( \get_bloginfo( 'version' ) ),
+				'ok'    => (bool) \version_compare( \get_bloginfo( 'version' ), '6.0', '>=' ),
+				'desc'  => \esc_html__( 'Required: 6.0 or higher', 'viscribe' ),
+			],
+			'memory' => [
+				'label' => \esc_html__( 'Memory Limit', 'viscribe' ),
+				'value' => \esc_html( \ini_get( 'memory_limit' ) ),
+				'ok'    => true, // Informational.
+				'desc'  => \esc_html__( 'Allocated memory for script execution', 'viscribe' ),
+			],
+			'upload' => [
+				'label' => \esc_html__( 'Max Upload Size', 'viscribe' ),
+				'value' => \esc_html( \ini_get( 'upload_max_filesize' ) ),
+				'ok'    => true, // Informational.
+				'desc'  => \esc_html__( 'Maximum file size set by server', 'viscribe' ),
+			],
+			'curl'   => [
+				'label' => \esc_html__( 'cURL Enabled', 'viscribe' ),
+				'value' => $curl_enabled ? \esc_html__( 'Yes', 'viscribe' ) : \esc_html__( 'No', 'viscribe' ),
+				'ok'    => \function_exists( 'curl_version' ),
+				'desc'  => \esc_html__( 'Required for API communication', 'viscribe' ),
+			],
+		];
+
+		// Build tabs and panels dynamically (filterable by Pro).
+		$tabs = $this->get_tab_definitions();
+
+		$panels = $this->get_panel_contents( [
+			'display_key'            => $api_key_info['display_key'],
+			'placeholder'            => $api_key_info['placeholder'],
+			'saved'                  => $api_key_info['saved'],
+			'enabled'                => $enabled,
+			'set_alt_text'           => $set_alt_text,
+			'file_types'             => $file_types,
+			'available_types'        => $available_types,
+			'current'                => $current,
+			'models'                 => $prepared_models,
+			'model_limit_info'       => $model_limit_info,
+			'max_keywords'           => $max_keywords,
+			'asset_url'              => $asset_url,
+			'using_api_key_constant' => $using_api_key_constant,
+			'diagnostics'            => $diagnostics,
+		] );
 
 		// Display any validation/save errors above the form.
 		\settings_errors( self::OPTION_GROUP );
 
 		// All values escaped before passing to template.
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Twig context contains escaped strings, prepared arrays, and typed boolean flags only.
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Twig context contains only escaped strings and pre-rendered HTML.
 		echo $this->template_engine->render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'admin/settings.twig', [
-			'page_slug'              => esc_attr( self::PAGE_SLUG ),
-			'option_group'           => esc_attr( self::OPTION_GROUP ),
-			'option_name'            => esc_attr( self::OPTION_NAME ),
-			'version'                => esc_html( VISCRIBE_VERSION ),
-			'page_title'             => esc_html( get_admin_page_title() ),
-			'display_key'            => esc_attr( $api_key_info['display_key'] ),
-			'placeholder'            => esc_attr( $api_key_info['placeholder'] ),
-			'saved'                  => $api_key_info['saved'],
-			'enabled'                => $this->normalize_checkbox_value( $options['enabled'] ?? $this->get_defaults()['enabled'] ),
-			'set_alt_text'           => $this->normalize_checkbox_value( $options['set_alt_text'] ?? $this->get_defaults()['set_alt_text'] ),
-			'file_types'             => array_map( 'esc_attr', $file_types ),
-			'available_types'        => array_map( 'esc_html', $available_types ),
-			'current'                => esc_attr( $current ),
-			'models'                 => $prepared_models,
-			'model_limit_info'       => $model_limit_info,
-			'max_keywords'           => absint( $options['max_keywords'] ?? 5 ),
-			'asset_url'              => esc_url( \plugins_url( 'assets', \dirname( __DIR__, 2 ) . '/viscribe.php' ) ),
-			'using_api_key_constant' => $using_api_key_constant,
-			'diagnostics'            => [
-				'php'    => [
-					'label' => esc_html__( 'PHP Version', 'viscribe' ),
-					'value' => esc_html( PHP_VERSION ),
-					'ok'    => (bool) version_compare( PHP_VERSION, '8.2', '>=' ),
-					'desc'  => esc_html__( 'Required: 8.2 or higher', 'viscribe' ),
-				],
-				'wp'     => [
-					'label' => esc_html__( 'WordPress', 'viscribe' ),
-					'value' => esc_html( get_bloginfo( 'version' ) ),
-					'ok'    => (bool) version_compare( get_bloginfo( 'version' ), '6.0', '>=' ),
-					'desc'  => esc_html__( 'Required: 6.0 or higher', 'viscribe' ),
-				],
-				'memory' => [
-					'label' => esc_html__( 'Memory Limit', 'viscribe' ),
-					'value' => esc_html( ini_get( 'memory_limit' ) ),
-					'ok'    => true, // Informational.
-					'desc'  => esc_html__( 'Allocated memory for script execution', 'viscribe' ),
-				],
-				'upload' => [
-					'label' => esc_html__( 'Max Upload Size', 'viscribe' ),
-					'value' => esc_html( ini_get( 'upload_max_filesize' ) ),
-					'ok'    => true, // Informational.
-					'desc'  => esc_html__( 'Maximum file size set by server', 'viscribe' ),
-				],
-				'curl'   => [
-					'label' => esc_html__( 'cURL Enabled', 'viscribe' ),
-					'value' => $curl_enabled ? esc_html__( 'Yes', 'viscribe' ) : esc_html__( 'No', 'viscribe' ),
-					'ok'    => function_exists( 'curl_version' ),
-					'desc'  => esc_html__( 'Required for API communication', 'viscribe' ),
-				],
-			],
+			'page_slug'    => \esc_attr( self::PAGE_SLUG ),
+			'option_group' => \esc_attr( self::OPTION_GROUP ),
+			'option_name'  => \esc_attr( self::OPTION_NAME ),
+			'version'      => \esc_html( VISCRIBE_VERSION ),
+			'page_title'   => \esc_html( \get_admin_page_title() ),
+			'tabs'         => $tabs,
+			'panels'       => $panels,
 		] );
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
