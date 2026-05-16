@@ -4,7 +4,7 @@
  * @description     Uses AI to rename images during upload for SEO-friendly filenames.
  * @author          Kolja Nolte <kolja.nolte@gmail.com>
  * @copyright       2025-2026 (C) Kolja Nolte
- * @see             https://docs.kolja-nolte.com/viscribe
+ * @see             https://docs.kolja-nolte.com/viscribe-wordpress-plugin
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@
 
 /**
  * Plugin Name:       Viscribe
- * Plugin URI:        https://docs.kolja-nolte.com/viscribe
- * Description:       Automatically renames uploaded images using Groq's Vision API for SEO-friendly filenames.
+ * Plugin URI:        https://docs.kolja-nolte.com/viscribe-wordpress-plugin
+ * Description:       Free AI-powered image renaming for WordPress. Automatically replaces meaningless filenames with descriptive, SEO-friendly ones and adds alt texts — no manual work needed.
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      8.2

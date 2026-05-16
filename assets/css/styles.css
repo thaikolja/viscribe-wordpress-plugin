@@ -1,81 +1,81 @@
 :root {
-  --viscribe-max-width: 1200px;
+  --viscribe-max-width:     1200px;
   --viscribe-border-radius: 6px;
-  --viscribe-transition: all 0.2s ease;
-  --viscribe-gap-sm: 10px;
-  --viscribe-gap-md: 16px;
-  --viscribe-gap-lg: 24px;
-  --viscribe-primary: #2271b1;
-  --viscribe-primary-dark: #135e96;
+  --viscribe-transition:    all 0.2s ease;
+  --viscribe-gap-sm:        10px;
+  --viscribe-gap-md:        16px;
+  --viscribe-gap-lg:        24px;
+  --viscribe-primary:       #2271b1;
+  --viscribe-primary-dark:  #135e96;
   --viscribe-primary-light: #f0f6fc;
-  --viscribe-success: #00a32a;
-  --viscribe-error: #d63638;
-  --viscribe-warning: #dba617;
-  --viscribe-white: #fff;
-  --viscribe-gray-50: #f9fafb;
-  --viscribe-gray-100: #f3f4f6;
-  --viscribe-gray-200: #e5e7eb;
-  --viscribe-gray-300: #d1d5db;
-  --viscribe-gray-400: #9ca3af;
-  --viscribe-gray-500: #6b7280;
-  --viscribe-gray-600: #4b5563;
-  --viscribe-gray-700: #374151;
-  --viscribe-gray-800: #1f2937;
-  --viscribe-gray-900: #111827;
-  --viscribe-shadow-sm: 0 1px 2px #0000000d;
-  --viscribe-shadow-md: 0 4px 6px -1px #0000001a;
-  --viscribe-shadow-lg: 0 10px 15px -3px #0000001a;
+  --viscribe-success:       #00a32a;
+  --viscribe-error:         #d63638;
+  --viscribe-warning:       #dba617;
+  --viscribe-white:         #ffffff;
+  --viscribe-gray-50:       #f9fafb;
+  --viscribe-gray-100:      #f3f4f6;
+  --viscribe-gray-200:      #e5e7eb;
+  --viscribe-gray-300:      #d1d5db;
+  --viscribe-gray-400:      #9ca3af;
+  --viscribe-gray-500:      #6b7280;
+  --viscribe-gray-600:      #4b5563;
+  --viscribe-gray-700:      #374151;
+  --viscribe-gray-800:      #1f2937;
+  --viscribe-gray-900:      #111827;
+  --viscribe-shadow-sm:     0 1px 2px #0000000d;
+  --viscribe-shadow-md:     0 4px 6px -1px #0000001a;
+  --viscribe-shadow-lg:     0 10px 15px -3px #0000001a;
 }
 
 /* ── Layout ── */
 
 .viscribe-settings-wrap {
   background: var(--viscribe-gray-100);
-  max-width: none;
+  max-width:  none;
   min-height: calc(100vh - 32px);
-  margin: 0 0 0 -20px;
-  padding: 0;
+  margin:     0 0 0 -20px;
+  padding:    0;
 }
 
 .viscribe-settings-wrap .viscribe-header {
-  background: var(--viscribe-white);
-  border-bottom: 1px solid var(--viscribe-gray-200);
-  z-index: 100;
-  padding: 16px 24px;
-  display: grid;
+  background:            var(--viscribe-white);
+  border-bottom:         1px solid var(--viscribe-gray-200);
+  z-index:               100;
+  padding:               16px 24px;
+  display:               grid;
   grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 24px;
-  top: 32px;
+  align-items:           center;
+  gap:                   24px;
+  top:                   32px;
 }
 
 .viscribe-settings-wrap .viscribe-header .viscribe-header-left {
   align-items: center;
-  gap: 12px;
-  display: flex;
+  gap:         12px;
+  display:     flex;
 }
 
 .viscribe-settings-wrap .viscribe-header .viscribe-header-center {
   justify-content: center;
-  display: flex;
+  display:         flex;
 }
 
 .viscribe-settings-wrap
 .viscribe-header
 .viscribe-header-left
 .viscribe-header-logo {
-  background: linear-gradient(
-    135deg,
-    var(--viscribe-primary) 0%,
-    var(--viscribe-primary-dark) 100%
-  );
-  width: 48px;
-  height: 48px;
-  box-shadow: var(--viscribe-shadow-md);
-  border-radius: 10px;
+  background:      linear-gradient(
+                       135deg,
+                       var(--viscribe-primary) 0%,
+                       var(--viscribe-primary-dark) 100%
+                   );
+  width:           48px;
+  height:          48px;
+  box-shadow:      var(--viscribe-shadow-md);
+  border-radius:   10px;
   justify-content: center;
-  align-items: center;
-  display: flex;
+  align-items:     center;
+  display:         flex;
 }
 
 .viscribe-settings-wrap
@@ -83,9 +83,9 @@
 .viscribe-header-left
 .viscribe-header-logo
 .dashicons {
-  color: var(--viscribe-white);
-  width: 24px;
-  height: 24px;
+  color:     var(--viscribe-white);
+  width:     24px;
+  height:    24px;
   font-size: 24px;
 }
 
@@ -102,9 +102,9 @@ a {
 .viscribe-header-left
 .viscribe-header-title
 h1 {
-  color: var(--viscribe-gray-900);
-  margin: 0;
-  font-size: 20px;
+  color:       var(--viscribe-gray-900);
+  margin:      0;
+  font-size:   20px;
   font-weight: 600;
   line-height: 1.2;
 }
@@ -113,54 +113,54 @@ h1 {
 .viscribe-header
 .viscribe-header-left
 .viscribe-header-version {
-  background: var(--viscribe-gray-200);
-  color: var(--viscribe-gray-600);
+  background:    var(--viscribe-gray-200);
+  color:         var(--viscribe-gray-600);
   border-radius: 4px;
-  padding: 2px 8px;
-  font-size: 11px;
-  font-weight: 500;
-  display: inline-block;
+  padding:       2px 8px;
+  font-size:     11px;
+  font-weight:   500;
+  display:       inline-block;
 }
 
 .viscribe-settings-wrap .viscribe-header .viscribe-header-right {
   align-items: center;
-  gap: 12px;
-  display: flex;
+  gap:         12px;
+  display:     flex;
 }
 
 .viscribe-settings-wrap
 .viscribe-header
 .viscribe-header-right
 .viscribe-header-version {
-  background: var(--viscribe-gray-200);
-  color: var(--viscribe-gray-600);
+  background:    var(--viscribe-gray-200);
+  color:         var(--viscribe-gray-600);
   border-radius: 4px;
-  padding: 2px 8px;
-  font-size: 11px;
-  font-weight: 500;
-  display: inline-block;
+  padding:       2px 8px;
+  font-size:     11px;
+  font-weight:   500;
+  display:       inline-block;
 }
 
 .viscribe-settings-wrap
 .viscribe-header
 .viscribe-header-right
 .viscribe-header-icon-link {
-  color: var(--viscribe-gray-400);
-  transition: var(--viscribe-transition);
-  border-radius: 4px;
+  color:           var(--viscribe-gray-400);
+  transition:      var(--viscribe-transition);
+  border-radius:   4px;
   justify-content: center;
-  align-items: center;
-  width: 28px;
-  height: 28px;
+  align-items:     center;
+  width:           28px;
+  height:          28px;
   text-decoration: none;
-  display: flex;
+  display:         flex;
 }
 
 .viscribe-settings-wrap
 .viscribe-header
 .viscribe-header-right
 .viscribe-header-icon-link:hover {
-  color: var(--viscribe-primary);
+  color:      var(--viscribe-primary);
   background: var(--viscribe-primary-light);
 }
 
@@ -169,8 +169,8 @@ h1 {
 .viscribe-header-right
 .viscribe-header-icon-link
 .dashicons {
-  width: 18px;
-  height: 18px;
+  width:     18px;
+  height:    18px;
   font-size: 18px;
 }
 
@@ -179,69 +179,69 @@ h1 {
 .viscribe-header-right
 .viscribe-header-icon-link
 svg {
-  fill: currentColor;
-  width: 16px;
+  fill:   currentColor;
+  width:  16px;
   height: 16px;
 }
 
 .viscribe-settings-wrap .viscribe-header .viscribe-header-breadcrumb {
-  color: var(--viscribe-gray-500);
+  color:          var(--viscribe-gray-500);
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size:      14px;
+  font-weight:    500;
 }
 
 .viscribe-settings-wrap .viscribe-settings-container {
-  gap: var(--viscribe-gap-lg);
-  padding: var(--viscribe-gap-lg);
+  gap:                   var(--viscribe-gap-lg);
+  padding:               var(--viscribe-gap-lg);
   grid-template-columns: 200px minmax(0, 1fr) 350px;
-  display: grid;
+  display:               grid;
 }
 
 /* ── Tabs ── */
 
 .viscribe-settings-wrap .viscribe-tabs {
   flex-direction: column;
-  gap: 4px;
-  width: 100%;
-  display: flex;
-  position: sticky;
-  top: 120px;
+  gap:            4px;
+  width:          100%;
+  display:        flex;
+  position:       sticky;
+  top:            120px;
 }
 
 .viscribe-settings-wrap .viscribe-tabs .viscribe-tab {
-  border-radius: 0 var(--viscribe-border-radius) var(--viscribe-border-radius) 0;
-  cursor: pointer;
-  transition: var(--viscribe-transition);
-  text-align: left;
-  color: var(--viscribe-gray-600);
-  background: 0 0;
-  border: none;
-  border-left: 3px solid #0000;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius:   0 var(--viscribe-border-radius) var(--viscribe-border-radius) 0;
+  cursor:          pointer;
+  transition:      var(--viscribe-transition);
+  text-align:      left;
+  color:           var(--viscribe-gray-600);
+  background:      0 0;
+  border:          none;
+  border-left:     3px solid #0000;
+  align-items:     center;
+  gap:             12px;
+  padding:         12px 16px;
+  font-size:       14px;
+  font-weight:     500;
   text-decoration: none;
-  display: flex;
+  display:         flex;
 }
 
 .viscribe-settings-wrap .viscribe-tabs .viscribe-tab:hover {
   background: var(--viscribe-gray-200);
-  color: var(--viscribe-gray-800);
+  color:      var(--viscribe-gray-800);
 }
 
 .viscribe-settings-wrap .viscribe-tabs .viscribe-tab.active {
-  background: var(--viscribe-primary-light);
+  background:        var(--viscribe-primary-light);
   border-left-color: var(--viscribe-primary);
-  color: var(--viscribe-primary);
+  color:             var(--viscribe-primary);
 }
 
 .viscribe-settings-wrap .viscribe-tabs .viscribe-tab .dashicons {
-  width: 18px;
-  height: 18px;
+  width:     18px;
+  height:    18px;
   font-size: 18px;
 }
 
@@ -264,34 +264,34 @@ svg {
 /* ── Cards ── */
 
 .viscribe-settings-wrap .viscribe-card {
-  background: var(--viscribe-white);
-  border: 1px solid var(--viscribe-gray-200);
+  background:    var(--viscribe-white);
+  border:        1px solid var(--viscribe-gray-200);
   border-radius: var(--viscribe-border-radius);
-  box-shadow: var(--viscribe-shadow-sm);
+  box-shadow:    var(--viscribe-shadow-sm);
   margin-bottom: var(--viscribe-gap-lg);
-  overflow: hidden;
+  overflow:      hidden;
 }
 
 .viscribe-settings-wrap .viscribe-card .viscribe-card-header {
-  padding: var(--viscribe-gap-md) var(--viscribe-gap-lg);
+  padding:       var(--viscribe-gap-md) var(--viscribe-gap-lg);
   border-bottom: 1px solid var(--viscribe-gray-200);
-  background: var(--viscribe-gray-50);
+  background:    var(--viscribe-gray-50);
 }
 
 .viscribe-settings-wrap .viscribe-card .viscribe-card-header h2 {
-  color: var(--viscribe-gray-900);
+  color:       var(--viscribe-gray-900);
   align-items: center;
-  gap: 10px;
-  margin: 0 0 4px;
-  font-size: 16px;
+  gap:         10px;
+  margin:      0 0 4px;
+  font-size:   16px;
   font-weight: 600;
-  display: flex;
+  display:     flex;
 }
 
 .viscribe-settings-wrap .viscribe-card .viscribe-card-header h2 .dashicons {
-  color: var(--viscribe-primary);
-  width: 20px;
-  height: 20px;
+  color:     var(--viscribe-primary);
+  width:     20px;
+  height:    20px;
   font-size: 20px;
 }
 
@@ -300,19 +300,19 @@ svg {
 .viscribe-card-header
 h2
 .viscribe-doc-badge {
-  color: var(--viscribe-primary);
-  background: var(--viscribe-primary-light);
-  transition: var(--viscribe-transition);
-  border-radius: 99px;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1;
+  color:           var(--viscribe-primary);
+  background:      var(--viscribe-primary-light);
+  transition:      var(--viscribe-transition);
+  border-radius:   99px;
+  align-items:     center;
+  gap:             6px;
+  margin-left:     auto;
+  padding:         6px 12px;
+  font-size:       13px;
+  font-weight:     500;
+  line-height:     1;
   text-decoration: none;
-  display: inline-flex;
+  display:         inline-flex;
 }
 
 .viscribe-settings-wrap
@@ -321,14 +321,14 @@ h2
 h2
 .viscribe-doc-badge
 .dashicons {
-  color: var(--viscribe-primary);
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
+  color:       var(--viscribe-primary);
+  width:       16px;
+  height:      16px;
+  font-size:   16px;
   line-height: 1;
-  display: block;
-  position: relative;
-  top: 1px;
+  display:     block;
+  position:    relative;
+  top:         1px;
 }
 
 .viscribe-settings-wrap
@@ -343,8 +343,8 @@ h2
 .viscribe-card
 .viscribe-card-header
 .viscribe-card-description {
-  color: var(--viscribe-gray-500);
-  margin: 0;
+  color:     var(--viscribe-gray-500);
+  margin:    0;
   font-size: 14px;
 }
 
@@ -365,9 +365,9 @@ h2
 .viscribe-api-key-container
 .viscribe-api-key-wrapper {
   align-items: center;
-  gap: var(--viscribe-gap-sm);
-  flex-wrap: wrap;
-  display: flex;
+  gap:         var(--viscribe-gap-sm);
+  flex-wrap:   wrap;
+  display:     flex;
 }
 
 .viscribe-settings-wrap
@@ -382,13 +382,13 @@ input[type="password"],
 .viscribe-api-key-container
 .viscribe-api-key-wrapper
 input[type="text"] {
-  border: 1px solid var(--viscribe-gray-300);
+  border:        1px solid var(--viscribe-gray-300);
   border-radius: var(--viscribe-border-radius);
-  width: 100%;
-  max-width: 100%;
-  transition: var(--viscribe-transition);
-  padding: 10px 14px;
-  font-size: 14px;
+  width:         100%;
+  max-width:     100%;
+  transition:    var(--viscribe-transition);
+  padding:       10px 14px;
+  font-size:     14px;
 }
 
 :is(
@@ -406,17 +406,17 @@ input[type="password"],
 input[type="text"]
 ):focus {
   border-color: var(--viscribe-primary);
-  outline: none;
-  box-shadow: 0 0 0 3px #2271b11a;
+  outline:      none;
+  box-shadow:   0 0 0 3px #2271b11a;
 }
 
 .viscribe-settings-wrap
 .viscribe-card
 .viscribe-card-body
 .viscribe-action-buttons {
-  gap: var(--viscribe-gap-sm);
+  gap:       var(--viscribe-gap-sm);
   flex-wrap: wrap;
-  display: flex;
+  display:   flex;
 }
 
 .viscribe-settings-wrap
@@ -425,8 +425,8 @@ input[type="text"]
 .viscribe-action-buttons
 .button {
   align-items: center;
-  gap: 10px;
-  display: flex;
+  gap:         10px;
+  display:     flex;
 }
 
 .viscribe-settings-wrap .viscribe-card .viscribe-card-body #air_test_result {
@@ -434,12 +434,12 @@ input[type="text"]
 }
 
 .viscribe-settings-wrap .viscribe-card .viscribe-card-body .error {
-  color: var(--viscribe-error);
+  color:       var(--viscribe-error);
   font-weight: 500;
 }
 
 .viscribe-settings-wrap .viscribe-card .viscribe-card-body .success {
-  color: var(--viscribe-success);
+  color:       var(--viscribe-success);
   font-weight: 500;
 }
 
@@ -447,7 +447,7 @@ input[type="text"]
 
 .viscribe-settings-wrap .viscribe-diagnostics-table {
   box-shadow: none;
-  border: none;
+  border:     none;
 }
 
 .viscribe-settings-wrap .viscribe-diagnostics-table tr:nth-child(2n) {
@@ -456,46 +456,46 @@ input[type="text"]
 
 .viscribe-settings-wrap .viscribe-diagnostics-table td {
   vertical-align: middle;
-  padding: 12px 15px;
+  padding:        12px 15px;
 }
 
 .viscribe-settings-wrap .viscribe-diagnostics-table td strong {
-  color: var(--viscribe-gray-900);
-  margin: 0 0 4px;
+  color:     var(--viscribe-gray-900);
+  margin:    0 0 4px;
   font-size: 14px;
-  display: block;
+  display:   block;
 }
 
 .viscribe-settings-wrap .viscribe-diagnostics-table td span {
-  color: var(--viscribe-gray-500);
+  color:     var(--viscribe-gray-500);
   font-size: 12px;
-  display: block;
+  display:   block;
 }
 
 .viscribe-settings-wrap .viscribe-diagnostics-table td:last-child {
-  text-align: right;
+  text-align:      right;
   justify-content: space-evenly;
-  align-items: center;
-  gap: 8px;
-  display: flex;
+  align-items:     center;
+  gap:             8px;
+  display:         flex;
 }
 
 .viscribe-settings-wrap .viscribe-diagnostics-table td:last-child code {
-  background: var(--viscribe-white);
-  border: 1px solid var(--viscribe-gray-300);
+  background:    var(--viscribe-white);
+  border:        1px solid var(--viscribe-gray-300);
   border-radius: 4px;
-  padding: 3px 6px;
-  font-size: 13px;
+  padding:       3px 6px;
+  font-size:     13px;
 }
 
 .viscribe-settings-wrap .viscribe-diagnostics-table td:last-child .dashicons {
   justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  margin-left: 0;
-  font-size: 20px;
-  display: inline-flex;
+  align-items:     center;
+  width:           20px;
+  height:          20px;
+  margin-left:     0;
+  font-size:       20px;
+  display:         inline-flex;
 }
 
 .viscribe-settings-wrap
@@ -515,11 +515,11 @@ td:last-child
 /* ── Setting Row ── */
 
 .viscribe-settings-wrap .viscribe-setting-row {
-  align-items: flex-start;
-  gap: var(--viscribe-gap-lg);
-  padding: var(--viscribe-gap-md) 0;
+  align-items:   flex-start;
+  gap:           var(--viscribe-gap-lg);
+  padding:       var(--viscribe-gap-md) 0;
   border-bottom: 1px solid var(--viscribe-gray-200);
-  display: flex;
+  display:       flex;
 }
 
 .viscribe-settings-wrap .viscribe-setting-row.viscribe-setting-row--stacked {
@@ -535,7 +535,7 @@ td:last-child
 .viscribe-settings-wrap
 .viscribe-setting-row.viscribe-setting-row--stacked
 .viscribe-setting-control {
-  width: 100%;
+  width:     100%;
   max-width: 100%;
 }
 
@@ -543,8 +543,8 @@ td:last-child
 .viscribe-setting-row.viscribe-setting-row--stacked
 .viscribe-setting-control
 .deprecation-notice {
-  color: var(--viscribe-gray-600);
-  font-size: 12px;
+  color:       var(--viscribe-gray-600);
+  font-size:   12px;
   line-height: 1.5;
 }
 
@@ -553,27 +553,27 @@ td:last-child
 }
 
 .viscribe-settings-wrap .viscribe-setting-row:last-child {
-  border-bottom: none;
+  border-bottom:  none;
   padding-bottom: 0;
 }
 
 .viscribe-settings-wrap .viscribe-setting-row .viscribe-setting-label {
-  flex: 1;
+  flex:      1;
   min-width: 0;
 }
 
 .viscribe-settings-wrap .viscribe-setting-row .viscribe-setting-label label {
-  color: var(--viscribe-gray-800);
-  margin: 0 0 4px;
-  font-size: 14px;
+  color:       var(--viscribe-gray-800);
+  margin:      0 0 4px;
+  font-size:   14px;
   font-weight: 600;
-  display: block;
+  display:     block;
 }
 
 .viscribe-settings-wrap .viscribe-setting-row .viscribe-setting-description {
-  color: var(--viscribe-gray-500);
-  margin: 0;
-  font-size: 14px;
+  color:       var(--viscribe-gray-500);
+  margin:      0;
+  font-size:   14px;
   line-height: 1.4;
 }
 
@@ -584,46 +584,46 @@ td:last-child
 /* ── File Types Grid ── */
 
 .viscribe-settings-wrap .viscribe-filetypes-grid {
-  gap: var(--viscribe-gap-md);
+  gap:                   var(--viscribe-gap-md);
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  display: grid;
+  display:               grid;
 }
 
 .viscribe-settings-wrap .viscribe-filetypes-grid .viscribe-filetype-card {
-  padding: var(--viscribe-gap-md);
-  background: var(--viscribe-gray-50);
-  border: 1px solid var(--viscribe-gray-200);
-  border-radius: var(--viscribe-border-radius);
-  cursor: pointer;
-  transition: var(--viscribe-transition);
-  text-align: center;
+  padding:        var(--viscribe-gap-md);
+  background:     var(--viscribe-gray-50);
+  border:         1px solid var(--viscribe-gray-200);
+  border-radius:  var(--viscribe-border-radius);
+  cursor:         pointer;
+  transition:     var(--viscribe-transition);
+  text-align:     center;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  display: flex;
+  align-items:    center;
+  gap:            8px;
+  display:        flex;
 }
 
 .viscribe-settings-wrap .viscribe-filetypes-grid .viscribe-filetype-card:hover {
   border-color: var(--viscribe-gray-400);
-  background: var(--viscribe-white);
+  background:   var(--viscribe-white);
 }
 
 .viscribe-settings-wrap
 .viscribe-filetypes-grid
 .viscribe-filetype-card:has(input:checked) {
   border-color: var(--viscribe-primary);
-  background: var(--viscribe-primary-light);
+  background:   var(--viscribe-primary-light);
 }
 
 .viscribe-settings-wrap
 .viscribe-filetypes-grid
 .viscribe-filetype-card:not(:has(input:checked)):not(:hover) {
   border-color: var(--viscribe-gray-200);
-  background: var(--viscribe-gray-50);
+  background:   var(--viscribe-gray-50);
 }
 
 .viscribe-settings-wrap .viscribe-filetypes-grid .viscribe-filetype-card input {
-  opacity: 0;
+  opacity:  0;
   position: absolute;
 }
 
@@ -632,9 +632,9 @@ td:last-child
 .viscribe-filetype-card
 .viscribe-filetype-icon
 .dashicons {
-  width: 32px;
-  height: 32px;
-  color: var(--viscribe-gray-500);
+  width:     32px;
+  height:    32px;
+  color:     var(--viscribe-gray-500);
   font-size: 32px;
 }
 
@@ -651,17 +651,17 @@ td:last-child
 .viscribe-filetype-card
 .viscribe-filetype-content {
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  display: flex;
+  align-items:    center;
+  gap:            4px;
+  display:        flex;
 }
 
 .viscribe-settings-wrap
 .viscribe-filetypes-grid
 .viscribe-filetype-card
 .viscribe-filetype-label {
-  color: var(--viscribe-gray-700);
-  font-size: 14px;
+  color:       var(--viscribe-gray-700);
+  font-size:   14px;
   font-weight: 500;
 }
 
@@ -669,53 +669,53 @@ td:last-child
 .viscribe-filetypes-grid
 .viscribe-filetype-card
 .viscribe-filetype-desc {
-  color: var(--viscribe-gray-500);
-  font-size: 12px;
+  color:       var(--viscribe-gray-500);
+  font-size:   12px;
   line-height: 1.4;
 }
 
 /* ── Model Cards ── */
 
 .viscribe-settings-wrap .viscribe-model-cards {
-  gap: var(--viscribe-gap-md);
+  gap:       var(--viscribe-gap-md);
   flex-flow: wrap;
-  width: 100%;
+  width:     100%;
   max-width: none;
-  display: flex;
+  display:   flex;
 }
 
 .viscribe-settings-wrap .viscribe-model-cards .viscribe-model-card {
-  align-items: flex-start;
-  gap: var(--viscribe-gap-md);
-  min-width: 250px;
-  padding: var(--viscribe-gap-md);
-  background: var(--viscribe-gray-50);
-  border: 1px solid var(--viscribe-gray-200);
+  align-items:   flex-start;
+  gap:           var(--viscribe-gap-md);
+  min-width:     250px;
+  padding:       var(--viscribe-gap-md);
+  background:    var(--viscribe-gray-50);
+  border:        1px solid var(--viscribe-gray-200);
   border-radius: var(--viscribe-border-radius);
-  cursor: pointer;
-  transition: var(--viscribe-transition);
-  flex: 1;
-  display: flex;
+  cursor:        pointer;
+  transition:    var(--viscribe-transition);
+  flex:          1;
+  display:       flex;
 }
 
 .viscribe-settings-wrap .viscribe-model-cards .viscribe-model-card:hover {
   border-color: var(--viscribe-primary);
-  background: var(--viscribe-white);
+  background:   var(--viscribe-white);
 }
 
 .viscribe-settings-wrap .viscribe-model-cards .viscribe-model-card.selected {
   border-color: var(--viscribe-primary);
-  box-shadow: var(--viscribe-shadow-sm);
-  background: var(--viscribe-primary-light);
+  box-shadow:   var(--viscribe-shadow-sm);
+  background:   var(--viscribe-primary-light);
 }
 
 .viscribe-settings-wrap
 .viscribe-model-cards
 .viscribe-model-card[class*="--deprecated"] {
   border-color: var(--viscribe-gray-300);
-  background: var(--viscribe-gray-50);
-  cursor: not-allowed;
-  opacity: 0.6;
+  background:   var(--viscribe-gray-50);
+  cursor:       not-allowed;
+  opacity:      0.6;
 }
 
 .viscribe-settings-wrap
@@ -751,8 +751,8 @@ p {
 .viscribe-model-content
 .viscribe-model-title-group {
   align-items: center;
-  gap: 8px;
-  display: flex;
+  gap:         8px;
+  display:     flex;
 }
 
 .viscribe-settings-wrap
@@ -761,9 +761,9 @@ p {
 .viscribe-model-content
 .viscribe-model-header {
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4px;
-  display: flex;
+  align-items:     center;
+  margin-bottom:   4px;
+  display:         flex;
 }
 
 .viscribe-settings-wrap
@@ -772,7 +772,7 @@ p {
 .viscribe-model-content
 .viscribe-model-header
 strong {
-  color: var(--viscribe-gray-900);
+  color:     var(--viscribe-gray-900);
   font-size: 15px;
 }
 
@@ -791,10 +791,10 @@ strong {
 .viscribe-model-content
 .viscribe-model-header
 .viscribe-provider-logo {
-  fill: #0668e1;
+  fill:        #0668e1;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width:       20px;
+  height:      20px;
 }
 
 .viscribe-settings-wrap
@@ -802,11 +802,11 @@ strong {
 .viscribe-model-card
 .viscribe-model-content
 .viscribe-model-description {
-  color: var(--viscribe-gray-600);
-  margin: 0 0 12px;
-  font-size: 14px;
+  color:       var(--viscribe-gray-600);
+  margin:      0 0 12px;
+  font-size:   14px;
   line-height: 1.4;
-  display: block;
+  display:     block;
 }
 
 .viscribe-settings-wrap
@@ -814,11 +814,11 @@ strong {
 .viscribe-model-card
 .viscribe-model-content
 .viscribe-model-specs {
-  border-top: 1px solid #0000000d;
+  border-top:            1px solid #0000000d;
   grid-template-columns: 1fr;
-  gap: 8px;
-  padding-top: 12px;
-  display: grid;
+  gap:                   8px;
+  padding-top:           12px;
+  display:               grid;
 }
 
 .viscribe-settings-wrap
@@ -827,11 +827,11 @@ strong {
 .viscribe-model-content
 .viscribe-model-specs
 .viscribe-spec-item {
-  color: var(--viscribe-gray-900);
+  color:       var(--viscribe-gray-900);
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  display: flex;
+  gap:         6px;
+  font-size:   14px;
+  display:     flex;
 }
 
 .viscribe-settings-wrap
@@ -841,9 +841,9 @@ strong {
 .viscribe-model-specs
 .viscribe-spec-item
 .dashicons {
-  width: 16px;
-  height: 16px;
-  color: var(--viscribe-gray-400);
+  width:     16px;
+  height:    16px;
+  color:     var(--viscribe-gray-400);
   font-size: 16px;
 }
 
@@ -854,7 +854,7 @@ strong {
 .viscribe-model-specs
 .viscribe-spec-item
 .viscribe-spec-label {
-  color: var(--viscribe-gray-900);
+  color:       var(--viscribe-gray-900);
   font-weight: 700;
 }
 
@@ -888,9 +888,9 @@ strong {
 }
 
 .viscribe-settings-wrap .viscribe-submit-row .button-primary {
-  height: auto;
-  padding: 10px 24px;
-  font-size: 14px;
+  height:      auto;
+  padding:     10px 24px;
+  font-size:   14px;
   line-height: 1.4;
 }
 
@@ -898,24 +898,24 @@ strong {
 
 .viscribe-settings-wrap .viscribe-settings-sidebar {
   position: sticky;
-  top: 120px;
+  top:      120px;
 }
 
 .viscribe-settings-wrap .viscribe-settings-sidebar .viscribe-pro-upsell {
-  background: var(--viscribe-white);
-  border: 1px solid var(--viscribe-gray-200);
+  background:    var(--viscribe-white);
+  border:        1px solid var(--viscribe-gray-200);
   border-radius: var(--viscribe-border-radius);
-  box-shadow: var(--viscribe-shadow-sm);
-  overflow: hidden;
+  box-shadow:    var(--viscribe-shadow-sm);
+  overflow:      hidden;
 }
 
 .viscribe-settings-wrap
 .viscribe-settings-sidebar
 .viscribe-pro-upsell
 .viscribe-pro-header {
-  background: var(--viscribe-gray-50);
+  background:    var(--viscribe-gray-50);
   border-bottom: 1px solid var(--viscribe-gray-200);
-  padding: 16px;
+  padding:       16px;
 }
 
 .viscribe-settings-wrap
@@ -923,10 +923,10 @@ strong {
 .viscribe-pro-upsell
 .viscribe-pro-header
 .hndle {
-  color: var(--viscribe-gray-900);
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
+  color:       var(--viscribe-gray-900);
+  margin:      0;
+  padding:     0;
+  font-size:   16px;
   font-weight: 700;
 }
 
@@ -942,9 +942,9 @@ strong {
 .viscribe-settings-sidebar
 .viscribe-pro-upsell
 .viscribe-pro-tagline {
-  color: var(--viscribe-gray-700);
-  margin: 0 0 16px;
-  font-size: 14px;
+  color:       var(--viscribe-gray-700);
+  margin:      0 0 16px;
+  font-size:   14px;
   font-weight: 500;
   line-height: 1.5;
 }
@@ -953,8 +953,8 @@ strong {
 .viscribe-settings-sidebar
 .viscribe-pro-upsell
 .viscribe-pro-features {
-  margin: 0 0 16px;
-  padding: 0;
+  margin:     0 0 16px;
+  padding:    0;
   list-style: none;
 }
 
@@ -963,16 +963,16 @@ strong {
 .viscribe-pro-upsell
 .viscribe-pro-features
 li {
-  background: var(--viscribe-gray-50);
-  transition: var(--viscribe-transition);
-  border: 1px solid var(--viscribe-gray-200);
-  border-radius: 8px;
+  background:            var(--viscribe-gray-50);
+  transition:            var(--viscribe-transition);
+  border:                1px solid var(--viscribe-gray-200);
+  border-radius:         8px;
   grid-template-columns: 24px 1fr;
-  align-items: start;
-  gap: 10px;
-  margin-bottom: 16px;
-  padding: 12px;
-  display: grid;
+  align-items:           start;
+  gap:                   10px;
+  margin-bottom:         16px;
+  padding:               12px;
+  display:               grid;
 }
 
 .viscribe-settings-wrap
@@ -989,13 +989,13 @@ li:hover {
 .viscribe-pro-features
 li
 .dashicons {
-  color: var(--viscribe-success);
-  grid-row: 1 / span 2;
-  width: 20px;
-  height: 20px;
+  color:      var(--viscribe-success);
+  grid-row:   1 / span 2;
+  width:      20px;
+  height:     20px;
   margin-top: 2px;
-  font-size: 20px;
-  display: block;
+  font-size:  20px;
+  display:    block;
 }
 
 .viscribe-settings-wrap
@@ -1004,11 +1004,11 @@ li
 .viscribe-pro-features
 li
 strong {
-  color: var(--viscribe-gray-900);
-  font-size: 14px;
+  color:       var(--viscribe-gray-900);
+  font-size:   14px;
   font-weight: 600;
   line-height: 1.3;
-  display: block;
+  display:     block;
 }
 
 .viscribe-settings-wrap
@@ -1017,11 +1017,11 @@ strong {
 .viscribe-pro-features
 li
 span:not(.dashicons) {
-  color: var(--viscribe-gray-600);
-  margin-top: 2px;
-  font-size: 13px;
+  color:       var(--viscribe-gray-600);
+  margin-top:  2px;
+  font-size:   13px;
   line-height: 1.4;
-  display: block;
+  display:     block;
 }
 
 /* ── Responsive ── */
@@ -1030,6 +1030,7 @@ span:not(.dashicons) {
   .viscribe-settings-wrap .viscribe-settings-container {
     grid-template-columns: 180px minmax(0, 1fr);
   }
+
   .viscribe-settings-wrap
   .viscribe-settings-container
   .viscribe-settings-sidebar {
@@ -1039,44 +1040,48 @@ span:not(.dashicons) {
 
 @media (width <= 782px) {
   .viscribe-settings-wrap .viscribe-settings-container {
-    padding: var(--viscribe-gap-md);
+    padding:               var(--viscribe-gap-md);
     grid-template-columns: 1fr;
   }
+
   .viscribe-settings-wrap .viscribe-settings-container .viscribe-settings-nav {
-    order: -1;
+    order:   -1;
     display: flex;
   }
+
   .viscribe-settings-wrap .viscribe-settings-container .viscribe-tabs {
-    margin-bottom: var(--viscribe-gap-md);
-    background: var(--viscribe-white);
-    border-radius: var(--viscribe-border-radius);
-    box-shadow: var(--viscribe-shadow-sm);
+    margin-bottom:  var(--viscribe-gap-md);
+    background:     var(--viscribe-white);
+    border-radius:  var(--viscribe-border-radius);
+    box-shadow:     var(--viscribe-shadow-sm);
     flex-direction: row;
-    gap: 0;
-    padding: 4px;
-    position: static;
-    overflow-x: auto;
+    gap:            0;
+    padding:        4px;
+    position:       static;
+    overflow-x:     auto;
   }
+
   .viscribe-settings-wrap
   .viscribe-settings-container
   .viscribe-tabs
   .viscribe-tab {
-    border-radius: var(--viscribe-border-radius) var(--viscribe-border-radius) 0
-    0;
-    text-align: center;
-    border-bottom: 3px solid #0000;
-    border-left: none;
-    flex: 1 0 auto;
+    border-radius:   var(--viscribe-border-radius) var(--viscribe-border-radius) 0 0;
+    text-align:      center;
+    border-bottom:   3px solid #0000;
+    border-left:     none;
+    flex:            1 0 auto;
     justify-content: center;
-    padding: 10px 14px;
+    padding:         10px 14px;
   }
+
   .viscribe-settings-wrap
   .viscribe-settings-container
   .viscribe-tabs
   .viscribe-tab.active {
     border-bottom-color: var(--viscribe-primary);
-    border-left-color: #0000;
+    border-left-color:   #0000;
   }
+
   .viscribe-settings-wrap
   .viscribe-settings-container
   .viscribe-tabs
@@ -1089,16 +1094,16 @@ span:not(.dashicons) {
 /* ── Toggle ── */
 
 .viscribe-toggle {
-  width: 44px;
-  height: 24px;
-  display: inline-block;
+  width:    44px;
+  height:   24px;
+  display:  inline-block;
   position: relative;
 }
 
 .viscribe-toggle input {
   opacity: 0;
-  width: 0;
-  height: 0;
+  width:   0;
+  height:  0;
 }
 
 .viscribe-toggle input:checked + .viscribe-toggle-slider {
@@ -1114,51 +1119,51 @@ span:not(.dashicons) {
 }
 
 .viscribe-toggle .viscribe-toggle-slider {
-  cursor: pointer;
-  background-color: #ccc;
-  border-radius: 34px;
-  transition: all 0.4s;
-  position: absolute;
-  inset: 0;
+  cursor:           pointer;
+  background-color: #cccccc;
+  border-radius:    34px;
+  transition:       all 0.4s;
+  position:         absolute;
+  inset:            0;
 }
 
 .viscribe-toggle .viscribe-toggle-slider:before {
-  content: "";
-  background-color: #fff;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  transition: all 0.4s;
-  position: absolute;
-  bottom: 3px;
-  left: 3px;
+  content:          "";
+  background-color: #ffffff;
+  border-radius:    50%;
+  width:            18px;
+  height:           18px;
+  transition:       all 0.4s;
+  position:         absolute;
+  bottom:           3px;
+  left:             3px;
 }
 
 /* ── Number Input ── */
 
 .viscribe-number-input {
-  border: 1px solid var(--viscribe-gray-300);
-  color: var(--viscribe-gray-800);
-  width: 80px;
-  height: 28px;
-  transition: var(--viscribe-transition);
-  text-align: center;
+  border:        1px solid var(--viscribe-gray-300);
+  color:         var(--viscribe-gray-800);
+  width:         80px;
+  height:        28px;
+  transition:    var(--viscribe-transition);
+  text-align:    center;
   border-radius: 99px;
-  padding: 4px 12px;
-  font-size: 14px;
+  padding:       4px 12px;
+  font-size:     14px;
 }
 
 .viscribe-number-input:focus {
   border-color: var(--viscribe-primary);
-  box-shadow: 0 0 0 2px var(--viscribe-primary-light);
-  outline: none;
+  box-shadow:   0 0 0 2px var(--viscribe-primary-light);
+  outline:      none;
 }
 
 /* ── Intro Card ── */
 
 .viscribe-intro-card {
   margin-bottom: var(--viscribe-gap-lg);
-  border-left: 4px solid var(--viscribe-primary);
+  border-left:   4px solid var(--viscribe-primary);
 }
 
 .viscribe-intro-card .viscribe-card-body {
@@ -1167,25 +1172,25 @@ span:not(.dashicons) {
 
 .viscribe-intro-card .viscribe-intro-content {
   align-items: flex-start;
-  gap: 20px;
-  display: flex;
+  gap:         20px;
+  display:     flex;
 }
 
 .viscribe-intro-card .viscribe-intro-content .viscribe-intro-icon {
-  background: var(--viscribe-primary-light);
-  color: var(--viscribe-primary);
-  border-radius: 50%;
-  flex-shrink: 0;
+  background:      var(--viscribe-primary-light);
+  color:           var(--viscribe-primary);
+  border-radius:   50%;
+  flex-shrink:     0;
   justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  display: flex;
+  align-items:     center;
+  width:           48px;
+  height:          48px;
+  display:         flex;
 }
 
 .viscribe-intro-card .viscribe-intro-content .viscribe-intro-icon .dashicons {
-  width: 24px;
-  height: 24px;
+  width:     24px;
+  height:    24px;
   font-size: 24px;
 }
 
@@ -1197,9 +1202,9 @@ span:not(.dashicons) {
 .viscribe-intro-content
 .viscribe-intro-text
 .viscribe-intro-title {
-  color: var(--viscribe-gray-900);
-  margin: 0 0 8px;
-  font-size: 20px;
+  color:       var(--viscribe-gray-900);
+  margin:      0 0 8px;
+  font-size:   20px;
   font-weight: 600;
 }
 
@@ -1207,10 +1212,10 @@ span:not(.dashicons) {
 .viscribe-intro-content
 .viscribe-intro-text
 .viscribe-intro-description {
-  color: var(--viscribe-gray-600);
-  max-width: 750px;
-  margin: 0 0 38px;
-  font-size: 15px;
+  color:       var(--viscribe-gray-600);
+  max-width:   750px;
+  margin:      0 0 38px;
+  font-size:   15px;
   line-height: 1.6;
 }
 
@@ -1220,20 +1225,20 @@ span:not(.dashicons) {
 .viscribe-intro-subtitle {
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--viscribe-gray-500);
-  margin: 0 0 12px;
-  font-size: 12px;
-  font-weight: 700;
+  color:          var(--viscribe-gray-500);
+  margin:         0 0 12px;
+  font-size:      12px;
+  font-weight:    700;
 }
 
 .viscribe-intro-card
 .viscribe-intro-content
 .viscribe-intro-text
 .viscribe-intro-steps {
-  flex-wrap: wrap;
+  flex-wrap:   wrap;
   align-items: flex-start;
-  gap: 24px;
-  display: flex;
+  gap:         24px;
+  display:     flex;
 }
 
 .viscribe-intro-card
@@ -1241,9 +1246,9 @@ span:not(.dashicons) {
 .viscribe-intro-text
 .viscribe-intro-steps
 .viscribe-step {
-  gap: 12px;
+  gap:       12px;
   max-width: 240px;
-  display: flex;
+  display:   flex;
 }
 
 .viscribe-intro-card
@@ -1288,18 +1293,18 @@ span:not(.dashicons) {
 .viscribe-intro-steps
 .viscribe-step
 .viscribe-step-indicator {
-  background: var(--viscribe-gray-800);
-  color: var(--viscribe-white);
-  border-radius: 50%;
-  flex-shrink: 0;
+  background:      var(--viscribe-gray-800);
+  color:           var(--viscribe-white);
+  border-radius:   50%;
+  flex-shrink:     0;
   justify-content: center;
-  align-items: center;
-  width: 28px;
-  height: 28px;
-  margin-top: 2px;
-  font-size: 13px;
-  font-weight: 700;
-  display: flex;
+  align-items:     center;
+  width:           28px;
+  height:          28px;
+  margin-top:      2px;
+  font-size:       13px;
+  font-weight:     700;
+  display:         flex;
 }
 
 .viscribe-intro-card
@@ -1309,8 +1314,8 @@ span:not(.dashicons) {
 .viscribe-step
 .viscribe-step-content {
   flex-direction: column;
-  gap: 4px;
-  display: flex;
+  gap:            4px;
+  display:        flex;
 }
 
 .viscribe-intro-card
@@ -1320,8 +1325,8 @@ span:not(.dashicons) {
 .viscribe-step
 .viscribe-step-content
 .viscribe-step-title {
-  color: var(--viscribe-gray-800);
-  font-size: 14px;
+  color:       var(--viscribe-gray-800);
+  font-size:   14px;
   font-weight: 600;
 }
 
@@ -1332,8 +1337,8 @@ span:not(.dashicons) {
 .viscribe-step
 .viscribe-step-content
 .viscribe-step-desc {
-  color: var(--viscribe-gray-600);
-  font-size: 13px;
+  color:       var(--viscribe-gray-600);
+  font-size:   13px;
   line-height: 1.4;
 }
 
@@ -1344,8 +1349,8 @@ span:not(.dashicons) {
 .viscribe-step-separator {
   background: var(--viscribe-gray-200);
   align-self: center;
-  width: 1px;
-  height: 40px;
+  width:      1px;
+  height:     40px;
 }
 
 /* ── Model Badge ── */
@@ -1353,65 +1358,65 @@ span:not(.dashicons) {
 .viscribe-model-badge {
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-radius: 4px;
-  align-items: center;
-  margin-left: auto;
-  padding: 2px 8px;
-  font-size: 10px;
-  font-weight: 600;
-  display: inline-flex;
+  border-radius:  4px;
+  align-items:    center;
+  margin-left:    auto;
+  padding:        2px 8px;
+  font-size:      10px;
+  font-weight:    600;
+  display:        inline-flex;
 }
 
 .viscribe-model-badge[class*="--deprecated"] {
   background: var(--viscribe-gray-300);
-  color: var(--viscribe-gray-600);
+  color:      var(--viscribe-gray-600);
 }
 
 /* ── Model Limits ── */
 
 .viscribe-model-limits-card .viscribe-card-body {
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 24px;
-  display: flex;
+  gap:            12px;
+  padding:        18px 24px;
+  display:        flex;
 }
 
 .viscribe-model-limit-meta {
-  color: var(--viscribe-gray-700);
-  flex-wrap: wrap;
+  color:       var(--viscribe-gray-700);
+  flex-wrap:   wrap;
   align-items: center;
-  gap: 10px;
-  margin: 0;
-  font-size: 13px;
-  display: flex;
+  gap:         10px;
+  margin:      0;
+  font-size:   13px;
+  display:     flex;
 }
 
 .viscribe-model-limit-meta strong {
-  color: var(--viscribe-gray-900);
-  font-size: 14px;
+  color:       var(--viscribe-gray-900);
+  font-size:   14px;
   font-weight: 600;
 }
 
 .viscribe-model-limit-code {
-  background: var(--viscribe-gray-50);
-  border: 1px solid var(--viscribe-gray-300);
+  background:    var(--viscribe-gray-50);
+  border:        1px solid var(--viscribe-gray-300);
   border-radius: var(--viscribe-border-radius);
-  color: var(--viscribe-gray-700);
-  align-items: center;
-  padding: 4px 8px;
-  font-size: 12px;
-  display: inline-flex;
+  color:         var(--viscribe-gray-700);
+  align-items:   center;
+  padding:       4px 8px;
+  font-size:     12px;
+  display:       inline-flex;
 }
 
 .viscribe-model-limit-list {
-  border-top: 1px solid var(--viscribe-gray-200);
+  border-top:     1px solid var(--viscribe-gray-200);
   flex-direction: column;
-  display: flex;
+  display:        flex;
 }
 
 .viscribe-model-limit-item {
   border-bottom: 1px solid var(--viscribe-gray-200);
-  padding: 12px 0;
+  padding:       12px 0;
 }
 
 .viscribe-model-limit-item:last-child {
@@ -1420,61 +1425,61 @@ span:not(.dashicons) {
 
 .viscribe-model-limit-item-header {
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 4px;
-  display: flex;
+  align-items:     flex-start;
+  gap:             12px;
+  margin-bottom:   4px;
+  display:         flex;
 }
 
 .viscribe-model-limit-item-header h3 {
-  color: var(--viscribe-gray-900);
-  margin: 0;
-  font-size: 14px;
+  color:       var(--viscribe-gray-900);
+  margin:      0;
+  font-size:   14px;
   font-weight: 600;
 }
 
 .viscribe-model-limit-value {
-  background: var(--viscribe-gray-50);
-  border: 1px solid var(--viscribe-gray-200);
-  color: var(--viscribe-gray-700);
+  background:    var(--viscribe-gray-50);
+  border:        1px solid var(--viscribe-gray-200);
+  color:         var(--viscribe-gray-700);
   border-radius: 999px;
-  flex-shrink: 0;
-  align-items: center;
-  padding: 2px 8px;
-  font-size: 11px;
-  font-weight: 700;
-  display: inline-flex;
+  flex-shrink:   0;
+  align-items:   center;
+  padding:       2px 8px;
+  font-size:     11px;
+  font-weight:   700;
+  display:       inline-flex;
 }
 
 .viscribe-model-limit-meaning {
-  color: var(--viscribe-gray-600);
-  margin: 0;
-  font-size: 13px;
+  color:       var(--viscribe-gray-600);
+  margin:      0;
+  font-size:   13px;
   line-height: 1.45;
 }
 
 .viscribe-model-limit-notes {
   flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
-  display: flex;
+  gap:            8px;
+  margin-top:     4px;
+  display:        flex;
 }
 
 .viscribe-model-limit-note {
   border-radius: var(--viscribe-border-radius);
-  border: 1px solid #0000;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 10px 12px;
-  display: flex;
+  border:        1px solid #0000;
+  align-items:   flex-start;
+  gap:           12px;
+  padding:       10px 12px;
+  display:       flex;
 }
 
 .viscribe-model-limit-note .dashicons {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  margin-top: 1px;
-  font-size: 20px;
+  width:       20px;
+  height:      20px;
+  margin-top:  1px;
+  font-size:   20px;
 }
 
 .viscribe-model-limit-note-body {
@@ -1482,22 +1487,22 @@ span:not(.dashicons) {
 }
 
 .viscribe-model-limit-note-body strong {
-  margin: 0 0 2px;
-  font-size: 13px;
+  margin:      0 0 2px;
+  font-size:   13px;
   font-weight: 600;
-  display: block;
+  display:     block;
 }
 
 .viscribe-model-limit-note-body p {
-  margin: 0;
-  font-size: 12px;
+  margin:      0;
+  font-size:   12px;
   line-height: 1.45;
 }
 
 .viscribe-model-limit-note--tip {
-  background: var(--viscribe-primary-light);
+  background:   var(--viscribe-primary-light);
   border-color: #bfdbfe;
-  margin-top: 12px;
+  margin-top:   12px;
 }
 
 .viscribe-model-limit-note--tip .dashicons,
@@ -1510,7 +1515,7 @@ span:not(.dashicons) {
 }
 
 .viscribe-model-limit-note--warning {
-  background: #fffbeb;
+  background:   #fffbeb;
   border-color: #fde68a;
 }
 
@@ -1526,21 +1531,21 @@ span:not(.dashicons) {
 @media (width <= 782px) {
   .viscribe-model-limit-item-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items:    flex-start;
   }
 }
 
 /* ── API Key Notice ── */
 
 .viscribe-api-key-notice {
-  margin-bottom: var(--viscribe-gap-md);
-  border-radius: var(--viscribe-border-radius);
-  border: 1px solid #0000;
+  margin-bottom:     var(--viscribe-gap-md);
+  border-radius:     var(--viscribe-border-radius);
+  border:            1px solid #0000;
   border-left-width: 4px;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 18px 20px;
-  display: flex;
+  align-items:       flex-start;
+  gap:               16px;
+  padding:           18px 20px;
+  display:           flex;
 }
 
 .viscribe-api-key-notice-icon {
@@ -1548,10 +1553,10 @@ span:not(.dashicons) {
 }
 
 .viscribe-api-key-notice-icon .dashicons {
-  width: 22px;
-  height: 22px;
+  width:      22px;
+  height:     22px;
   margin-top: 1px;
-  font-size: 22px;
+  font-size:  22px;
 }
 
 .viscribe-api-key-notice-body {
@@ -1559,29 +1564,29 @@ span:not(.dashicons) {
 }
 
 .viscribe-api-key-notice-body strong {
-  margin: 0 0 4px;
-  font-size: 14px;
+  margin:      0 0 4px;
+  font-size:   14px;
   font-weight: 600;
-  display: block;
+  display:     block;
 }
 
 .viscribe-api-key-notice-body p {
-  margin: 0 0 6px;
-  font-size: 13px;
+  margin:      0 0 6px;
+  font-size:   13px;
   line-height: 1.5;
 }
 
 .viscribe-api-key-notice-body code {
   border-radius: 3px;
-  padding: 2px 6px;
-  font-size: 12px;
-  font-weight: 600;
+  padding:       2px 6px;
+  font-size:     12px;
+  font-weight:   600;
 }
 
 .viscribe-api-key-notice--active {
-  border-color: #a7f3d0;
+  border-color:      #a7f3d0;
   border-left-color: var(--viscribe-success);
-  background: #ecfdf5;
+  background:        #ecfdf5;
 }
 
 .viscribe-api-key-notice--active .viscribe-api-key-notice-icon .dashicons {
@@ -1593,8 +1598,8 @@ span:not(.dashicons) {
 }
 
 .viscribe-api-key-notice--tip {
-  background: var(--viscribe-primary-light);
-  border-color: #bfdbfe;
+  background:        var(--viscribe-primary-light);
+  border-color:      #bfdbfe;
   border-left-color: var(--viscribe-primary);
 }
 
@@ -1611,60 +1616,60 @@ span:not(.dashicons) {
 }
 
 .viscribe-api-key-notice--tip .viscribe-api-key-notice-body code {
-  color: var(--viscribe-primary-dark);
+  color:      var(--viscribe-primary-dark);
   background: #dbeafe;
 }
 
 .viscribe-api-key-notice-snippet {
   border-radius: var(--viscribe-border-radius);
-  background: #fff;
-  margin: 10px 0 0;
-  padding: 10px 14px;
-  overflow-x: auto;
+  background:    #ffffff;
+  margin:        10px 0 0;
+  padding:       10px 14px;
+  overflow-x:    auto;
 }
 
 .viscribe-api-key-notice-snippet code {
   white-space: nowrap;
   font-family: monospace;
-  color: var(--viscribe-gray-800) !important;
-  background: 0 0 !important;
-  padding: 0 !important;
-  font-size: 13px !important;
+  color:       var(--viscribe-gray-800) !important;
+  background:  0 0 !important;
+  padding:     0 !important;
+  font-size:   13px !important;
   font-weight: 500 !important;
 }
 
 /* ── API Key Input ── */
 
 .viscribe-setting-control--full {
-  width: 100%;
+  width:     100%;
   max-width: 100%;
 }
 
 .viscribe-api-key-input-row {
-  gap: 4px;
-  width: 100%;
+  gap:     4px;
+  width:   100%;
   display: flex;
 }
 
 .viscribe-api-key-field {
-  border: 1px solid var(--viscribe-gray-300);
+  border:        1px solid var(--viscribe-gray-300);
   border-radius: var(--viscribe-border-radius);
-  background: var(--viscribe-white);
-  min-width: 0;
-  height: 40px;
-  color: var(--viscribe-gray-900);
-  transition: var(--viscribe-transition);
-  outline: none;
-  flex: 1;
-  padding: 0 12px;
-  font-size: 14px;
+  background:    var(--viscribe-white);
+  min-width:     0;
+  height:        40px;
+  color:         var(--viscribe-gray-900);
+  transition:    var(--viscribe-transition);
+  outline:       none;
+  flex:          1;
+  padding:       0 12px;
+  font-size:     14px;
 }
 
 .viscribe-api-key-field:focus {
   border-color: var(--viscribe-primary);
-  box-shadow: 0 0 0 1px var(--viscribe-primary);
-  z-index: 1;
-  position: relative;
+  box-shadow:   0 0 0 1px var(--viscribe-primary);
+  z-index:      1;
+  position:     relative;
 }
 
 .viscribe-api-key-field::placeholder {
@@ -1672,70 +1677,70 @@ span:not(.dashicons) {
 }
 
 .viscribe-api-key-delete {
-  background: var(--viscribe-white);
-  border: 1px solid var(--viscribe-gray-300);
+  background:    var(--viscribe-white);
+  border:        1px solid var(--viscribe-gray-300);
   border-radius: var(--viscribe-border-radius);
-  height: 40px;
-  color: var(--viscribe-error);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: var(--viscribe-transition);
-  flex-shrink: 0;
-  align-items: center;
-  gap: 6px;
-  padding: 0 14px;
-  font-size: 13px;
-  font-weight: 500;
-  display: inline-flex;
+  height:        40px;
+  color:         var(--viscribe-error);
+  cursor:        pointer;
+  white-space:   nowrap;
+  transition:    var(--viscribe-transition);
+  flex-shrink:   0;
+  align-items:   center;
+  gap:           6px;
+  padding:       0 14px;
+  font-size:     13px;
+  font-weight:   500;
+  display:       inline-flex;
 }
 
 .viscribe-api-key-delete .dashicons {
-  width: 16px;
-  height: 16px;
+  width:     16px;
+  height:    16px;
   font-size: 16px;
 }
 
 .viscribe-api-key-delete:hover:not(:disabled) {
   border-color: var(--viscribe-error);
-  color: #b91c1c;
-  background: #fef2f2;
+  color:        #b91c1c;
+  background:   #fef2f2;
 }
 
 .viscribe-api-key-delete:disabled {
-  color: var(--viscribe-gray-400);
-  cursor: not-allowed;
+  color:   var(--viscribe-gray-400);
+  cursor:  not-allowed;
   opacity: 0.6;
 }
 
 .viscribe-api-key-input-row--disabled {
-  opacity: 0.55;
+  opacity:        0.55;
   pointer-events: none;
 }
 
 .viscribe-api-key-input-row--disabled .viscribe-api-key-field {
   background: var(--viscribe-gray-100);
-  color: var(--viscribe-gray-500);
+  color:      var(--viscribe-gray-500);
 }
 
 .viscribe-api-key-error {
-  color: var(--viscribe-error);
-  border-left: 3px solid var(--viscribe-error);
+  color:         var(--viscribe-error);
+  border-left:   3px solid var(--viscribe-error);
   border-radius: 0 var(--viscribe-border-radius) var(--viscribe-border-radius) 0;
-  background: #fef2f2;
-  margin-top: 8px;
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: 500;
-  animation: 0.25s air-fade-in;
+  background:    #fef2f2;
+  margin-top:    8px;
+  padding:       8px 12px;
+  font-size:     13px;
+  font-weight:   500;
+  animation:     0.25s air-fade-in;
 }
 
 @keyframes air-fade-in {
   0% {
-    opacity: 0;
+    opacity:   0;
     transform: translateY(-4px);
   }
   to {
-    opacity: 1;
+    opacity:   1;
     transform: translateY(0);
   }
 }
@@ -1743,55 +1748,55 @@ span:not(.dashicons) {
 .viscribe-label-required {
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--viscribe-error);
+  color:          var(--viscribe-error);
   vertical-align: middle;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 3px;
-  margin-left: 4px;
-  padding: 1px 5px;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1.5;
-  display: inline-block;
+  background:     #fef2f2;
+  border:         1px solid #fecaca;
+  border-radius:  3px;
+  margin-left:    4px;
+  padding:        1px 5px;
+  font-size:      10px;
+  font-weight:    600;
+  line-height:    1.5;
+  display:        inline-block;
 }
 
 /* ── Connection Row ── */
 
 .viscribe-connection-row {
-  flex-wrap: wrap;
+  flex-wrap:   wrap;
   align-items: center;
-  gap: 12px;
-  display: flex;
+  gap:         12px;
+  display:     flex;
 }
 
 /* ── Buttons ── */
 
 .viscribe-btn {
-  border-radius: var(--viscribe-border-radius);
-  cursor: pointer;
-  white-space: nowrap;
-  height: 42px;
-  transition: var(--viscribe-transition);
-  border: 1px solid #0000;
+  border-radius:   var(--viscribe-border-radius);
+  cursor:          pointer;
+  white-space:     nowrap;
+  height:          42px;
+  transition:      var(--viscribe-transition);
+  border:          1px solid #0000;
   justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 0 20px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
+  align-items:     center;
+  gap:             8px;
+  padding:         0 20px;
+  font-size:       14px;
+  font-weight:     500;
+  line-height:     1;
   text-decoration: none;
-  display: inline-flex;
+  display:         inline-flex;
 }
 
 .viscribe-btn .dashicons {
   justify-content: center;
-  align-items: center;
-  width: 18px;
-  height: 18px;
-  font-size: 18px;
-  display: inline-flex;
+  align-items:     center;
+  width:           18px;
+  height:          18px;
+  font-size:       18px;
+  display:         inline-flex;
 }
 
 .viscribe-btn--loading .dashicons {
@@ -1800,14 +1805,14 @@ span:not(.dashicons) {
 
 .viscribe-btn--primary {
   background: var(--viscribe-primary);
-  border: 1px solid var(--viscribe-primary-dark);
-  color: var(--viscribe-white);
+  border:     1px solid var(--viscribe-primary-dark);
+  color:      var(--viscribe-white);
 }
 
 .viscribe-btn--primary:hover {
   background: var(--viscribe-primary-dark);
-  border: 1px solid var(--viscribe-primary-dark);
-  color: var(--viscribe-white);
+  border:     1px solid var(--viscribe-primary-dark);
+  color:      var(--viscribe-white);
 }
 
 .viscribe-btn--primary:focus {
@@ -1816,14 +1821,14 @@ span:not(.dashicons) {
 
 .viscribe-btn--secondary {
   background: var(--viscribe-white);
-  border: 1px solid var(--viscribe-gray-300);
-  color: var(--viscribe-gray-700);
+  border:     1px solid var(--viscribe-gray-300);
+  color:      var(--viscribe-gray-700);
 }
 
 .viscribe-btn--secondary:hover {
   background: var(--viscribe-gray-50);
-  border: 1px solid var(--viscribe-gray-400);
-  color: var(--viscribe-gray-900);
+  border:     1px solid var(--viscribe-gray-400);
+  color:      var(--viscribe-gray-900);
 }
 
 .viscribe-btn--secondary:focus {
@@ -1832,45 +1837,43 @@ span:not(.dashicons) {
 
 .viscribe-btn:disabled {
   opacity: 0.6;
-  cursor: not-allowed;
+  cursor:  not-allowed;
 }
 
 /* ── Status Badge ── */
 
 .viscribe-status-badge {
-  white-space: nowrap;
+  white-space:   nowrap;
   border-radius: 100px;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  font-size: 13px;
-  font-weight: 500;
-  transition:
-    background 0.4s,
-    color 0.4s,
-    border-color 0.4s;
-  display: inline-flex;
+  justify-items: center;
+  display:       flex;
+  gap:           6px;
+  padding:       6px 14px;
+  font-size:     13px;
+  font-weight:   500;
+  transition:    background 0.4s,
+                 color 0.4s,
+                 border-color 0.4s;
 }
 
 .viscribe-status-badge .dashicons {
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
-  transition:
-    transform 0.4s,
-    opacity 0.4s;
+  width:      16px;
+  height:     16px;
+  font-size:  16px;
+  transition: transform 0.4s,
+              opacity 0.4s;
 }
 
 .viscribe-status-badge--idle {
   background: var(--viscribe-gray-100);
-  border: 1px solid var(--viscribe-gray-200);
-  color: var(--viscribe-gray-500);
+  border:     1px solid var(--viscribe-gray-200);
+  color:      var(--viscribe-gray-500);
 }
 
 .viscribe-status-badge--testing {
   background: var(--viscribe-primary-light);
-  color: var(--viscribe-primary);
-  border: 1px solid #bfdbfe;
+  color:      var(--viscribe-primary);
+  border:     1px solid #bfdbfe;
 }
 
 .viscribe-status-badge--testing .dashicons {
@@ -1878,74 +1881,74 @@ span:not(.dashicons) {
 }
 
 .viscribe-status-badge--success {
-  color: #059669;
+  color:      #059669;
   background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  animation: 0.3s air-fade-in;
+  border:     1px solid #a7f3d0;
+  animation:  0.3s air-fade-in;
 }
 
 .viscribe-status-badge--error {
-  color: var(--viscribe-error);
+  color:      var(--viscribe-error);
   background: #fef2f2;
-  border: 1px solid #fecaca;
-  animation: 0.3s air-fade-in;
+  border:     1px solid #fecaca;
+  animation:  0.3s air-fade-in;
 }
 
 .no-ai {
-  color: var(--viscribe-gray-500);
+  color:     var(--viscribe-gray-500);
   font-size: 12px;
 }
 
 /* ── Donate Card ── */
 
 .viscribe-donate-card {
-  background: var(--viscribe-primary-light);
-  border: 1px solid #bfdbfe;
-  border-radius: var(--viscribe-border-radius);
-  transition: var(--viscribe-transition);
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 500;
+  background:      var(--viscribe-primary-light);
+  border:          1px solid #bfdbfe;
+  border-radius:   var(--viscribe-border-radius);
+  transition:      var(--viscribe-transition);
+  align-items:     center;
+  gap:             8px;
+  padding:         10px 20px;
+  font-size:       14px;
+  font-weight:     500;
   text-decoration: none;
-  white-space: nowrap;
-  display: inline-flex;
-  color: inherit;
+  white-space:     nowrap;
+  display:         inline-flex;
+  color:           inherit;
 }
 
 .viscribe-donate-card:hover {
-  background: var(--viscribe-white);
+  background:   var(--viscribe-white);
   border-color: var(--viscribe-primary);
-  box-shadow: var(--viscribe-shadow-md);
+  box-shadow:   var(--viscribe-shadow-md);
 }
 
 .viscribe-donate-card-icon {
-  color: var(--viscribe-error);
-  width: 18px;
-  height: 18px;
-  font-size: 18px;
+  color:       var(--viscribe-error);
+  width:       18px;
+  height:      18px;
+  font-size:   18px;
   flex-shrink: 0;
 }
 
 .viscribe-donate-card-text {
-  color: var(--viscribe-primary-dark);
-  font-size: 13px;
+  color:       var(--viscribe-primary-dark);
+  font-size:   13px;
   font-weight: 500;
   line-height: 1.3;
 }
 
 .viscribe-donate-card-paypal {
-  fill: #003087;
+  fill:        #003087;
   flex-shrink: 0;
 }
 
 .viscribe-donate-card-arrow {
-  color: var(--viscribe-primary);
-  width: 18px;
-  height: 18px;
-  font-size: 18px;
-  transition: var(--viscribe-transition);
+  color:       var(--viscribe-primary);
+  width:       18px;
+  height:      18px;
+  font-size:   18px;
+  transition:  var(--viscribe-transition);
   flex-shrink: 0;
 }
 
@@ -1965,53 +1968,53 @@ span:not(.dashicons) {
 /* ── Branded Provider Bar ── */
 
 .viscribe-bar-wrap {
-  margin-left: calc(-1 * var(--viscribe-gap-lg));
+  margin-left:  calc(-1 * var(--viscribe-gap-lg));
   margin-right: calc(-1 * var(--viscribe-gap-lg));
-  margin-top: calc(-1 * var(--viscribe-gap-lg));
-  background: #366aa4;
+  margin-top:   calc(-1 * var(--viscribe-gap-lg));
+  background:   #366aa4;
 }
 
 .viscribe-bar {
   display: flex;
-  gap: 0;
+  gap:     0;
   padding: 0 var(--viscribe-gap-lg);
 }
 
 .viscribe-bar-item {
-  display: flex;
+  display:     flex;
   align-items: center;
-  gap: 8px;
-  padding: 13px 18px;
-  cursor: pointer;
+  gap:         8px;
+  padding:     13px 18px;
+  cursor:      pointer;
   user-select: none;
-  position: relative;
-  color: rgba(255,255,255,0.75);
-  font-size: 14px;
+  position:    relative;
+  color:       rgba(255, 255, 255, 0.75);
+  font-size:   14px;
   font-weight: 500;
-  transition: color 0.15s, background 0.15s;
+  transition:  color 0.15s, background 0.15s;
 }
 
 .viscribe-bar-item:hover {
-  color: #fff;
+  color:      #ffffff;
   background: rgba(54, 106, 164, 0.15);
 }
 
 .viscribe-bar-item input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
+  position:       absolute;
+  opacity:        0;
+  width:          0;
+  height:         0;
   pointer-events: none;
 }
 
 .viscribe-bar-item--active {
-  color: #366aa4 !important;
-  background: #e3edf7 !important;
+  color:       #366aa4 !important;
+  background:  #e3edf7 !important;
   font-weight: 600;
 }
 
 .viscribe-bar-item--locked {
-  color: rgba(255,255,255,0.85) !important;
+  color:  rgba(255, 255, 255, 0.85) !important;
   cursor: not-allowed;
 }
 
@@ -2020,10 +2023,10 @@ span:not(.dashicons) {
 }
 
 .viscribe-bar-ico {
-  width: 20px;
-  height: 20px;
+  width:       20px;
+  height:      20px;
   flex-shrink: 0;
-  color: inherit;
+  color:       inherit;
 }
 
 .viscribe-bar-label {
@@ -2051,90 +2054,90 @@ span:not(.dashicons) {
 /* ── Custom Provider Card ── */
 
 .viscribe-custom-card {
-  border: 1px solid var(--viscribe-gray-200);
+  border:        1px solid var(--viscribe-gray-200);
   border-radius: var(--viscribe-border-radius);
-  background: var(--viscribe-white);
-  max-width: 560px;
-  overflow: hidden;
+  background:    var(--viscribe-white);
+  max-width:     560px;
+  overflow:      hidden;
 }
 
 .viscribe-custom-head {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: var(--viscribe-gap-md) var(--viscribe-gap-lg);
-  background: var(--viscribe-gray-50);
+  display:       flex;
+  align-items:   flex-start;
+  gap:           12px;
+  padding:       var(--viscribe-gap-md) var(--viscribe-gap-lg);
+  background:    var(--viscribe-gray-50);
   border-bottom: 1px solid var(--viscribe-gray-200);
 }
 
 .viscribe-custom-head-icon {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--viscribe-border-radius);
-  background: var(--viscribe-white);
-  border: 1px solid var(--viscribe-gray-200);
-  display: flex;
-  align-items: center;
+  flex-shrink:     0;
+  width:           36px;
+  height:          36px;
+  border-radius:   var(--viscribe-border-radius);
+  background:      var(--viscribe-white);
+  border:          1px solid var(--viscribe-gray-200);
+  display:         flex;
+  align-items:     center;
   justify-content: center;
 }
 
 .viscribe-custom-head-icon .dashicons {
   font-size: 18px;
-  width: 18px;
-  height: 18px;
-  color: var(--viscribe-gray-500);
+  width:     18px;
+  height:    18px;
+  color:     var(--viscribe-gray-500);
 }
 
 .viscribe-custom-head strong {
-  display: block;
-  color: var(--viscribe-gray-900);
-  font-size: 14px;
+  display:       block;
+  color:         var(--viscribe-gray-900);
+  font-size:     14px;
   margin-bottom: 2px;
 }
 
 .viscribe-custom-head p {
-  margin: 0;
-  color: var(--viscribe-gray-500);
-  font-size: 12.5px;
+  margin:      0;
+  color:       var(--viscribe-gray-500);
+  font-size:   12.5px;
   line-height: 1.4;
 }
 
 .viscribe-custom-body {
-  padding: var(--viscribe-gap-md) var(--viscribe-gap-lg) var(--viscribe-gap-lg);
-  display: flex;
+  padding:        var(--viscribe-gap-md) var(--viscribe-gap-lg) var(--viscribe-gap-lg);
+  display:        flex;
   flex-direction: column;
-  gap: var(--viscribe-gap-md);
+  gap:            var(--viscribe-gap-md);
 }
 
 .viscribe-custom-field {
-  display: flex;
+  display:        flex;
   flex-direction: column;
-  gap: 5px;
+  gap:            5px;
 }
 
 .viscribe-custom-field-label {
-  display: flex;
+  display:     flex;
   align-items: center;
-  gap: 6px;
+  gap:         6px;
 }
 
 .viscribe-custom-field-label-text {
-  font-size: 13px;
+  font-size:   13px;
   font-weight: 600;
-  color: var(--viscribe-gray-700);
+  color:       var(--viscribe-gray-700);
 }
 
 .viscribe-custom-field-input {
-  font-family: monospace;
-  font-size: 14px;
-  padding: 10px 12px;
-  border: 1px solid var(--viscribe-gray-300);
+  font-family:   monospace;
+  font-size:     14px;
+  padding:       10px 12px;
+  border:        1px solid var(--viscribe-gray-300);
   border-radius: var(--viscribe-border-radius);
-  background: var(--viscribe-gray-50);
-  color: var(--viscribe-gray-900);
-  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
-  max-width: 400px;
+  background:    var(--viscribe-gray-50);
+  color:         var(--viscribe-gray-900);
+  transition:    border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  max-width:     400px;
 }
 
 .viscribe-custom-field-input::placeholder {
@@ -2143,52 +2146,52 @@ span:not(.dashicons) {
 
 .viscribe-custom-field-input:focus {
   border-color: var(--viscribe-primary);
-  background: var(--viscribe-white);
-  box-shadow: 0 0 0 1px var(--viscribe-primary);
-  outline: none;
+  background:   var(--viscribe-white);
+  box-shadow:   0 0 0 1px var(--viscribe-primary);
+  outline:      none;
 }
 
 .viscribe-custom-field-hint {
-  font-size: 12.5px;
-  color: var(--viscribe-gray-500);
-  margin: 0;
+  font-size:   12.5px;
+  color:       var(--viscribe-gray-500);
+  margin:      0;
   line-height: 1.4;
 }
 
 .viscribe-custom-field-hint code {
-  font-size: 12px;
-  background: var(--viscribe-gray-100);
-  padding: 1px 5px;
+  font-size:     12px;
+  background:    var(--viscribe-gray-100);
+  padding:       1px 5px;
   border-radius: 3px;
-  color: var(--viscribe-gray-700);
+  color:         var(--viscribe-gray-700);
 }
 
 /* ── URL Input Group ── */
 
 .viscribe-url-group {
-  display: inline-flex;
-  border: 1px solid var(--viscribe-gray-300);
+  display:       inline-flex;
+  border:        1px solid var(--viscribe-gray-300);
   border-radius: var(--viscribe-border-radius);
-  overflow: hidden;
-  max-width: 500px;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  overflow:      hidden;
+  max-width:     500px;
+  transition:    border-color 0.15s, box-shadow 0.15s;
 }
 
 .viscribe-url-group:focus-within {
   border-color: var(--viscribe-primary);
-  box-shadow: 0 0 0 1px var(--viscribe-primary);
+  box-shadow:   0 0 0 1px var(--viscribe-primary);
 }
 
 .viscribe-url-input {
-  border: none;
-  flex: 1;
-  min-width: 200px;
-  padding: 10px 12px;
+  border:      none;
+  flex:        1;
+  min-width:   200px;
+  padding:     10px 12px;
   font-family: monospace;
-  font-size: 14px;
-  background: var(--viscribe-gray-50);
-  color: var(--viscribe-gray-900);
-  outline: none;
+  font-size:   14px;
+  background:  var(--viscribe-gray-50);
+  color:       var(--viscribe-gray-900);
+  outline:     none;
 }
 
 .viscribe-url-input::placeholder {
@@ -2200,14 +2203,14 @@ span:not(.dashicons) {
 }
 
 .viscribe-url-suffix {
-  padding: 10px 12px;
-  background: var(--viscribe-gray-100);
-  color: var(--viscribe-gray-500);
+  padding:     10px 12px;
+  background:  var(--viscribe-gray-100);
+  color:       var(--viscribe-gray-500);
   font-family: monospace;
-  font-size: 13px;
+  font-size:   13px;
   white-space: nowrap;
   border-left: 1px solid var(--viscribe-gray-200);
-  display: flex;
+  display:     flex;
   align-items: center;
   user-select: none;
 }
@@ -2215,16 +2218,16 @@ span:not(.dashicons) {
 /* ── PRO Badge ── */
 
 .viscribe-bar-pro {
-  display: inline-flex;
-  align-items: center;
-  font-size: 9px;
-  font-weight: 700;
+  display:        inline-flex;
+  align-items:    center;
+  font-size:      9px;
+  font-weight:    700;
   letter-spacing: 0.6px;
-  color: rgba(255,255,255,0.7);
-  background: rgba(255,255,255,0.12);
-  padding: 2px 5px;
-  border-radius: 3px;
-  line-height: 1;
+  color:          rgba(255, 255, 255, 0.7);
+  background:     rgba(255, 255, 255, 0.12);
+  padding:        2px 5px;
+  border-radius:  3px;
+  line-height:    1;
   text-transform: uppercase;
 }
 
@@ -2233,18 +2236,18 @@ span:not(.dashicons) {
 @media (width <= 782px) {
   .viscribe-bar {
     flex-wrap: wrap;
-    gap: 2px;
-    padding: 8px var(--viscribe-gap-sm);
+    gap:       2px;
+    padding:   8px var(--viscribe-gap-sm);
   }
 
   .viscribe-bar-item {
-    padding: 8px 12px;
+    padding:   8px 12px;
     font-size: 13px;
-    gap: 6px;
+    gap:       6px;
   }
 
   .viscribe-bar-ico {
-    width: 17px;
+    width:  17px;
     height: 17px;
   }
 }
