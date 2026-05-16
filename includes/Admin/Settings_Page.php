@@ -115,7 +115,6 @@ class Settings_Page {
 		\add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 		\add_action( 'wp_ajax_viscribe_test_connection', [ $this, 'ajax_test_connection' ] );
 		\add_action( 'wp_ajax_viscribe_delete_api_key', [ $this, 'ajax_delete_api_key' ] );
-		\add_action( 'wp_ajax_viscribe_dismiss_encryption_notice', [ $this, 'ajax_dismiss_encryption_notice' ] );
 	}
 
 	/**
@@ -325,12 +324,16 @@ class Settings_Page {
 			 */
 			$valid_models = \apply_filters( 'viscribe_valid_models', $valid_models );
 
-			if ( in_array( $input['model'], $valid_models, true ) ) {
+			if ( \in_array( $input['model'], $valid_models, true ) ) {
 				$sanitized['model'] = $input['model'];
 			} else {
-				// Invalid model submitted, add error and use default.
-				\add_settings_error( self::OPTION_NAME, 'invalid_model', \__( 'Invalid AI model selected. Using default model.', 'viscribe' ) );
-				$sanitized['model'] = $this->get_defaults()['model'];
+				// Custom providers (Pro) use free-text model names which are validated later.
+				$is_custom_provider = isset( $input['provider'] ) && 'custom' === $input['provider'];
+
+				if ( ! $is_custom_provider ) {
+					\add_settings_error( self::OPTION_NAME, 'invalid_model', \__( 'Invalid AI model selected. Using default model.', 'viscribe' ) );
+					$sanitized['model'] = $this->get_defaults()['model'];
+				}
 			}
 		}
 
@@ -572,8 +575,8 @@ class Settings_Page {
 		$current_limits = $model_limits[ $current_model ] ?? $model_limits['meta-llama/llama-4-scout-17b-16e-instruct'];
 
 		return [
-			'title'          => esc_html__( 'Model Limits', 'viscribe' ),
-			'description'    => esc_html__( 'A quick overview of the limits that matter most when this model renames uploaded images.', 'viscribe' ),
+			'title'          => \__( 'Model Limits', 'viscribe' ),
+			'description'    => \__( 'A quick overview of the limits that matter most when this model renames uploaded images.', 'viscribe' ),
 			'model_label'    => $current_limits['model_label'],
 			'model_id'       => $current_limits['model_id'],
 			'model_card_url' => $current_limits['model_card_url'],
@@ -617,8 +620,13 @@ class Settings_Page {
 			'notes'          => [
 				[
 					'variant' => 'tip',
-					'title'   => esc_html__( 'Rate limits still apply', 'viscribe' ),
-					'text'    => esc_html__( 'Your Groq account can still limit how many requests or tokens you may use over time, especially during larger upload bursts.', 'viscribe' ),
+					'title'   => \__( 'Rate limits still apply', 'viscribe' ),
+					'text'    => \__( 'Your Groq account can still limit how many requests or tokens you may use over time, especially during larger upload bursts.', 'viscribe' ),
+				],
+				[
+					'variant' => 'tip',
+					'title'   => \__( 'EU licensing note', 'viscribe' ),
+					'text'    => \__( 'Groq repeats Meta\'s note that certain multimodal rights may be limited in the EU. Check the linked model card if this could apply to you.', 'viscribe' ),
 				],
 				[
 					'variant' => 'tip',
@@ -917,13 +925,18 @@ class Settings_Page {
 			return;
 		}
 
-		$suffix = defined( 'WP_DEBUG' ) && WP_DEBUG ? '' : '.min';
+		$suffix = \defined( 'WP_DEBUG' ) && WP_DEBUG ? '' : '.min';
 
 		if ( '' === $suffix ) {
-			$version = \filemtime( VISCRIBE_PLUGIN_DIR . 'assets/js/scripts.js' );
+			$js_file = VISCRIBE_PLUGIN_DIR . 'assets/js/scripts.js';
+			$version = \file_exists( $js_file ) ? \filemtime( $js_file ) : VISCRIBE_VERSION;
 		} else {
-			$asset_file = include VISCRIBE_PLUGIN_DIR . 'assets/js/index.asset.php';
-			$version    = $asset_file['version'];
+			$asset_file   = VISCRIBE_PLUGIN_DIR . 'assets/js/index.asset.php';
+			$version      = VISCRIBE_VERSION;
+			if ( \file_exists( $asset_file ) ) {
+				$asset_data = include $asset_file;
+				$version    = $asset_data['version'] ?? VISCRIBE_VERSION;
+			}
 		}
 
 		\wp_enqueue_style( 'viscribe-admin', VISCRIBE_PLUGIN_URL . "assets/css/styles{$suffix}.css", [], $version );
@@ -934,9 +947,8 @@ class Settings_Page {
 			'ajaxUrl'             => \admin_url( 'admin-ajax.php' ),
 			'usingApiKeyConstant' => Groq_Service::has_api_key_constant(),
 			'nonces'              => [
-				'test_connection'           => \wp_create_nonce( 'viscribe_test_connection' ),
-				'delete_api_key'            => \wp_create_nonce( 'viscribe_delete_api_key' ),
-				'dismiss_encryption_notice' => \wp_create_nonce( 'viscribe_dismiss_encryption_notice' ),
+				'test_connection' => \wp_create_nonce( 'viscribe_test_connection' ),
+				'delete_api_key'  => \wp_create_nonce( 'viscribe_delete_api_key' ),
 			],
 			'strings'             => [
 				'testing'                                                  => \__( 'Testing...', 'viscribe' ),
@@ -1070,41 +1082,5 @@ class Settings_Page {
 		\update_option( self::OPTION_NAME, $options );
 
 		\wp_send_json_success( [ 'message' => \__( 'API key deleted.', 'viscribe' ) ] );
-	}
-
-	/**
-	 * Show encryption security notice if key is not in wp-config.php.
-	 *
-	 * @return void
-	 */
-	final public function show_encryption_notice(): void {
-		// Only show on plugin settings page or general settings page.
-		$screen = \get_current_screen();
-		if ( ! $screen ) {
-			return;
-		}
-
-		if ( 'media_page_' . self::PAGE_SLUG !== $screen->id ) {
-			return;
-		}
-
-		$this->encryption_service->maybe_show_security_notice();
-	}
-
-	/**
-	 * Handle AJAX request to dismiss encryption notice.
-	 *
-	 * @return void
-	 */
-	final public function ajax_dismiss_encryption_notice(): void {
-		\check_ajax_referer( 'viscribe_dismiss_encryption_notice', 'nonce' );
-
-		if ( ! \current_user_can( 'manage_options' ) ) {
-			\wp_send_json_error( [ 'message' => \__( 'Permission denied.', 'viscribe' ) ] );
-		}
-
-		\update_user_meta( \get_current_user_id(), 'viscribe_encryption_notice_dismissed', true );
-
-		\wp_send_json_success();
 	}
 }
